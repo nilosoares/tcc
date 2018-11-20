@@ -1,0 +1,11 @@
+###> idea ###
+/.idea
+###< idea ###
+
+###> tpc-h ###
+/resources/tpc-h/dbgen/dbgen
+/resources/tpc-h/dbgen/qgen
+/resources/tpc-h/dbgen/*.o
+/resources/tpc-h/dbgen/*.tbl
+/resources/tpc-h/dbgen/*.csv
+###< tpc-h ###

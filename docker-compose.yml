@@ -24,3 +24,15 @@ services:
             - postgres
         links:
             - postgres
+
+    # mongo
+    mongo:
+        container_name: 'uerj.projeto_final.mongo'
+        image: mongo:3.6.9
+        working_dir: /tpc-h
+
+    # mongo-express
+    mongo-express:
+        image: mongo-express
+        ports:
+            - 8081:8081

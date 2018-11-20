@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Generates the data
+cd resources/tpc-h/dbgen
+make
+./dbgen -f 1

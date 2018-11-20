@@ -1,0 +1,22 @@
+version: '3.3'
+
+services:
+    # postgres
+    postgres:
+        container_name: 'uerj.projeto_final.postgres'
+        image: postgres:11.1
+        environment:
+            - POSTGRES_USER=admin
+            - POSTGRES_PASSWORD=123456
+            - POSTGRES_DB=tpch
+
+    # db admin
+    adminer:
+        container_name: 'uerj.projeto_final.adminer'
+        image: adminer
+        ports:
+            - 8080:8080
+        depends_on:
+            - postgres
+        links:
+            - postgres

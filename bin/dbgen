@@ -1,6 +1,8 @@
 #!/bin/bash
 
+# Run make
+docker run --rm -v "$PWD":/app -w /app/resources/tpc-h/dbgen gcc:8.2 make
+
 # Generates the data
 cd resources/tpc-h/dbgen
-make
 ./dbgen -f 1

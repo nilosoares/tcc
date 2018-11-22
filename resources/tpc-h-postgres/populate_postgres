@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Converts .tbl files to .csv
+cd /app/resources/tpc-h/dbgen
+find . -type f -name '*.csv' -delete
+for i in `ls *.tbl`; do sed 's/|$//' $i > ${i/tbl/csv}; echo $i; done;
+
+# Populate the database
+cd /app/resources/tpc-h-postgres
+psql --command="DROP DATABASE IF EXISTS tpch"
+psql --command="CREATE DATABASE tpch"
+psql --dbname=tpch --file=populate_postgres.sql

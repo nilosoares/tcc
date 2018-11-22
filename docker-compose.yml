@@ -43,7 +43,9 @@ services:
     mongo:
         container_name: 'uerj.projeto_final.mongo'
         image: mongo:3.6.9
-        working_dir: /tpc-h
+        volumes:
+            - ./resources:/app/resources
+        working_dir: /app
 
     # mongo-express
     mongo-express:

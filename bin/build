@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Compiles the code
+docker-compose run gradle gradle build

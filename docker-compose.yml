@@ -1,6 +1,20 @@
 version: '3.3'
 
 services:
+    # gradle
+    gradle:
+        container_name: 'uerj.projeto_final.gradle'
+        image: gradle:4.10-jdk8
+        volumes:
+            - ./:/app
+        working_dir: /app
+        depends_on:
+            - postgres
+            - mongo
+        links:
+            - postgres
+            - mongo
+
     # postgres
     postgres:
         container_name: 'uerj.projeto_final.postgres'
@@ -29,7 +43,9 @@ services:
     mongo:
         container_name: 'uerj.projeto_final.mongo'
         image: mongo:3.6.9
-        working_dir: /tpc-h
+        volumes:
+            - ./resources:/app/resources
+        working_dir: /app
 
     # mongo-express
     mongo-express:

@@ -1,4 +1,4 @@
 #!/bin/bash
 
 # Compiles the code
-docker run --rm -v "$PWD":/app -w /app gradle:4.10 gradle build
+docker-compose run gradle gradle build

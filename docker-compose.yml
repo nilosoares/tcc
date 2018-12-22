@@ -49,6 +49,7 @@ services:
 
     # mongo-express
     mongo-express:
+        container_name: 'uerj.projeto_final.mongo_express'
         image: mongo-express
         ports:
             - 8081:8081

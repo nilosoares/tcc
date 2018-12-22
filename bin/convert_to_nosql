@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Map 1-to-1 into MongoDB
+docker-compose run gradle gradle convert_to_nosql

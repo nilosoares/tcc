@@ -30,4 +30,13 @@ public class CastHelper {
         }
     }
 
+    public static Object castDate(String entry) {
+        try {
+            Date date = (Date) sdf.parse(entry);
+            return date;
+        } catch (ParseException e2) {
+            return entry;
+        }
+    }
+
 }

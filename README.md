@@ -28,6 +28,8 @@ Nas execuções seguintes o processo será mais rápido.
 
 Para compilar o projeto, basta executar o comando abaixo:
 
+    bin/build
+
 ## Gerando os dados do TPC-H 
 
 Primeiro é necessário gerar os dados do TPC-H:

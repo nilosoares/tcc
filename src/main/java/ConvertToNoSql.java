@@ -7,6 +7,8 @@ import com.mongodb.*;
  */
 public class ConvertToNoSql {
 
+    private static final int FETCH_SIZE = 10000;
+
     private static final String MONGO_DATABASE_NAME = "final";
     private static final String MONGO_HOST = "mongo";
     private static final int MONGO_PORT = 27017;
@@ -30,6 +32,7 @@ public class ConvertToNoSql {
 
         // Fetch the data
         Statement st = pgsqlConn.createStatement();
+        st.setFetchSize(FETCH_SIZE);
         ResultSet rs = st.executeQuery("" +
             "SELECT " +
                 "lineitem.*, " +
@@ -61,8 +64,7 @@ public class ConvertToNoSql {
             "INNER JOIN part ON part.p_partkey = partsupp.ps_partkey " +
             "INNER JOIN supplier ON supplier.s_suppkey = partsupp.ps_suppkey " +
             "INNER JOIN nation AS snation ON snation.n_nationkey = supplier.s_nationkey " +
-            "INNER JOIN region AS sregion ON sregion.r_regionkey = snation.n_regionkey " +
-            "LIMIT 30 OFFSET 0"
+            "INNER JOIN region AS sregion ON sregion.r_regionkey = snation.n_regionkey"
         );
 
         // Convert each lineItem to MongoDB

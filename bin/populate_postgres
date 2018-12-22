@@ -1,4 +1,4 @@
 #!/bin/bash
 
-# Map 1-to-1 into MongoDB
+# Insert the TPC-H data to Postgres
 docker-compose exec --user postgres postgres /app/resources/tpc-h-postgres/populate_postgres

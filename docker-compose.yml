@@ -27,6 +27,7 @@ services:
             - ./bin:/app/bin
             - ./resources:/app/resources
         working_dir: /app
+        shm_size: 2gb
 
     # db admin
     adminer:

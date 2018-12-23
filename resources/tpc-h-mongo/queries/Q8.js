@@ -1,25 +1,29 @@
 // TPC-H Query 8 for MongoDB
 db = db.getSiblingDB("final");
 
-// subquery
+// variables
 var start = new Date(1995, 0, 1); // month is 0-indexed
 var end = new Date(1996, 11, 31);
+var region = 'AMERICA';
+var part_type = "ECONOMY ANODIZED STEEL";
+var nation = 'BRAZIL'; // You must replace the value manually in the "red" function
 
+// subquery
 var subquery = {
-	$and: [
-		{
-			"order.customer.nation.region.name": { $regex : '^AMERICA' }
-		},
-		{
-			"partsupp.part.type": "ECONOMY ANODIZED STEEL"
-		},
-		{
-			"order.orderdate": {
-				"$gte": start,
-				"$lt": end
-			}
-		}
-	]
+    $and: [
+        {
+            "order.customer.nation.region.name": { $regex : '^' + region }
+        },
+        {
+            "partsupp.part.type": part_type
+        },
+        {
+            "order.orderdate": {
+                "$gte": start,
+                "$lte": end
+            }
+        }
+    ]
 };
 
 var volume_each_nation = db.deals.aggregate([
@@ -44,30 +48,41 @@ var volume_each_nation = db.deals.aggregate([
 ]);
 
 // cache the result temporarily in the database
-db.tmp.insert(volume_each_nation.toArray());
+db.tmp_q8.drop();
+db.tmp_q8.insert(volume_each_nation.toArray());
 
-// process result of subquery (stored in the database)
-var red = function(doc, out) {
-	out.o_year = doc.o_year;
-	out.total_sum += doc.volume; // helper field to calculate market share
-	if (doc.nation == "BRAZIL") { // sum mkt_share of the country
-		out.mkt_share += doc.volume;
-	}
-};
+var result = db.tmp_q8.aggregate([
+    {
+        $group: {
+            _id: "$o_year",
+            total_sum: {
+                $sum: "$volume"
+            },
+            mkt_share: {
+                $sum: {
+                    $cond: [
+                        { $eq: ["$nation", "BRAZIL"] },
+                        "$volume",
+                        0
+                    ]
+                }
+            }
+        }
+    },
+    {
+        $project: {
+            mkt_share: {
+                $divide: ["$mkt_share", "$total_sum"]
+            }
+        },
+    },
+    {
+        $sort: { o_year: 1 }
+    },
+    {
+        $limit: 1
+    }
+]);
 
-var share = function(out) {
-	out.mkt_share = out.mkt_share / out.total_sum
-	delete out.total_sum; // remove the total_sum field
-};
-
-db.tmp.group({
-	key: {
-		o_year: true
-	},
-	initial: {
-		total_sum: 0,
-		mkt_share: 0
-	},
-	reduce: red,
-	finalize: share
-});
+// print the result
+printjson(result.toArray());

@@ -14,7 +14,7 @@ var subquery = {
 };
 
 // extracts the total revenue of each supplier
-var eachsupp = db.deals.aggregate([
+var result = db.deals.aggregate([
     {
         $match: subquery
     },
@@ -41,15 +41,16 @@ var eachsupp = db.deals.aggregate([
             address: { $first : "$address" },
             phone: { $first : "$phone" }
         }
+    },
+    {
+        $sort: {
+            total_revenue : -1
+        }
+    },
+    {
+        $limit: 1
     }
 ]);
-
-// store the result in the database
-db.tmp_q15.drop();
-db.tmp_q15.insert(eachsupp.toArray());
-
-// find the top supplier
-var result = db.tmp_q15.find().sort({total_revenue : -1}).limit(1);
 
 // print result
 printjson(result.toArray());

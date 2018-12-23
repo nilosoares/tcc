@@ -19,20 +19,31 @@ Após instalar e configurar o Git, abra o terminal (Ctrl Alt T) e execute os com
 
 ## Iniciando os containers (Java, MongoDB, Postgres) 
 
-Após intalar o Docker e Docker-Compose, abra o terminal na raiz do projeto e execute o comando abaixo:
+Primeiro precisamos baixar as imagens utilizadas pelo projeto. Para isso, execute o comando abaixo na raiz do projeto:
 
-    docker-compose up
+    docker-compose pull
     
-> Importante: As imagens do Docker serão baixadas e construidas durante a primeira execução, portanto isso pode demorar alguns minutos.
-Nas execuções seguintes o processo será mais rápido.
+Para iniciar os containers, execute o comando abaixo:
+    
+    docker-compose up -d
+    
+## Instalando o TPC-H (passo único)
 
-## Compilando o projeto
+Para instalar o TPC-H no MongoDB, basta executar o comando abaixo:
+
+    bin/install
+    
+> Atenção: isso pode demorar alguns minutos.
+
+## Instalando o TPC-H (passo a passo)
+    
+### Compilando o projeto
 
 Para compilar o projeto, basta executar o comando abaixo:
 
     bin/build
 
-## Gerando os dados do TPC-H 
+### Gerando os dados do TPC-H 
 
 Primeiro é necessário gerar os dados do TPC-H:
 
@@ -42,7 +53,7 @@ Esse comando irá gerar 1GB de dados para o TPC-H.
 
 > Atenção: isso pode demorar alguns segundos.
 
-## Inserindo os dados do TPC-H no MongoDB
+### Inserindo os dados do TPC-H no MongoDB usando Postgres (recomendado)
 
 Para inserir os dados do TPC-H no MongoDB de forma rápida, precisamos primeiro inserir os dados no Postgres e então convertemos esses dados para o MongoDB.
 
@@ -51,7 +62,7 @@ Para inserir os dados do TPC-H no MongoDB de forma rápida, precisamos primeiro 
     
 > Atenção: isso pode demorar alguns minutos.
 
-## Inserindo os dados do TPC-H no MongoDB (sem Postgres)
+### Inserindo os dados do TPC-H no MongoDB sem Postgres
 
 Você também pode inserir os dados diretamente no MongoDB sem criar uma instância do Postgres, porém esse algoritmo é extremamente lento.
 

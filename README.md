@@ -11,9 +11,11 @@ Esse é o repositório do projeto de final de curso do aluno Nilo Soares, orient
 
 ## Clonando o projeto
 
-Após instalar e configurar o Git, abra o terminal (Ctrl Alt T) e execute o comando abaixo:
+Após instalar e configurar o Git, abra o terminal (Ctrl Alt T) e execute os comandos abaixo:
 
     git clone git@bitbucket.org:nilosoares/uerj-projeto-final-v2.git
+    cd uerj-projeto-final-v2
+    bin/update_permissions
 
 ## Iniciando os containers (Java, MongoDB, Postgres) 
 

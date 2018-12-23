@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Change all folders to 777
+find ./resources -type d -exec chmod 777 {} \;

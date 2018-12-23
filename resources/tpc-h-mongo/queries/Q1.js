@@ -6,7 +6,8 @@ function rand(min, max) {
     var interval = max - min + 1;
     return Math.floor((Math.random() * interval)) + min;
 }
-var delta = rand(60, 120);
+//var delta = rand(60, 120);
+var delta = 90;
 var date = new Date(1998, 11, 1); // month is 0-indexed
 date.setDate(date.getDate() - delta);
 
@@ -28,10 +29,18 @@ var avg = function(out) {
 };
 
 // run query
-db.deals.group({
+var unsortedResult = db.deals.group({
     key : { returnflag : true, linestatus : true },
     cond : { "shipdate" : { $lte: date }},
     initial: { count_order : 0, sum_qty : 0, sum_base_price : 0, sum_disc_price : 0, sum_charge : 0, avg_disc : 0 },
     reduce : red,
     finalize : avg
 });
+
+// sort the result
+db.tmp_q1.drop();
+db.tmp_q1.insert(unsortedResult);
+var result = db.tmp_q1.find().limit(1).sort({ returnflag: 1, linestatus: 1 });
+
+// print the result
+printjson(result.toArray());

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+bin/update_permissions
+bin/build
+bin/dbgen
+bin/populate_postgres
+bin/convert_to_nosql

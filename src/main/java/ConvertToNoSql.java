@@ -29,6 +29,7 @@ public class ConvertToNoSql {
 
         // connect to PGSQL
         Connection pgsqlConn = ch.connectPostgres(PGSQL_HOST, PGSQL_PORT, PGSQL_DATABASE_NAME);
+        pgsqlConn.setAutoCommit(false);
 
         // Fetch the data
         Statement st = pgsqlConn.createStatement();

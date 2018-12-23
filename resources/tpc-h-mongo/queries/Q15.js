@@ -1,11 +1,15 @@
 // TPC-H Query 15 for MongoDB
 db = db.getSiblingDB("final");
 
+// variables
+var start = new Date(1996, 0, 1);
+var end = new Date(1996, 3, 1);
+
 // month is 0-indexed
 var subquery = {
 	"shipdate": {
-		"$gte": new Date(1996, 0, 1),
-		"$lt": new Date(1996, 3, 1)
+		"$gte": start,
+		"$lt": end
 	}
 };
 
@@ -41,7 +45,11 @@ var eachsupp = db.deals.aggregate([
 ]);
 
 // store the result in the database
-db.tmp.insert(eachsupp.toArray());
+db.tmp_q15.drop();
+db.tmp_q15.insert(eachsupp.toArray());
 
 // find the top supplier
-db.tmp.find().sort({total_revenue : -1}).limit(1);
+var result = db.tmp_q15.find().sort({total_revenue : -1}).limit(1);
+
+// print result
+printjson(result.toArray());

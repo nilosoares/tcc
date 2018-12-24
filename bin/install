@@ -1,5 +1,7 @@
 #!/bin/bash
 
+docker-compose pull
+docker-compose up -d
 bin/update_permissions
 bin/build
 bin/dbgen

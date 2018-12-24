@@ -65,7 +65,7 @@ public class ConvertToNoSql {
             "INNER JOIN part ON part.p_partkey = partsupp.ps_partkey " +
             "INNER JOIN supplier ON supplier.s_suppkey = partsupp.ps_suppkey " +
             "INNER JOIN nation AS snation ON snation.n_nationkey = supplier.s_nationkey " +
-            "INNER JOIN region AS sregion ON sregion.r_regionkey = snation.n_regionkey"
+            "INNER JOIN region AS sregion ON sregion.r_regionkey = snation.n_regionkey "
         );
 
         // Convert each lineItem to MongoDB
@@ -89,7 +89,7 @@ public class ConvertToNoSql {
             lioc.put("name", rs.getString("c_name").trim());
             lioc.put("address", rs.getString("c_address").trim());
             lioc.put("phone", rs.getString("c_phone").trim());
-            lioc.put("acctbal", rs.getDouble("c_acctbal"));
+            lioc.put("acctbal", CastHelper.castDouble(rs.getString("c_acctbal")));
             lioc.put("mktsegment", rs.getString("c_mktsegment").trim());
             lioc.put("comment", rs.getString("c_comment").trim());
             lioc.put("nation", liocn);
@@ -98,7 +98,7 @@ public class ConvertToNoSql {
             DBObject lio = new BasicDBObject();
             lio.put("orderkey", rs.getInt("o_orderkey"));
             lio.put("orderstatus", rs.getString("o_orderstatus").trim());
-            lio.put("totalprice", rs.getDouble("o_totalprice"));
+            lio.put("totalprice", CastHelper.castDouble(rs.getString("o_totalprice")));
             lio.put("orderdate", CastHelper.castDate(rs.getString("o_orderdate")));
             lio.put("orderpriority", rs.getString("o_orderpriority").trim());
             lio.put("clerk", rs.getString("o_clerk").trim());
@@ -125,7 +125,7 @@ public class ConvertToNoSql {
             lipss.put("name", rs.getString("s_name").trim());
             lipss.put("address", rs.getString("s_address").trim());
             lipss.put("phone", rs.getString("s_phone").trim());
-            lipss.put("acctbal", rs.getDouble("s_acctbal"));
+            lipss.put("acctbal", CastHelper.castDouble(rs.getString("s_acctbal")));
             lipss.put("comment", rs.getString("s_comment").trim());
             lipss.put("nation", lipssn);
 
@@ -138,13 +138,13 @@ public class ConvertToNoSql {
             lipsp.put("type", rs.getString("p_type").trim());
             lipsp.put("size", rs.getInt("p_size"));
             lipsp.put("container", rs.getString("p_container").trim());
-            lipsp.put("retailprice", rs.getDouble("p_retailprice"));
+            lipsp.put("retailprice", CastHelper.castDouble(rs.getString("p_retailprice")));
             lipsp.put("comment", rs.getString("p_comment").trim());
 
             // lineItem.partSupp
             DBObject lips = new BasicDBObject();
             lips.put("availqty", rs.getInt("ps_availqty"));
-            lips.put("supplycost", rs.getDouble("ps_supplycost"));
+            lips.put("supplycost", CastHelper.castDouble(rs.getString("ps_supplycost")));
             lips.put("comment", rs.getString("ps_comment").trim());
             lips.put("supplier", lipss);
             lips.put("part", lipsp);
@@ -153,9 +153,9 @@ public class ConvertToNoSql {
             DBObject li = new BasicDBObject();
             li.put("linenumber", rs.getInt("l_linenumber"));
             li.put("quantity", rs.getInt("l_quantity"));
-            li.put("extendedprice", rs.getDouble("l_extendedprice"));
-            li.put("discount", rs.getDouble("l_discount"));
-            li.put("tax", rs.getDouble("l_tax"));
+            li.put("extendedprice", CastHelper.castDouble(rs.getString("l_extendedprice")));
+            li.put("discount", CastHelper.castDouble(rs.getString("l_discount")));
+            li.put("tax", CastHelper.castDouble(rs.getString("l_tax")));
             li.put("returnflag", rs.getString("l_returnflag").trim());
             li.put("linestatus", rs.getString("l_linestatus").trim());
             li.put("shipdate", CastHelper.castDate(rs.getString("l_shipdate")));

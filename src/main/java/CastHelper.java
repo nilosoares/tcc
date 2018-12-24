@@ -30,6 +30,11 @@ public class CastHelper {
         }
     }
 
+    public static Object castDouble(String entry) {
+        double asDouble = Double.valueOf(entry);
+        return asDouble;
+    }
+
     public static Object castDate(String entry) {
         try {
             Date date = (Date) sdf.parse(entry);

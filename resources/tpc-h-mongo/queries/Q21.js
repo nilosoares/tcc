@@ -58,7 +58,7 @@ var result = db.deals.aggregate([
     },
     {
         $match: {
-            $expr: { $gt: [{ $size: "$multisupp" }, 0] }
+            $expr: { $gt: [{ $size: "$multisupp" }, 0] },
             $expr: { $eq: [{ $size: "onlyfail" }, 0] }
         }
     },

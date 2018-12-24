@@ -5,9 +5,9 @@ var result = db.deals.aggregate([
     {
         $match: {
             $and: [
-                { "order.orderstatus": "F", },
-                { "partsupp.supplier.nation.name": { $regex : '^SAUDI ARABIA' }, },
-                { $expr: { $gt: ["$receiptdate", "$commitdate"] }, }
+                { "order.orderstatus": "F" },
+                { "partsupp.supplier.nation.name": { $regex : '^SAUDI ARABIA' } },
+                { $expr: { $gt: ["$receiptdate", "$commitdate"] } }
             ]
         }
     },
@@ -58,8 +58,12 @@ var result = db.deals.aggregate([
     },
     {
         $match: {
-            $expr: { $gt: [{ $size: "$multisupp" }, 0] },
-            $expr: { $eq: [{ $size: "$onlyfail" }, 0] }
+            $expr: {
+                $and: [
+                    $gt: [{ $size: "$multisupp" }, 0],
+                    $eq: [{ $size: "$onlyfail" }, 0]
+                ]
+            }
         }
     },
     {

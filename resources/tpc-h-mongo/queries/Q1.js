@@ -11,36 +11,80 @@ var delta = 90;
 var date = new Date(1998, 11, 1); // month is 0-indexed
 date.setDate(date.getDate() - delta);
 
-// reduce function
-var red = function(doc, out) {
-    out.count_order++;
-    out.sum_qty += doc.quantity;
-    out.sum_base_price += doc.extendedprice;
-    out.sum_disc_price += doc.extendedprice * (1 - doc.discount);
-    out.sum_charge += doc.extendedprice * (1 - doc.discount) * (1 + doc.tax);
-    out.avg_disc += doc.discount; // sum the discount first
-};
-
-// finalize function
-var avg = function(out) {
-    out.avg_qty = out.sum_qty / out.count_order;
-    out.avg_price = out.sum_base_price / out.count_order;
-    out.avg_disc = out.avg_disc / out.count_order; // calculate the average of the discount
-};
-
 // run query
-var unsortedResult = db.deals.group({
-    key : { returnflag : true, linestatus : true },
-    cond : { "shipdate" : { $lte: date }},
-    initial: { count_order : 0, sum_qty : 0, sum_base_price : 0, sum_disc_price : 0, sum_charge : 0, avg_disc : 0 },
-    reduce : red,
-    finalize : avg
-});
+var result = db.deals.aggregate([
+    {
+        $match: {
+            "shipdate" : { $lte: date }
+        }
+    },
+    {
+        $group: {
+            _id: {
+                returnflag: "$returnflag",
+                linestatus: "$linestatus"
+            },
+            count_order: {
+                $sum: 1
+            },
+            sum_qty: {
+                $sum: "$quantity"
+            },
+            sum_base_price: {
+                $sum: "$extendedprice"
+            },
+            sum_disc_price: {
+                $sum: {
+                    $multiply: [
+                        "$extendedprice",
+                        { $subtract: [1, "$discount"] }
+                    ]
+                }
+            },
+            sum_charge: {
+                $sum: {
+                    $multiply: [
+                        "$extendedprice",
+                        { $subtract: [1, "$discount"] },
+                        { $sum: [1, "$tax"] }
+                    ]
+                }
+            },
+            sum_disc: {
+                $sum: "$discount"
+            }
+        },
+    },
+    {
+        $project: {
+            _id: 0,
+            returnflag: "$_id.returnflag",
+            linestatus: "$_id.linestatus",
+            sum_qty: 1,
+            sum_base_price: 1,
+            sum_disc_price: 1,
+            sum_charge: 1,
+            avg_qty: {
+                $divide: ["$sum_qty", "$count_order"]
+            },
+            avg_price: {
+                $divide: ["$sum_base_price", "$count_order"]
+            },
+            avg_disc: {
+                $divide: ["$sum_disc", "$count_order"]
+            },
+            count_order: 1
+        }
+    },
+    {
+        $sort: {
+            returnflag: 1,
+            linestatus: 1
+        }
+    },
+    {
+        $limit: 1
+    }
+]);
 
-// sort the result
-db.tmp_q1.drop();
-db.tmp_q1.insert(unsortedResult);
-var result = db.tmp_q1.find().limit(1).sort({ returnflag: 1, linestatus: 1 });
-
-// print the result
 printjson(result.toArray());

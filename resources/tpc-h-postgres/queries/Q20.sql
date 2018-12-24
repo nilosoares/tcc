@@ -21,8 +21,8 @@ where
 				from
 					lineitem
 				where
-					l_shipdate >= date '1997-01-01'
-					and l_shipdate < date '1997-01-01' + interval '1' year
+					l_shipdate >= date '1994-01-01'
+					and l_shipdate < date '1994-01-01' + interval '1' year
 				group by
 					l_partkey,
 					l_suppkey
@@ -36,12 +36,12 @@ where
 				from
 					part
 				where
-					p_name like 'powder%'
+					p_name like 'forest%'
 			)
 			and ps_availqty > agg_quantity
 	)
 	and s_nationkey = n_nationkey
-	and n_name = 'ARGENTINA'
+	and n_name = 'CANADA'
 order by
 	s_name
 limit 1;

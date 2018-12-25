@@ -16,7 +16,7 @@ var notExists = db.deals.aggregate([
     {
         $match: {
             $expr: {
-                { $gt: ["$receiptdate", "$commitdate"] }
+                $gt: ["$receiptdate", "$commitdate"]
             }
         }
     },

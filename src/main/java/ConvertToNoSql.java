@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.sql.*;
 import com.mongodb.*;
 
@@ -17,7 +18,7 @@ public class ConvertToNoSql {
     private static final String PGSQL_HOST = "postgres";
     private static final int PGSQL_PORT = 5432;
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, ParseException {
         ConnectorHelper ch = new ConnectorHelper();
 
         // connect to Mongo

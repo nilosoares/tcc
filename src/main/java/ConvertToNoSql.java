@@ -8,33 +8,32 @@ import com.mongodb.*;
  */
 public class ConvertToNoSql {
 
-    private static final int FETCH_SIZE = 10000;
+    private static final String MONGO_COLLECTION_NAME = "deals";
+    private static final int CURSOR_SIZE = 10000;
 
-    private static final String MONGO_DATABASE_NAME = "final";
-    private static final String MONGO_HOST = "mongo";
-    private static final int MONGO_PORT = 27017;
-
-    private static final String PGSQL_DATABASE_NAME = "tpch";
-    private static final String PGSQL_HOST = "postgres";
-    private static final int PGSQL_PORT = 5432;
-
+    /**
+     *
+     * @param args
+     * @throws SQLException
+     * @throws ParseException
+     */
     public static void main(String[] args) throws SQLException, ParseException {
         ConnectorHelper ch = new ConnectorHelper();
 
-        // connect to Mongo
-        DB mongoConn = ch.connectMongo(MONGO_HOST, MONGO_PORT, MONGO_DATABASE_NAME);
+        // connect to MongoDB
+        DB mongoConn = ch.connectMongo();
 
-        // Drop the deals collection and create a new one
-        DBCollection collection = mongoConn.getCollection("deals");
+        // Drop the deals collection
+        DBCollection collection = mongoConn.getCollection(MONGO_COLLECTION_NAME);
         collection.drop();
 
         // connect to PGSQL
-        Connection pgsqlConn = ch.connectPostgres(PGSQL_HOST, PGSQL_PORT, PGSQL_DATABASE_NAME);
+        Connection pgsqlConn = ch.connectPostgres();
         pgsqlConn.setAutoCommit(false);
 
         // Fetch the data
         Statement st = pgsqlConn.createStatement();
-        st.setFetchSize(FETCH_SIZE);
+        st.setFetchSize(CURSOR_SIZE);
         ResultSet rs = st.executeQuery("" +
             "SELECT " +
                 "lineitem.*, " +

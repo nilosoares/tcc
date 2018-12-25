@@ -1,6 +1,35 @@
 // TPC-H Query 21 for MongoDB
 db = db.getSiblingDB("final");
 
+var exists = db.deals.aggregate([
+    {
+        $project: {
+            orderkey: "$order.orderkey",
+            suppkey: "$partsupp.supplier.suppkey"
+        }
+    }
+]);
+db.tmp_q21_1.drop();
+db.tmp_q21_1.insert(exists.toArray());
+
+var notExists = db.deals.aggregate([
+    {
+        $match: {
+            $expr: {
+                { $gt: ["$receiptdate", "$commitdate"] }
+            }
+        }
+    },
+    {
+        $project: {
+            orderkey: "$order.orderkey",
+            suppkey: "$partsupp.supplier.suppkey"
+        }
+    }
+]);
+db.tmp_q21_2.drop();
+db.tmp_q21_2.insert(notExists.toArray());
+
 var result = db.deals.aggregate([
     {
         $match: {
@@ -13,7 +42,7 @@ var result = db.deals.aggregate([
     },
     {
         $lookup: {
-            from: "deals",
+            from: "tmp_q21_1",
             let: {
                 thisOrderKey: "$order.orderkey",
                 thisSuppKey: "$partsupp.supplier.suppkey"
@@ -23,8 +52,8 @@ var result = db.deals.aggregate([
                     $match: {
                         $expr: {
                             $and: [
-                                { $eq: ["$order.orderkey",  "$$thisOrderKey"] },
-                                { $ne: ["$partsupp.supplier.suppkey",  "$$thisSuppKey"] }
+                                { $eq: ["$orderkey",  "$$thisOrderKey"] },
+                                { $ne: ["$suppkey",  "$$thisSuppKey"] }
                             ]
                         }
                     }
@@ -35,7 +64,7 @@ var result = db.deals.aggregate([
     },
     {
         $lookup: {
-            from: "deals",
+            from: "tmp_q21_2",
             let: {
                 thisOrderKey: "$order.orderkey",
                 thisSuppKey: "$partsupp.supplier.suppkey"
@@ -45,9 +74,8 @@ var result = db.deals.aggregate([
                     $match: {
                         $expr: {
                             $and: [
-                                { $eq: ["$order.orderkey",  "$$thisOrderKey"] },
-                                { $ne: ["$partsupp.supplier.suppkey",  "$$thisSuppKey"] },
-                                { $gt: ["$receiptdate", "$commitdate"] }
+                                { $eq: ["$orderkey",  "$$thisOrderKey"] },
+                                { $ne: ["$suppkey",  "$$thisSuppKey"] }
                             ]
                         }
                     }
@@ -60,8 +88,8 @@ var result = db.deals.aggregate([
         $match: {
             $expr: {
                 $and: [
-                    $gt: [{ $size: "$multisupp" }, 0],
-                    $eq: [{ $size: "$onlyfail" }, 0]
+                    { $gt: [{ $size: "$multisupp" }, 0] },
+                    { $eq: [{ $size: "$onlyfail" }, 0] }
                 ]
             }
         }

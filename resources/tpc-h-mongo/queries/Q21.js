@@ -95,14 +95,8 @@ var result = db.deals.aggregate([
         }
     },
     {
-        $project : {
-            _id : 0,
-            s_name : "$partsupp.supplier.name"
-        }
-    },
-    {
         $group : {
-            _id : "$s_name",
+            _id : "$partsupp.supplier.name",
             numwait : {
                 $sum : 1
             }

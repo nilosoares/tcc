@@ -5,43 +5,60 @@ import java.util.Date;
 public class CastHelper {
 
     private final static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    private final static String phonePattern = "[0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]";
 
+    /**
+     *
+     * @param entry
+     * @return
+     */
     public static Object autoCast(String entry) {
         try {
-            int asInt = Integer.valueOf(entry);
-            return asInt;
-        } catch (NumberFormatException e) {
+            return castInt(entry);
+        } catch (NumberFormatException e1) {
             try {
-                double asDouble = Double.valueOf(entry);
-                return asDouble;
-            } catch (Exception e1) {
+                return castDouble(entry);
+            } catch (Exception e2) {
+                // it's a phone number that should not be parsed into a date
+                if (entry.matches(phonePattern)) {
+                    return entry;
+                }
+
                 try {
-                    // it's a phone number that should not be parsed into a date
-                    if (entry.matches("[0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]")) {
-                        return entry;
-                    } else {
-                        Date date = (Date) sdf.parse(entry);
-                        return date;
-                    }
-                } catch (ParseException e2) {
+                    return castDate(entry);
+                } catch (ParseException e) {
                     return entry;
                 }
             }
         }
     }
 
-    public static Object castDouble(String entry) {
-        double asDouble = Double.valueOf(entry);
-        return asDouble;
+    /**
+     *
+     * @param entry
+     * @return
+     */
+    public static Integer castInt(String entry) {
+        return Integer.valueOf(entry);
     }
 
-    public static Object castDate(String entry) {
-        try {
-            Date date = (Date) sdf.parse(entry);
-            return date;
-        } catch (ParseException e2) {
-            return entry;
-        }
+    /**
+     *
+     * @param entry
+     * @return
+     */
+    public static Double castDouble(String entry) {
+        return Double.valueOf(entry);
+    }
+
+    /**
+     *
+     * @param entry
+     * @return
+     * @throws ParseException
+     */
+    public static Date castDate(String entry) throws ParseException {
+        return (Date) sdf.parse(entry);
     }
 
 }

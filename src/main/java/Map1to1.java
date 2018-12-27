@@ -16,17 +16,22 @@ import com.mongodb.MongoException;
  * There is no resolution about keys.
  *
  * @author Nico Rutishauser
- *
+ * @author Nilo Soares
  */
 public class Map1to1 {
 
-    private static final String DATABASE_NAME = "1to1";
-    private static final String HOST = "mongo";
-    private static final int PORT = 27017;
+    private static final String MONGO_DATABASE_NAME = "1to1";
 
+    /**
+     *
+     * @param args
+     * @throws UnknownHostException
+     * @throws MongoException
+     */
     public static void main(String[] args) throws UnknownHostException, MongoException {
-        ConnectorHelper ch = new ConnectorHelper(); // connect to MongoDB
-        DB db = ch.connectMongo(HOST, PORT, DATABASE_NAME);
+        // connect to MongoDB
+        ConnectorHelper ch = new ConnectorHelper();
+        DB db = ch.connectMongo(MONGO_DATABASE_NAME);
 
         File folder = new File("resources/tpc-h/dbgen");
         FilenameFilter filter = new FilenameFilter() {

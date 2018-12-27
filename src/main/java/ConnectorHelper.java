@@ -68,7 +68,10 @@ public class ConnectorHelper {
 
         String url = "jdbc:postgresql://" + host + ":" + port + "/" + dbName + "?user=" + user + "&password=" + pass;
 
-        return DriverManager.getConnection(url);
+        Connection conn = DriverManager.getConnection(url);
+        conn.setAutoCommit(false);
+
+        return conn;
     }
 
     /**

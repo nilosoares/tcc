@@ -8,8 +8,9 @@ import com.mongodb.*;
  */
 public class ConvertToNoSql {
 
-    private static final String MONGO_COLLECTION_NAME = "deals";
     private static final int CURSOR_SIZE = 10000;
+    private static DB mongoConn;
+    private static Connection pgsqlConn;
 
     /**
      *
@@ -18,20 +19,25 @@ public class ConvertToNoSql {
      * @throws ParseException
      */
     public static void main(String[] args) throws SQLException, ParseException {
+        // connect to MongoDB and PGSQL
         ConnectorHelper ch = new ConnectorHelper();
+        mongoConn = ch.connectMongo();
+        pgsqlConn = ch.connectPostgres();
 
-        // connect to MongoDB
-        DB mongoConn = ch.connectMongo();
+        // Convert the data
+        convertLineItems();
+        convertCustomers();
+    }
 
-        // Drop the deals collection
-        DBCollection collection = mongoConn.getCollection(MONGO_COLLECTION_NAME);
+    /**
+     *
+     */
+    private static void convertLineItems() throws SQLException, ParseException {
+        // Drop the "deals" collection
+        DBCollection collection = mongoConn.getCollection("deals");
         collection.drop();
 
-        // connect to PGSQL
-        Connection pgsqlConn = ch.connectPostgres();
-        pgsqlConn.setAutoCommit(false);
-
-        // Fetch the data
+        // Fetch all lineItems in PgSQL
         Statement st = pgsqlConn.createStatement();
         st.setFetchSize(CURSOR_SIZE);
         ResultSet rs = st.executeQuery("" +
@@ -70,108 +76,234 @@ public class ConvertToNoSql {
 
         // Convert each lineItem to MongoDB
         while (rs.next()) {
-            // lineItem.order.customer.nation.region
-            DBObject liocnr = new BasicDBObject();
-            liocnr.put("regionkey", rs.getInt("cr_regionkey"));
-            liocnr.put("name", rs.getString("cr_name").trim());
-            liocnr.put("comment", rs.getString("cr_comment").trim());
-
-            // lineItem.order.customer.nation
-            DBObject liocn = new BasicDBObject();
-            liocn.put("nationkey", rs.getInt("cn_nationkey"));
-            liocn.put("name", rs.getString("cn_name").trim());
-            liocn.put("comment", rs.getString("cn_comment").trim());
-            liocn.put("region", liocnr);
-
-            // lineItem.order.customer
-            DBObject lioc = new BasicDBObject();
-            lioc.put("custkey", rs.getInt("c_custkey"));
-            lioc.put("name", rs.getString("c_name").trim());
-            lioc.put("address", rs.getString("c_address").trim());
-            lioc.put("phone", rs.getString("c_phone").trim());
-            lioc.put("acctbal", CastHelper.castDouble(rs.getString("c_acctbal")));
-            lioc.put("mktsegment", rs.getString("c_mktsegment").trim());
-            lioc.put("comment", rs.getString("c_comment").trim());
-            lioc.put("nation", liocn);
-
-            // lineItem.order
-            DBObject lio = new BasicDBObject();
-            lio.put("orderkey", rs.getInt("o_orderkey"));
-            lio.put("orderstatus", rs.getString("o_orderstatus").trim());
-            lio.put("totalprice", CastHelper.castDouble(rs.getString("o_totalprice")));
-            lio.put("orderdate", CastHelper.castDate(rs.getString("o_orderdate")));
-            lio.put("orderpriority", rs.getString("o_orderpriority").trim());
-            lio.put("clerk", rs.getString("o_clerk").trim());
-            lio.put("shippriority", rs.getInt("o_shippriority"));
-            lio.put("comment", rs.getString("o_comment").trim());
-            lio.put("customer", lioc);
-
-            // lineItem.partSupp.supplier.nation.region
-            DBObject lipssnr = new BasicDBObject();
-            lipssnr.put("regionkey", rs.getInt("sr_regionkey"));
-            lipssnr.put("name", rs.getString("sr_name").trim());
-            lipssnr.put("comment", rs.getString("sr_comment").trim());
-
-            // lineItem.partSupp.supplier.nation
-            DBObject lipssn = new BasicDBObject();
-            lipssn.put("nationkey", rs.getInt("sn_nationkey"));
-            lipssn.put("name", rs.getString("sn_name").trim());
-            lipssn.put("comment", rs.getString("sn_comment").trim());
-            lipssn.put("region", lipssnr);
-
-            // lineItem.partSupp.supplier
-            DBObject lipss = new BasicDBObject();
-            lipss.put("suppkey", rs.getInt("s_suppkey"));
-            lipss.put("name", rs.getString("s_name").trim());
-            lipss.put("address", rs.getString("s_address").trim());
-            lipss.put("phone", rs.getString("s_phone").trim());
-            lipss.put("acctbal", CastHelper.castDouble(rs.getString("s_acctbal")));
-            lipss.put("comment", rs.getString("s_comment").trim());
-            lipss.put("nation", lipssn);
-
-            // lineItem.partSupp.part
-            DBObject lipsp = new BasicDBObject();
-            lipsp.put("partkey", rs.getInt("p_partkey"));
-            lipsp.put("name", rs.getString("p_name").trim());
-            lipsp.put("mfgr", rs.getString("p_mfgr").trim());
-            lipsp.put("brand", rs.getString("p_brand").trim());
-            lipsp.put("type", rs.getString("p_type").trim());
-            lipsp.put("size", rs.getInt("p_size"));
-            lipsp.put("container", rs.getString("p_container").trim());
-            lipsp.put("retailprice", CastHelper.castDouble(rs.getString("p_retailprice")));
-            lipsp.put("comment", rs.getString("p_comment").trim());
-
-            // lineItem.partSupp
-            DBObject lips = new BasicDBObject();
-            lips.put("availqty", rs.getInt("ps_availqty"));
-            lips.put("supplycost", CastHelper.castDouble(rs.getString("ps_supplycost")));
-            lips.put("comment", rs.getString("ps_comment").trim());
-            lips.put("supplier", lipss);
-            lips.put("part", lipsp);
-
-            // lineItem
-            DBObject li = new BasicDBObject();
-            li.put("linenumber", rs.getInt("l_linenumber"));
-            li.put("quantity", rs.getInt("l_quantity"));
-            li.put("extendedprice", CastHelper.castDouble(rs.getString("l_extendedprice")));
-            li.put("discount", CastHelper.castDouble(rs.getString("l_discount")));
-            li.put("tax", CastHelper.castDouble(rs.getString("l_tax")));
-            li.put("returnflag", rs.getString("l_returnflag").trim());
-            li.put("linestatus", rs.getString("l_linestatus").trim());
-            li.put("shipdate", CastHelper.castDate(rs.getString("l_shipdate")));
-            li.put("commitdate", CastHelper.castDate(rs.getString("l_commitdate")));
-            li.put("receiptdate", CastHelper.castDate(rs.getString("l_receiptdate")));
-            li.put("shipinstruct", rs.getString("l_shipinstruct").trim());
-            li.put("shipmode", rs.getString("l_shipmode").trim());
-            li.put("comment", rs.getString("l_comment").trim());
-            li.put("order", lio);
-            li.put("partsupp", lips);
-
-            collection.insert(li);
+            collection.insert(getLineItem(rs));
         }
 
         rs.close();
         st.close();
+    }
+
+    /**
+     *
+     */
+    private static void convertCustomers() throws SQLException {
+        // Drop the "customers" collection
+        DBCollection collection = mongoConn.getCollection("customers");
+        collection.drop();
+
+        // Fetch all customers without orders in PgSQL
+        Statement st = pgsqlConn.createStatement();
+        st.setFetchSize(CURSOR_SIZE);
+        ResultSet rs = st.executeQuery("" +
+            "SELECT " +
+                "customer.*, " +
+                "cnation.n_nationkey AS cn_nationkey, " +
+                "cnation.n_name AS cn_name, " +
+                "cnation.n_regionkey AS cn_regionkey, " +
+                "cnation.n_comment AS cn_comment, " +
+                "cregion.r_regionkey AS cr_regionkey, " +
+                "cregion.r_name AS cr_name, " +
+                "cregion.r_comment AS cr_comment " +
+            "FROM customer " +
+            "INNER JOIN nation AS cnation ON cnation.n_nationkey = customer.c_nationkey " +
+            "INNER JOIN region AS cregion ON cregion.r_regionkey = cnation.n_regionkey " +
+            "WHERE NOT EXISTS (SELECT 1 FROM orders WHERE customer.c_custkey = orders.o_custkey) "
+        );
+
+        // Convert each lineItem to MongoDB
+        while (rs.next()) {
+            collection.insert(getCustomer(rs));
+        }
+
+        rs.close();
+        st.close();
+    }
+
+    /**
+     *
+     * @param rs
+     * @return
+     */
+    private static final DBObject getCustomerRegion(ResultSet rs) throws SQLException {
+        DBObject region = new BasicDBObject();
+
+        region.put("regionkey", rs.getInt("cr_regionkey"));
+        region.put("name", rs.getString("cr_name").trim());
+        region.put("comment", rs.getString("cr_comment").trim());
+
+        return region;
+    }
+
+    /**
+     *
+     * @param rs
+     * @return
+     */
+    private static final DBObject getCustomerNation(ResultSet rs) throws SQLException {
+        DBObject nation = new BasicDBObject();
+
+        nation.put("nationkey", rs.getInt("cn_nationkey"));
+        nation.put("name", rs.getString("cn_name").trim());
+        nation.put("comment", rs.getString("cn_comment").trim());
+        nation.put("region", getCustomerRegion(rs));
+
+        return nation;
+    }
+
+    /**
+     *
+     * @param rs
+     * @return
+     */
+    private static final DBObject getCustomer(ResultSet rs) throws SQLException {
+        DBObject customer = new BasicDBObject();
+
+        customer.put("custkey", rs.getInt("c_custkey"));
+        customer.put("name", rs.getString("c_name").trim());
+        customer.put("address", rs.getString("c_address").trim());
+        customer.put("phone", rs.getString("c_phone").trim());
+        customer.put("acctbal", CastHelper.castDouble(rs.getString("c_acctbal")));
+        customer.put("mktsegment", rs.getString("c_mktsegment").trim());
+        customer.put("comment", rs.getString("c_comment").trim());
+        customer.put("nation", getCustomerNation(rs));
+
+        return customer;
+    }
+
+    /**
+     *
+     * @param rs
+     * @return
+     */
+    private static final DBObject getOrder(ResultSet rs) throws SQLException, ParseException {
+        DBObject order = new BasicDBObject();
+
+        order.put("orderkey", rs.getInt("o_orderkey"));
+        order.put("orderstatus", rs.getString("o_orderstatus").trim());
+        order.put("totalprice", CastHelper.castDouble(rs.getString("o_totalprice")));
+        order.put("orderdate", CastHelper.castDate(rs.getString("o_orderdate")));
+        order.put("orderpriority", rs.getString("o_orderpriority").trim());
+        order.put("clerk", rs.getString("o_clerk").trim());
+        order.put("shippriority", rs.getInt("o_shippriority"));
+        order.put("comment", rs.getString("o_comment").trim());
+        order.put("customer", getCustomer(rs));
+
+        return order;
+    }
+
+    /**
+     *
+     * @param rs
+     * @return
+     */
+    private static final DBObject getSupplierRegion(ResultSet rs) throws SQLException {
+        DBObject region = new BasicDBObject();
+
+        region.put("regionkey", rs.getInt("sr_regionkey"));
+        region.put("name", rs.getString("sr_name").trim());
+        region.put("comment", rs.getString("sr_comment").trim());
+
+        return region;
+    }
+
+    /**
+     *
+     * @param rs
+     * @return
+     */
+    private static final DBObject getSupplierNation(ResultSet rs) throws SQLException {
+        DBObject nation = new BasicDBObject();
+
+        nation.put("nationkey", rs.getInt("sn_nationkey"));
+        nation.put("name", rs.getString("sn_name").trim());
+        nation.put("comment", rs.getString("sn_comment").trim());
+        nation.put("region", getSupplierRegion(rs));
+
+        return nation;
+    }
+
+    /**
+     *
+     * @param rs
+     * @return
+     */
+    private static final DBObject getSupplier(ResultSet rs) throws SQLException {
+        DBObject supplier = new BasicDBObject();
+
+        supplier.put("suppkey", rs.getInt("s_suppkey"));
+        supplier.put("name", rs.getString("s_name").trim());
+        supplier.put("address", rs.getString("s_address").trim());
+        supplier.put("phone", rs.getString("s_phone").trim());
+        supplier.put("acctbal", CastHelper.castDouble(rs.getString("s_acctbal")));
+        supplier.put("comment", rs.getString("s_comment").trim());
+        supplier.put("nation", getSupplierNation(rs));
+
+        return supplier;
+    }
+
+    /**
+     *
+     * @param rs
+     * @return
+     */
+    private static final DBObject getPart(ResultSet rs) throws SQLException {
+        DBObject part = new BasicDBObject();
+
+        part.put("partkey", rs.getInt("p_partkey"));
+        part.put("name", rs.getString("p_name").trim());
+        part.put("mfgr", rs.getString("p_mfgr").trim());
+        part.put("brand", rs.getString("p_brand").trim());
+        part.put("type", rs.getString("p_type").trim());
+        part.put("size", rs.getInt("p_size"));
+        part.put("container", rs.getString("p_container").trim());
+        part.put("retailprice", CastHelper.castDouble(rs.getString("p_retailprice")));
+        part.put("comment", rs.getString("p_comment").trim());
+
+        return part;
+    }
+
+    /**
+     *
+     * @param rs
+     * @return
+     */
+    private static final DBObject getPartSupp(ResultSet rs) throws SQLException {
+        DBObject partSupp = new BasicDBObject();
+
+        partSupp.put("availqty", rs.getInt("ps_availqty"));
+        partSupp.put("supplycost", CastHelper.castDouble(rs.getString("ps_supplycost")));
+        partSupp.put("comment", rs.getString("ps_comment").trim());
+        partSupp.put("supplier", getSupplier(rs));
+        partSupp.put("part", getPart(rs));
+
+        return partSupp;
+    }
+
+    /**
+     *
+     * @param rs
+     * @return
+     */
+    private static final DBObject getLineItem(ResultSet rs) throws SQLException, ParseException {
+        DBObject lineItem = new BasicDBObject();
+
+        lineItem.put("linenumber", rs.getInt("l_linenumber"));
+        lineItem.put("quantity", rs.getInt("l_quantity"));
+        lineItem.put("extendedprice", CastHelper.castDouble(rs.getString("l_extendedprice")));
+        lineItem.put("discount", CastHelper.castDouble(rs.getString("l_discount")));
+        lineItem.put("tax", CastHelper.castDouble(rs.getString("l_tax")));
+        lineItem.put("returnflag", rs.getString("l_returnflag").trim());
+        lineItem.put("linestatus", rs.getString("l_linestatus").trim());
+        lineItem.put("shipdate", CastHelper.castDate(rs.getString("l_shipdate")));
+        lineItem.put("commitdate", CastHelper.castDate(rs.getString("l_commitdate")));
+        lineItem.put("receiptdate", CastHelper.castDate(rs.getString("l_receiptdate")));
+        lineItem.put("shipinstruct", rs.getString("l_shipinstruct").trim());
+        lineItem.put("shipmode", rs.getString("l_shipmode").trim());
+        lineItem.put("comment", rs.getString("l_comment").trim());
+        lineItem.put("order", getOrder(rs));
+        lineItem.put("partsupp", getPartSupp(rs));
+
+        return lineItem;
     }
 
 }

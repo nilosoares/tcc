@@ -58,6 +58,21 @@ var result = db.deals.aggregate([
         $group: groupCust
     },
     {
+        $lookup: {
+            from: "customers",
+            localField: "_id", // _id = order.customer.custkey
+            foreignField: "custkey",
+            as: "notExistsArr"
+        }
+    },
+    {
+        $match: {
+            "notExistsArr": {
+                $eq: 0
+             }
+        }
+    },
+    {
         $group: {
             _id: {
                 $substr: ["$phone", 0, 2]

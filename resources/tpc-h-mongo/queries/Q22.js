@@ -1,9 +1,10 @@
 // TPC-H Query 22 for MongoDB
 db = db.getSiblingDB("final");
 
-// query to match country code
 var countryCodes = ['13', '31', '23', '29', '30', '18', '17'];
-var phone = {
+
+// query to match country code
+var dealsPhoneMatch = {
     $expr: {
         $in: [
             { $substr: ["$order.customer.phone", 0, 2] },
@@ -12,64 +13,69 @@ var phone = {
     }
 };
 
-// group to have distinct customers
-var groupCust = {
-    _id: "$order.customer.custkey",
-    bal: { $first : "$order.customer.acctbal" },
-    phone: { $first : "$order.customer.phone" }
+var customersPhoneMatch = {
+    $expr: {
+        $in: [
+            { $substr: ["$phone", 0, 2] },
+            countryCodes
+        ]
+    }
 };
 
-// calculate the average account balance
-var avgAccBalArr = db.deals.aggregate([
+// Calculates the avg of the acctbal
+var sum1 = db.customers.aggregate([
     {
-        $match: phone
+        $match: customersPhoneMatch
     },
     {
         $match: {
-            "order.customer.acctbal" : { $gt : 0 }
+            "acctbal": { $gt: 0.00 },
         }
     },
     {
-        $group: groupCust
-    },
-    {
-        $group : {
+        $group: {
             _id: null,
-            avg_acctbal: {
-                $avg: "$bal"
-            }
+            counter: { $sum: 1 },
+            sumAcctBal: { $sum: "$acctbal" }
         }
     }
-]).toArray();
+]).toArray()[0];
 
-var avgAccBal = avgAccBalArr[0].avg_acctbal;
+var sum2 = db.deals.aggregate([
+    {
+        $match: dealsPhoneMatch
+    },
+    {
+        $match: {
+            "order.customer.acctbal": { $gt: 0.00 },
+        }
+    },
+    {
+        $group: { // group to have distinct customers
+            _id: "$order.customer.custkey",
+            bal: { $first : "$order.customer.acctbal" },
+            phone: { $first : "$order.customer.phone" }
+        }
+    },
+    {
+        $group: {
+            _id: null,
+            counter: { $sum: 1 },
+            sumAcctBal: { $sum: "$bal" }
+        }
+    }
+]).toArray()[0];
+
+var avgAcctBal = (sum1.sumAcctBal + sum2.sumAcctBal) / (sum1.counter + sum2.counter);
 
 // Find the final result
-var result = db.deals.aggregate([
-    { $match: phone },
+var result = db.customers.aggregate([
     {
-        $match: {
-            "order.customer.acctbal": {
-                $gt: avgAccBal
-            }
-        }
-    },
-    {
-        $group: groupCust
-    },
-    {
-        $lookup: {
-            from: "customers",
-            localField: "_id", // _id = order.customer.custkey
-            foreignField: "custkey",
-            as: "notExistsArr"
-        }
+        $match: customersPhoneMatch
     },
     {
         $match: {
-            "notExistsArr": {
-                $eq: 0
-             }
+            "acctbal": { $gt: avgAcctBal }
         }
     },
     {
@@ -78,7 +84,7 @@ var result = db.deals.aggregate([
                 $substr: ["$phone", 0, 2]
             },
             numcust: { $sum: 1 },
-            totacctbal: { $sum: "$bal" }
+            totacctbal: { $sum: "$acctbal" }
         }
     },
     {

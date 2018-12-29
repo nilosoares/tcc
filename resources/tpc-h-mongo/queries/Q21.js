@@ -1,72 +1,102 @@
 // TPC-H Query 21 for MongoDB
 db = db.getSiblingDB("final");
 
-var query = {
-	$and: [
-		{ "order.orderstatus": "F"},
-		{ "partsupp.supplier.nation.name": { $regex : '^SAUDI ARABIA' }},
-		{ $expr: "this.receiptdate > this.commitdate"}
-	]
-};
-
-// check if there are other suppliers with same order
-var multisupp = {
-	$expr : function() {
-		return db.deals.findOne({
-			$and: [
-				{
-					"order.orderkey": this.order.orderkey
-				},
-				{
-					"partsupp.supplier.suppkey": {
-						"$ne": this.partsupp.supplier.suppkey
-					}
-				}
-			]
-		}) != null;
-	}
-};
-
-// make sure that no other supplier failed
-var onlyfail = {
-	$expr : function() {
-		return db.deals.findOne({
-			$and: [
-				{
-					"order.orderkey": this.order.orderkey
-				},
-				{
-					"partsupp.supplier.suppkey": {
-						"$ne": this.partsupp.supplier.suppkey
-					}
-				},
-				{
-					$expr: "this.receiptdate > this.commitdate"
-				}
-			]
-		}) == null;
-	}
-};
-
-res = db.deals.aggregate([
+var exists = db.deals.aggregate([
     {
-        $match : query
+        $project: {
+            orderkey: "$order.orderkey",
+            suppkey: "$partsupp.supplier.suppkey"
+        }
+    }
+]);
+db.tmp_q21_1.drop();
+db.tmp_q21_1.insert(exists.toArray());
+
+var notExists = db.deals.aggregate([
+    {
+        $match: {
+            $expr: {
+                $gt: ["$receiptdate", "$commitdate"]
+            }
+        }
     },
     {
-        $match : multisupp
+        $project: {
+            orderkey: "$order.orderkey",
+            suppkey: "$partsupp.supplier.suppkey"
+        }
+    }
+]);
+db.tmp_q21_2.drop();
+db.tmp_q21_2.insert(notExists.toArray());
+
+var result = db.deals.aggregate([
+    {
+        $match: {
+            $and: [
+                { "order.orderstatus": "F" },
+                { "partsupp.supplier.nation.name": { $regex : '^SAUDI ARABIA' } },
+                { $expr: { $gt: ["$receiptdate", "$commitdate"] } }
+            ]
+        }
     },
     {
-        $match : onlyfail
+        $lookup: {
+            from: "tmp_q21_1",
+            let: {
+                thisOrderKey: "$order.orderkey",
+                thisSuppKey: "$partsupp.supplier.suppkey"
+            },
+            pipeline: [
+                {
+                    $match: {
+                        $expr: {
+                            $and: [
+                                { $eq: ["$orderkey",  "$$thisOrderKey"] },
+                                { $ne: ["$suppkey",  "$$thisSuppKey"] }
+                            ]
+                        }
+                    }
+                }
+            ],
+            as: "multisupp"
+        }
     },
     {
-        $project : {
-            _id : 0,
-            s_name : "$partsupp.supplier.name"
+        $lookup: {
+            from: "tmp_q21_2",
+            let: {
+                thisOrderKey: "$order.orderkey",
+                thisSuppKey: "$partsupp.supplier.suppkey"
+            },
+            pipeline: [
+                {
+                    $match: {
+                        $expr: {
+                            $and: [
+                                { $eq: ["$orderkey",  "$$thisOrderKey"] },
+                                { $ne: ["$suppkey",  "$$thisSuppKey"] }
+                            ]
+                        }
+                    }
+                }
+            ],
+            as: "onlyfail"
+        }
+    },
+    {
+        $match: {
+            $expr: {
+                $and: [
+                    { $gt: [{ $size: "$multisupp" }, 0] },
+                    { $eq: [{ $size: "$onlyfail" }, 0] }
+                ]
+            }
         }
     },
     {
         $group : {
-            _id : "$s_name",
+            _id : "$partsupp.supplier.name",
             numwait : {
                 $sum : 1
             }
@@ -77,5 +107,10 @@ res = db.deals.aggregate([
             numwait : -1,
             _id : 1
         }
+    },
+    {
+        $limit: 1
     }
 ]);
+
+printjson(result.toArray());

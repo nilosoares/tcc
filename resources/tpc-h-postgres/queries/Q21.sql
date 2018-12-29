@@ -34,7 +34,7 @@ where
 			and l3.l_receiptdate > l3.l_commitdate
 	)
 	and s_nationkey = n_nationkey
-	and n_name = 'VIETNAM'
+	and n_name = 'SAUDI ARABIA'
 group by
 	s_name
 order by

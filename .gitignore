@@ -14,3 +14,7 @@
 /resources/tpc-h/dbgen/*.tbl
 /resources/tpc-h/dbgen/*.csv
 ###< tpc-h ###
+
+###> tpc-h-mongo ###
+/resources/tpc-h-mongo/queries/*.out
+###< tpc-h ###

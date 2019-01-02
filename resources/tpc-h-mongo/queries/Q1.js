@@ -1,3 +1,6 @@
+// add log time
+print('Query started at ' + new Date());
+
 // TPC-H Query 1 for MongoDB using the native group-statement
 db = db.getSiblingDB("final");
 
@@ -87,4 +90,8 @@ var result = db.deals.aggregate([
     }
 ]);
 
+// print result
 printjson(result.toArray());
+
+// add log time
+print('Query ended at ' + new Date());

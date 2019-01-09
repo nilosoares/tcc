@@ -1,5 +1,6 @@
 // add log time
-print('Query started at ' + new Date());
+var queryStartedAt = new Date();
+print('Query started at ' + queryStartedAt.toISOString());
 
 // TPC-H Query 15 for MongoDB
 db = db.getSiblingDB("final");
@@ -59,4 +60,5 @@ var result = db.deals.aggregate([
 printjson(result.toArray());
 
 // add log time
-print('Query ended at ' + new Date());
+var queryEndedAt = new Date();
+print('Query ended at ' + queryEndedAt.toISOString());

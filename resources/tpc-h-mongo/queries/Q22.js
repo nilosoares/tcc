@@ -107,3 +107,4 @@ printjson(result.toArray());
 // add log time
 var queryEndedAt = new Date();
 print('Query ended at ' + queryEndedAt.toISOString());
+print('Execution time: ' + ((queryEndedAt - queryStartedAt) / 1000)) + ' seconds';

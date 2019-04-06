@@ -6,4 +6,6 @@ bin/update_permissions
 bin/build
 bin/dbgen
 bin/populate_postgres
+bin/disable_profiler
 bin/convert_to_nosql
+bin/enable_profiler

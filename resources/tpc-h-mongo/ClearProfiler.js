@@ -4,6 +4,6 @@ db.setProfilingLevel(0);
 
 db.system.profile.drop();
 
-db.createCollection("system.profile", { capped: true, size: 15 * 1000 * 1000 } ); // 15MB
+db.createCollection("system.profile", { capped: true, size: 100 * 1000 * 1000 } ); // 100MB
 
-db.setProfilingLevel(1, { slowms: 100 });
+db.setProfilingLevel(2);

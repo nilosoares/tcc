@@ -1,3 +1,3 @@
 db = db.getSiblingDB("final");
 
-db.setProfilingLevel(1, { slowms: 100 });
+db.setProfilingLevel(2);

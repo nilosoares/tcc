@@ -5,7 +5,7 @@ repositories {
 }
 
 dependencies {
-    compile 'org.mongodb:mongo-java-driver:3.6.3'
+    compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.6.3'
     compile group: 'org.postgresql', name: 'postgresql', version: '42.2.5'
     compile 'io.github.cdimascio:java-dotenv:3.1.7'
 }
@@ -22,4 +22,11 @@ task convert_to_nosql(type:JavaExec) {
     description 'Populate MongoDB with TPC-H data (one collection).'
     classpath = sourceSets.main.runtimeClasspath
     main = "ConvertToNoSql"
+}
+
+task monitor(type:JavaExec) {
+    group 'TPC-H'
+    description 'Start MongoDB monitoring.'
+    classpath = sourceSets.main.runtimeClasspath
+    main = "Monitor"
 }

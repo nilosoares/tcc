@@ -1,6 +1,11 @@
 import java.text.ParseException;
-import java.sql.*;
-import com.mongodb.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import org.bson.Document;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 /**
  *
@@ -9,7 +14,7 @@ import com.mongodb.*;
 public class ConvertToNoSql {
 
     private static final int CURSOR_SIZE = 10000;
-    private static DB mongoConn;
+    private static MongoDatabase mongoConn;
     private static Connection pgsqlConn;
 
     /**
@@ -34,7 +39,7 @@ public class ConvertToNoSql {
      */
     private static void convertLineItems() throws SQLException, ParseException {
         // Drop the "deals" collection
-        DBCollection collection = mongoConn.getCollection("deals");
+        MongoCollection<Document> collection = mongoConn.getCollection("deals");
         collection.drop();
 
         // Fetch all lineItems in PgSQL
@@ -76,7 +81,7 @@ public class ConvertToNoSql {
 
         // Convert each lineItem to MongoDB
         while (rs.next()) {
-            collection.insert(getLineItem(rs));
+            collection.insertOne(getLineItem(rs));
         }
 
         rs.close();
@@ -88,7 +93,7 @@ public class ConvertToNoSql {
      */
     private static void convertCustomers() throws SQLException {
         // Drop the "customers" collection
-        DBCollection collection = mongoConn.getCollection("customers");
+        MongoCollection<Document> collection = mongoConn.getCollection("customers");
         collection.drop();
 
         // Fetch all customers without orders in PgSQL
@@ -112,7 +117,7 @@ public class ConvertToNoSql {
 
         // Convert each lineItem to MongoDB
         while (rs.next()) {
-            collection.insert(getCustomer(rs));
+            collection.insertOne(getCustomer(rs));
         }
 
         rs.close();
@@ -124,8 +129,8 @@ public class ConvertToNoSql {
      * @param rs
      * @return
      */
-    private static final DBObject getCustomerRegion(ResultSet rs) throws SQLException {
-        DBObject region = new BasicDBObject();
+    private static final Document getCustomerRegion(ResultSet rs) throws SQLException {
+        Document region = new Document();
 
         region.put("regionkey", rs.getInt("cr_regionkey"));
         region.put("name", rs.getString("cr_name").trim());
@@ -139,8 +144,8 @@ public class ConvertToNoSql {
      * @param rs
      * @return
      */
-    private static final DBObject getCustomerNation(ResultSet rs) throws SQLException {
-        DBObject nation = new BasicDBObject();
+    private static final Document getCustomerNation(ResultSet rs) throws SQLException {
+        Document nation = new Document();
 
         nation.put("nationkey", rs.getInt("cn_nationkey"));
         nation.put("name", rs.getString("cn_name").trim());
@@ -155,8 +160,8 @@ public class ConvertToNoSql {
      * @param rs
      * @return
      */
-    private static final DBObject getCustomer(ResultSet rs) throws SQLException {
-        DBObject customer = new BasicDBObject();
+    private static final Document getCustomer(ResultSet rs) throws SQLException {
+        Document customer = new Document();
 
         customer.put("custkey", rs.getInt("c_custkey"));
         customer.put("name", rs.getString("c_name").trim());
@@ -175,8 +180,8 @@ public class ConvertToNoSql {
      * @param rs
      * @return
      */
-    private static final DBObject getOrder(ResultSet rs) throws SQLException, ParseException {
-        DBObject order = new BasicDBObject();
+    private static final Document getOrder(ResultSet rs) throws SQLException, ParseException {
+        Document order = new Document();
 
         order.put("orderkey", rs.getInt("o_orderkey"));
         order.put("orderstatus", rs.getString("o_orderstatus").trim());
@@ -196,8 +201,8 @@ public class ConvertToNoSql {
      * @param rs
      * @return
      */
-    private static final DBObject getSupplierRegion(ResultSet rs) throws SQLException {
-        DBObject region = new BasicDBObject();
+    private static final Document getSupplierRegion(ResultSet rs) throws SQLException {
+        Document region = new Document();
 
         region.put("regionkey", rs.getInt("sr_regionkey"));
         region.put("name", rs.getString("sr_name").trim());
@@ -211,8 +216,8 @@ public class ConvertToNoSql {
      * @param rs
      * @return
      */
-    private static final DBObject getSupplierNation(ResultSet rs) throws SQLException {
-        DBObject nation = new BasicDBObject();
+    private static final Document getSupplierNation(ResultSet rs) throws SQLException {
+        Document nation = new Document();
 
         nation.put("nationkey", rs.getInt("sn_nationkey"));
         nation.put("name", rs.getString("sn_name").trim());
@@ -227,8 +232,8 @@ public class ConvertToNoSql {
      * @param rs
      * @return
      */
-    private static final DBObject getSupplier(ResultSet rs) throws SQLException {
-        DBObject supplier = new BasicDBObject();
+    private static final Document getSupplier(ResultSet rs) throws SQLException {
+        Document supplier = new Document();
 
         supplier.put("suppkey", rs.getInt("s_suppkey"));
         supplier.put("name", rs.getString("s_name").trim());
@@ -246,8 +251,8 @@ public class ConvertToNoSql {
      * @param rs
      * @return
      */
-    private static final DBObject getPart(ResultSet rs) throws SQLException {
-        DBObject part = new BasicDBObject();
+    private static final Document getPart(ResultSet rs) throws SQLException {
+        Document part = new Document();
 
         part.put("partkey", rs.getInt("p_partkey"));
         part.put("name", rs.getString("p_name").trim());
@@ -267,8 +272,8 @@ public class ConvertToNoSql {
      * @param rs
      * @return
      */
-    private static final DBObject getPartSupp(ResultSet rs) throws SQLException {
-        DBObject partSupp = new BasicDBObject();
+    private static final Document getPartSupp(ResultSet rs) throws SQLException {
+        Document partSupp = new Document();
 
         partSupp.put("availqty", rs.getInt("ps_availqty"));
         partSupp.put("supplycost", CastHelper.castDouble(rs.getString("ps_supplycost")));
@@ -284,8 +289,8 @@ public class ConvertToNoSql {
      * @param rs
      * @return
      */
-    private static final DBObject getLineItem(ResultSet rs) throws SQLException, ParseException {
-        DBObject lineItem = new BasicDBObject();
+    private static final Document getLineItem(ResultSet rs) throws SQLException, ParseException {
+        Document lineItem = new Document();
 
         lineItem.put("linenumber", rs.getInt("l_linenumber"));
         lineItem.put("quantity", rs.getInt("l_quantity"));

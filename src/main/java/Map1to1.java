@@ -4,12 +4,10 @@ import java.io.FilenameFilter;
 import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Scanner;
-
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBObject;
+import org.bson.Document;
 import com.mongodb.MongoException;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 /**
  * Maps the entries just 1 to 1 to the MongoDB.
@@ -31,7 +29,7 @@ public class Map1to1 {
     public static void main(String[] args) throws UnknownHostException, MongoException {
         // connect to MongoDB
         ConnectorHelper ch = new ConnectorHelper();
-        DB db = ch.connectMongo(MONGO_DATABASE_NAME);
+        MongoDatabase db = ch.connectMongo(MONGO_DATABASE_NAME);
 
         File folder = new File("resources/tpc-h/dbgen");
         FilenameFilter filter = new FilenameFilter() {
@@ -78,19 +76,19 @@ public class Map1to1 {
             }
 
             try {
-                DBCollection collection = db.getCollection(collName);
+                MongoCollection<Document> collection = db.getCollection(collName);
                 collection.drop();
                 Scanner scanner = new Scanner(toRead);
                 while (scanner.hasNext()) {
                     String line = scanner.nextLine();
-                    DBObject mongoEntry = new BasicDBObject();
+                    Document mongoEntry = new Document();
                     String[] elements = line.split("\\|");
 
                     for (int i = 0; i < elements.length; i++) {
                         mongoEntry.put(keys.get(i), CastHelper.autoCast(elements[i]));
                     }
 
-                    collection.insert(mongoEntry);
+                    collection.insertOne(mongoEntry);
                 }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();

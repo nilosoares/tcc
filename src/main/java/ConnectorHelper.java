@@ -1,7 +1,9 @@
 import io.github.cdimascio.dotenv.Dotenv;
-import com.mongodb.DB;
+import com.mongodb.client.MongoDatabase;
 import com.mongodb.MongoClient;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class ConnectorHelper {
 
@@ -24,20 +26,20 @@ public class ConnectorHelper {
      * @param host
      * @param port
      * @param dbName
-     * @return
+     * @return MongoDatabase
      */
-    public DB connectMongo(String host, int port, String dbName) {
+    public MongoDatabase connectMongo(String host, int port, String dbName) {
         MongoClient mongoClient = new MongoClient(host, port);
 
-        return mongoClient.getDB(dbName);
+        return mongoClient.getDatabase(dbName);
     }
 
     /**
      *
      * @param dbName
-     * @return
+     * @return MongoDatabase
      */
-    public DB connectMongo(String dbName) {
+    public MongoDatabase connectMongo(String dbName) {
         String host = dotenv.get("MONGO_HOST");
         Integer port = CastHelper.castInt(dotenv.get("MONGO_PORT"));
 
@@ -46,9 +48,9 @@ public class ConnectorHelper {
 
     /**
      *
-     * @return
+     * @return MongoDatabase
      */
-    public DB connectMongo() {
+    public MongoDatabase connectMongo() {
         String dbName = dotenv.get("MONGO_DATABASE");
 
         return this.connectMongo(dbName);

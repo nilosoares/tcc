@@ -1,7 +1,9 @@
 import io.github.cdimascio.dotenv.Dotenv;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.MongoClient;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class ConnectorHelper {
 

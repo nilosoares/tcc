@@ -4,9 +4,10 @@ import java.io.FilenameFilter;
 import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Scanner;
-import org.bson.*;
-import com.mongodb.*;
-import com.mongodb.client.*;
+import org.bson.Document;
+import com.mongodb.MongoException;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 /**
  * Maps the entries just 1 to 1 to the MongoDB.

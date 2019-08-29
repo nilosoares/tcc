@@ -6,12 +6,7 @@ print('Query started at ' + queryStartedAt.toISOString());
 db = db.getSiblingDB("final");
 
 // random date
-function rand(min, max) {
-    var interval = max - min + 1;
-    return Math.floor((Math.random() * interval)) + min;
-}
-//var delta = rand(60, 120);
-var delta = 90;
+var delta = __PARAM_DELTA__;
 var date = new Date(1998, 11, 1); // month is 0-indexed
 date.setDate(date.getDate() - delta);
 

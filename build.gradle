@@ -30,3 +30,10 @@ task monitor(type:JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     main = "Monitor"
 }
+
+task mongo_dbgen(type:JavaExec) {
+    group 'TPC-H'
+    description 'Generate MongoDB queries.'
+    classpath = sourceSets.main.runtimeClasspath
+    main = "MongoDbGen"
+}

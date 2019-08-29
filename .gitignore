@@ -16,5 +16,7 @@
 ###< tpc-h ###
 
 ###> tpc-h-mongo ###
-/resources/tpc-h-mongo/queries/*.out
+/resources/tpc-h-mongo/executable-queries/*.js
+!/resources/tpc-h-mongo/executable-queries/.gitignore
+/resources/tpc-h-mongo/template-queries/*.out
 ###< tpc-h ###

@@ -5,6 +5,8 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import org.json.simple.JSONObject;
+
 /**
  *
  * @author Nilo Soares
@@ -20,6 +22,7 @@ public class MongoDbGen {
      */
     public static void main(String[] args) {
         query1();
+        query8();
         query15();
         query20();
         query21();
@@ -30,7 +33,7 @@ public class MongoDbGen {
      *
      * @param queryNumber
      */
-    private static Path getNewTemplate(String queryNumber) {
+    private static Path getTemplate(String queryNumber) {
         Path destPath = null;
 
         try {
@@ -53,7 +56,7 @@ public class MongoDbGen {
      *
      */
     private static void query1() {
-        Path destPath = getNewTemplate("Q1");
+        Path destPath = getTemplate("Q1");
 
         // Delta
         Integer delta = RandomHelper.getRandomInteger(60, 120);
@@ -63,8 +66,26 @@ public class MongoDbGen {
     /**
      *
      */
+    private static void query8() {
+        Path destPath = getTemplate("Q8");
+
+        // Country and Region
+        JSONObject country = RandomHelper.getRandomCountry();
+        String countryName = (String) country.get("nation_name");
+        String regionName = (String) country.get("region_name");
+        FileSystemHelper.findAndReplace(destPath, "__PARAM_COUNTRY__", countryName);
+        FileSystemHelper.findAndReplace(destPath, "__PARAM_REGION__", regionName);
+
+        // Type
+        String type = RandomHelper.getRandomType();
+        FileSystemHelper.findAndReplace(destPath, "__PARAM_TYPE__", type);
+    }
+
+    /**
+     *
+     */
     private static void query15() {
-        Path destPath = getNewTemplate("Q15");
+        Path destPath = getTemplate("Q15");
 
         // Start Date
         Calendar startDate = RandomHelper.getRandomDate(93, 0, 1, 97, 9, 1);
@@ -81,7 +102,7 @@ public class MongoDbGen {
      *
      */
     private static void query20() {
-        Path destPath = getNewTemplate("Q20");
+        Path destPath = getTemplate("Q20");
 
         // Date
         Integer year = RandomHelper.getRandomInteger(1993, 1997);
@@ -98,7 +119,7 @@ public class MongoDbGen {
         FileSystemHelper.findAndReplace(destPath, "__PARAM_COLOR__", color);
 
         // Country
-        String country = RandomHelper.getRandomCountry();
+        String country = RandomHelper.getRandomCountryName();
         FileSystemHelper.findAndReplace(destPath, "__PARAM_COUNTRY__", country);
     }
 
@@ -106,10 +127,10 @@ public class MongoDbGen {
      *
      */
     private static void query21() {
-        Path destPath = getNewTemplate("Q21");
+        Path destPath = getTemplate("Q21");
 
         // Country
-        String country = RandomHelper.getRandomCountry();
+        String country = RandomHelper.getRandomCountryName();
         FileSystemHelper.findAndReplace(destPath, "__PARAM_COUNTRY__", country);
     }
 
@@ -117,7 +138,7 @@ public class MongoDbGen {
      *
      */
     private static void query22() {
-        Path destPath = getNewTemplate("Q22");
+        Path destPath = getTemplate("Q22");
         ArrayList<Integer> countryCodes = new ArrayList<Integer>();
 
         // 7 unique country codes

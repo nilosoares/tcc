@@ -2,6 +2,7 @@ import java.lang.System;
 
 import java.nio.file.Path;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -22,6 +23,7 @@ public class MongoDbGen {
         query15();
         query20();
         query21();
+        query22();
     }
 
     /**
@@ -109,6 +111,29 @@ public class MongoDbGen {
         // Country
         String country = RandomHelper.getRandomCountry();
         FileSystemHelper.findAndReplace(destPath, "__PARAM_COUNTRY__", country);
+    }
+
+    /**
+     *
+     */
+    private static void query22() {
+        Path destPath = getNewTemplate("Q22");
+        ArrayList<Integer> countryCodes = new ArrayList<Integer>();
+
+        // 7 unique country codes
+        for (int i = 1; i <= 7; i++) {
+            while (true) {
+                Integer countryCode = RandomHelper.getRandomCountryCode();
+
+                if (countryCodes.contains(countryCode)) {
+                    continue;
+                }
+
+                countryCodes.add(countryCode);
+                FileSystemHelper.findAndReplace(destPath, "__PARAM_COUNTRY_CODE_" + i + "__", countryCode.toString());
+                break;
+            }
+        }
     }
 
 }

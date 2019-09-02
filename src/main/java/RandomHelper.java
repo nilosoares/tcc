@@ -53,6 +53,7 @@ public class RandomHelper {
     public static String getRandomColor() {
         String file = "resources/tpc-h-mongo/parameters/colors.json";
         JSONArray colors = FileSystemHelper.readJSONArray(file);
+
         int randomIndex = RandomHelper.getRandomInteger(0, colors.size() - 1);
 
         return (String) colors.get(randomIndex);
@@ -65,9 +66,24 @@ public class RandomHelper {
     public static String getRandomCountry() {
         String file = "resources/tpc-h-mongo/parameters/countries.json";
         JSONArray countries = FileSystemHelper.readJSONArray(file);
-        int randomIndex = RandomHelper.getRandomInteger(0, countries.size() - 1);
 
-        return (String) countries.get(randomIndex);
+        int nationKey = RandomHelper.getRandomInteger(0, countries.size() - 1);
+
+        return (String) countries.get(nationKey);
+    }
+
+    /**
+     *
+     * @return String
+     */
+    public static Integer getRandomCountryCode() {
+        String file = "resources/tpc-h-mongo/parameters/countries.json";
+        JSONArray countries = FileSystemHelper.readJSONArray(file);
+
+        int nationKey = RandomHelper.getRandomInteger(0, countries.size() - 1);
+        int countryCode = nationKey + 10;
+
+        return new Integer(countryCode);
     }
 
     /**

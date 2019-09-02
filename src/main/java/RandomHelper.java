@@ -7,6 +7,7 @@ import java.util.Random;
 import java.lang.System;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 /**
  *
@@ -61,15 +62,37 @@ public class RandomHelper {
 
     /**
      *
+     * @return JSONObject
+     */
+    public static JSONObject getRandomCountry() {
+        // Read the JSON files
+        String countriesFile = "resources/tpc-h-mongo/parameters/countries.json";
+        String regionsFile = "resources/tpc-h-mongo/parameters/regions.json";
+        JSONArray countries = FileSystemHelper.readJSONArray(countriesFile);
+        JSONArray regions = FileSystemHelper.readJSONArray(regionsFile);
+
+        // Get random country
+        int randomIndex = RandomHelper.getRandomInteger(0, countries.size() - 1);
+        JSONObject country = (JSONObject) countries.get(randomIndex);
+
+        // Get the region name
+        int regionKey = ((Long) country.get("region_key")).intValue();
+        String regionName = (String) regions.get(regionKey);
+
+        // Store the region name
+        country.put("region_name", regionName);
+
+        return country;
+    }
+
+    /**
+     *
      * @return String
      */
-    public static String getRandomCountry() {
-        String file = "resources/tpc-h-mongo/parameters/countries.json";
-        JSONArray countries = FileSystemHelper.readJSONArray(file);
+    public static String getRandomCountryName() {
+        JSONObject country = getRandomCountry();
 
-        int nationKey = RandomHelper.getRandomInteger(0, countries.size() - 1);
-
-        return (String) countries.get(nationKey);
+        return (String) country.get("nation_name");
     }
 
     /**
@@ -77,10 +100,9 @@ public class RandomHelper {
      * @return String
      */
     public static Integer getRandomCountryCode() {
-        String file = "resources/tpc-h-mongo/parameters/countries.json";
-        JSONArray countries = FileSystemHelper.readJSONArray(file);
+        JSONObject country = getRandomCountry();
 
-        int nationKey = RandomHelper.getRandomInteger(0, countries.size() - 1);
+        int nationKey = ((Long) country.get("nation_key")).intValue();
         int countryCode = nationKey + 10;
 
         return new Integer(countryCode);
@@ -109,6 +131,19 @@ public class RandomHelper {
         Integer randomInt = random.nextInt(max - min + 1) + min;
 
         return randomInt;
+    }
+
+    /**
+     *
+     * @return String
+     */
+    public static String getRandomType() {
+        String file = "resources/tpc-h-mongo/parameters/types.json";
+        JSONArray types = FileSystemHelper.readJSONArray(file);
+
+        int randomIndex = RandomHelper.getRandomInteger(0, types.size() - 1);
+
+        return (String) types.get(randomIndex);
     }
 
 }

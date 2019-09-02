@@ -21,6 +21,7 @@ public class MongoDbGen {
         query1();
         query15();
         query20();
+        query21();
     }
 
     /**
@@ -93,6 +94,17 @@ public class MongoDbGen {
         // Colors
         String color = RandomHelper.getRandomColor();
         FileSystemHelper.findAndReplace(destPath, "__PARAM_COLOR__", color);
+
+        // Country
+        String country = RandomHelper.getRandomCountry();
+        FileSystemHelper.findAndReplace(destPath, "__PARAM_COUNTRY__", country);
+    }
+
+    /**
+     *
+     */
+    private static void query21() {
+        Path destPath = getNewTemplate("Q21");
 
         // Country
         String country = RandomHelper.getRandomCountry();

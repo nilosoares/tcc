@@ -10,8 +10,8 @@ var halfQtyArr = db.deals.aggregate([
     {
         $match: {
             "shipdate": {
-                $gte: new Date(1994, 0, 1),
-                $lt: new Date(1995, 0, 1)
+                $gte: new Date(__PARAM_START_DATE__),
+                $lt: new Date(__PARAM_END_DATE__)
             }
         }
     },
@@ -45,11 +45,11 @@ var result = db.deals.aggregate([
     {
         $match: {
             "partsupp.part.name": {
-                $regex: '^forest',
+                $regex: '^__PARAM_COLOR__',
                 $options: 'i' // option i makes case insensitive
             },
             "partsupp.supplier.nation.name": {
-                $regex: '^CANADA' // use regex because of whitespaces in the end
+                $regex: '^__PARAM_COUNTRY__' // use regex because of whitespaces in the end
             }
         }
     },

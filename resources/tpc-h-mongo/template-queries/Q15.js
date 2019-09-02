@@ -6,8 +6,8 @@ print('Query started at ' + queryStartedAt.toISOString());
 db = db.getSiblingDB("final");
 
 // variables
-var start = new Date(1996, 0, 1);
-var end = new Date(1996, 3, 1);
+var start = new Date(__PARAM_START_DATE__);
+var end = new Date(__PARAM_END_DATE__);
 
 // month is 0-indexed
 var subquery = {

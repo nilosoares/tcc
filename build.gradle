@@ -8,6 +8,7 @@ dependencies {
     compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.6.3'
     compile group: 'org.postgresql', name: 'postgresql', version: '42.2.5'
     compile 'io.github.cdimascio:java-dotenv:3.1.7'
+    compile 'com.googlecode.json-simple:json-simple:1.1.1'
 }
 
 task map1to1(type:JavaExec) {
@@ -29,4 +30,11 @@ task monitor(type:JavaExec) {
     description 'Start MongoDB monitoring.'
     classpath = sourceSets.main.runtimeClasspath
     main = "Monitor"
+}
+
+task mongo_dbgen(type:JavaExec) {
+    group 'TPC-H'
+    description 'Generate MongoDB queries.'
+    classpath = sourceSets.main.runtimeClasspath
+    main = "MongoDbGen"
 }

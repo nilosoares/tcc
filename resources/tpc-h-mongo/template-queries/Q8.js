@@ -8,9 +8,9 @@ db = db.getSiblingDB("final");
 // variables
 var start = new Date(1995, 0, 1); // month is 0-indexed
 var end = new Date(1996, 11, 31);
-var region = 'AMERICA';
-var part_type = "ECONOMY ANODIZED STEEL";
-var nation = 'BRAZIL';
+var region = "__PARAM_REGION__";
+var part_type = "__PARAM_TYPE__";
+var nation = "__PARAM_COUNTRY__";
 
 // subquery
 var subquery = {

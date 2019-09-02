@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker-compose run gradle gradle mongo_dbgen

@@ -39,7 +39,7 @@ var result = db.deals.aggregate([
         $match: {
             $and: [
                 { "order.orderstatus": "F" },
-                { "partsupp.supplier.nation.name": { $regex : '^SAUDI ARABIA' } },
+                { "partsupp.supplier.nation.name": { $regex : '^__PARAM_COUNTRY__' } },
                 { $expr: { $gt: ["$receiptdate", "$commitdate"] } }
             ]
         }

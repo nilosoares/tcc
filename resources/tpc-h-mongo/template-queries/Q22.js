@@ -5,7 +5,15 @@ print('Query started at ' + queryStartedAt.toISOString());
 // TPC-H Query 22 for MongoDB
 db = db.getSiblingDB("final");
 
-var countryCodes = ['13', '31', '23', '29', '30', '18', '17'];
+var countryCodes = [
+    __PARAM_COUNTRY_CODE_1__,
+    __PARAM_COUNTRY_CODE_2__,
+    __PARAM_COUNTRY_CODE_3__,
+    __PARAM_COUNTRY_CODE_4__,
+    __PARAM_COUNTRY_CODE_5__,
+    __PARAM_COUNTRY_CODE_6__,
+    __PARAM_COUNTRY_CODE_7__
+];
 
 // query to match country code
 var dealsPhoneMatch = {

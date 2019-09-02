@@ -1,8 +1,8 @@
 import java.lang.System;
-import java.io.IOException;
+
 import java.nio.file.Path;
+
 import java.util.Calendar;
-import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -17,32 +17,39 @@ public class MongoDbGen {
      *
      * @param args
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         query1();
         query15();
+        query20();
     }
 
     /**
      *
      * @param queryNumber
-     * @throws IOException
      */
-    private static Path getNewTemplate(String queryNumber) throws IOException {
-        String fileName = queryNumber + ".js";
+    private static Path getNewTemplate(String queryNumber) {
+        Path destPath = null;
 
-        Path destPath = FileSystemHelper.copyFile(
-            TEMPLATE_PATH + fileName,
-            QUERIES_PATH + fileName
-        );
+        try {
+            String fileName = queryNumber + ".js";
+
+            destPath = FileSystemHelper.copyFile(
+                TEMPLATE_PATH + fileName,
+                QUERIES_PATH + fileName
+            );
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
 
         return destPath;
     }
 
     /**
      *
-     * @throws IOException
      */
-    private static void query1() throws IOException {
+    private static void query1() {
         Path destPath = getNewTemplate("Q1");
 
         // Delta
@@ -52,9 +59,8 @@ public class MongoDbGen {
 
     /**
      *
-     * @throws IOException
      */
-    private static void query15() throws IOException {
+    private static void query15() {
         Path destPath = getNewTemplate("Q15");
 
         // Start Date
@@ -66,6 +72,31 @@ public class MongoDbGen {
         Calendar endDate = (Calendar) startDate.clone();
         endDate.add(Calendar.MONTH, 3);
         FileSystemHelper.findAndReplace(destPath, "__PARAM_END_DATE__", DateHelper.format(endDate));
+    }
+
+    /**
+     *
+     */
+    private static void query20() {
+        Path destPath = getNewTemplate("Q20");
+
+        // Date
+        Integer year = RandomHelper.getRandomInteger(1993, 1997);
+        Calendar startDate = DateHelper.getInstance(year-1900, 0, 1);
+        FileSystemHelper.findAndReplace(destPath, "__PARAM_START_DATE__", DateHelper.format(startDate));
+
+        // End Date
+        Calendar endDate = (Calendar) startDate.clone();
+        endDate.add(Calendar.YEAR, 1);
+        FileSystemHelper.findAndReplace(destPath, "__PARAM_END_DATE__", DateHelper.format(endDate));
+
+        // Colors
+        String color = RandomHelper.getRandomColor();
+        FileSystemHelper.findAndReplace(destPath, "__PARAM_COLOR__", color);
+
+        // Country
+        String country = RandomHelper.getRandomCountry();
+        FileSystemHelper.findAndReplace(destPath, "__PARAM_COUNTRY__", country);
     }
 
 }

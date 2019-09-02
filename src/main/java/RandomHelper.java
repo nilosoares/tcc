@@ -1,7 +1,12 @@
+import java.io.FileReader;
+
 import java.util.Calendar;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.Random;
+
 import java.lang.System;
+
+import org.json.simple.JSONArray;
 
 /**
  *
@@ -39,6 +44,42 @@ public class RandomHelper {
         Calendar date2 = DateHelper.getInstance(y2, m2, d2);
 
         return getRandomDate(date1, date2);
+    }
+
+    /**
+     *
+     * @return String
+     */
+    public static String getRandomColor() {
+        String file = "resources/tpc-h-mongo/parameters/colors.json";
+        JSONArray colors = FileSystemHelper.readJSONArray(file);
+        int randomIndex = RandomHelper.getRandomInteger(0, colors.size() - 1);
+
+        return (String) colors.get(randomIndex);
+    }
+
+    /**
+     *
+     * @return String
+     */
+    public static String getRandomCountry() {
+        String file = "resources/tpc-h-mongo/parameters/countries.json";
+        JSONArray countries = FileSystemHelper.readJSONArray(file);
+        int randomIndex = RandomHelper.getRandomInteger(0, countries.size() - 1);
+
+        return (String) countries.get(randomIndex);
+    }
+
+    /**
+     *
+     * @param int min
+     * @param int max
+     * @return
+     */
+    public static int getRandomInteger(int min, int max) {
+        Integer randomInt = getRandomInteger(new Integer(min), new Integer(max));
+
+        return randomInt.intValue();
     }
 
     /**

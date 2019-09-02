@@ -1,9 +1,16 @@
-import java.io.IOException;
+import java.lang.System;
+
+import java.io.FileReader;
+
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.Files;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 /**
  *
@@ -18,30 +25,65 @@ public class FileSystemHelper {
      * @return
      * @throws IOException
      */
-    public static Path copyFile(String from, String dest) throws IOException {
-        Path fromPath = Paths.get(from);
-        Path destPath = Paths.get(dest);
+    public static Path copyFile(String from, String dest) {
+        Path fromPath = null;
+        Path destPath = null;
 
-        Files.deleteIfExists(destPath);
-        Files.copy(fromPath, destPath);
+        try {
+            fromPath = Paths.get(from);
+            destPath = Paths.get(dest);
+
+            Files.deleteIfExists(destPath);
+            Files.copy(fromPath, destPath);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
 
         return destPath;
     }
 
     /**
      *
-     * @param path
-     * @param find
-     * @param replace
-     * @throws IOException
+     * @param Path path
+     * @param String find
+     * @param String replace
      */
-    public static void findAndReplace(Path path, String find, String replace) throws IOException {
-        Charset charset = StandardCharsets.UTF_8;
-        String content = new String(Files.readAllBytes(path), charset);
+    public static void findAndReplace(Path path, String find, String replace) {
+        try {
+            Charset charset = StandardCharsets.UTF_8;
+            String content = new String(Files.readAllBytes(path), charset);
 
-        content = content.replaceAll(find, replace);
+            content = content.replaceAll(find, replace);
 
-        Files.write(path, content.getBytes(charset));
+            Files.write(path, content.getBytes(charset));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
+
+    /**
+     *
+     * @param String file
+     * @return JSONArray
+     */
+    public static JSONArray readJSONArray(String file) {
+        Object obj = null;
+
+        try {
+            FileReader reader = new FileReader(file);
+            JSONParser jsonParser = new JSONParser();
+            obj = jsonParser.parse(reader);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+
+        return (JSONArray) obj;
     }
 
 }

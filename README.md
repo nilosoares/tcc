@@ -23,8 +23,6 @@ Para instalar o TPC-H no MongoDB, basta executar o comando abaixo na raiz do pro
     
 > Atenção: isso pode demorar alguns minutos.
 
-Para mais detalhes sobre a instalação, [clique aqui](INSTALLATION_GUIDE.md).
-
 ## Executando o TPC-H
 
 ...

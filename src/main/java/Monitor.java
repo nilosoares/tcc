@@ -12,7 +12,7 @@ import com.mongodb.CursorType;
  */
 public class Monitor {
 
-    private static MongoDatabase mongoConn;
+    private static MongoDatabase mongoDatabase;
 
     /**
      *
@@ -21,9 +21,8 @@ public class Monitor {
      */
     public static void main(String[] args) {
         // connect to MongoDB
-        ConnectorHelper ch = new ConnectorHelper();
-        mongoConn = ch.connectMongo();
-        MongoCollection<Document> collection = mongoConn.getCollection("system.profile");
+        mongoDatabase = ConnectorHelper.getMongoDatabase("final");
+        MongoCollection<Document> collection = mongoDatabase.getCollection("system.profile");
 
         // Filters
         Bson filters = Filters.and(

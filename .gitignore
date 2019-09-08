@@ -1,7 +1,7 @@
 ###> gradle ###
 /.gradle
 /build
-###< idea ###
+###< gradle ###
 
 ###> idea ###
 /.idea
@@ -19,4 +19,9 @@
 /resources/tpc-h-mongo/executable-queries/*.js
 !/resources/tpc-h-mongo/executable-queries/.gitkeep
 /resources/tpc-h-mongo/template-queries/*.out
-###< tpc-h ###
+###< tpc-h-mongo ###
+
+###> vars ###
+/vars/logs/*.log
+!/vars/logs/.gitkeep
+###< vars ###

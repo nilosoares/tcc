@@ -11,13 +11,6 @@ dependencies {
     compile 'com.googlecode.json-simple:json-simple:1.1.1'
 }
 
-task map1to1(type:JavaExec) {
-    group 'TPC-H'
-    description 'Populate MongoDB with TPC-H data (multiple collections).'
-    classpath = sourceSets.main.runtimeClasspath
-    main = "Map1to1"
-}
-
 task convert_to_nosql(type:JavaExec) {
     group 'TPC-H'
     description 'Populate MongoDB with TPC-H data (one collection).'

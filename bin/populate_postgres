@@ -1,4 +1,0 @@
-#!/bin/bash
-
-# Insert the TPC-H data to Postgres
-docker-compose exec --user postgres postgres /app/resources/tpc-h-postgres/populate_postgres

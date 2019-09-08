@@ -1,4 +1,0 @@
-#!/bin/bash
-
-# Convert the data to final schema
-docker-compose run gradle gradle convert_to_nosql

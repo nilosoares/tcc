@@ -1,11 +1,27 @@
 #!/bin/bash
 
+# pull docker images
 docker-compose pull
+
+# start docker containers
 docker-compose up -d
-bin/update_permissions
-bin/build
-bin/dbgen
-bin/populate_postgres
-bin/disable_profiler
-bin/convert_to_nosql
-bin/enable_profiler
+
+# update folder permissions
+find ./resources -type d -exec chmod 777 {} \;
+
+# compile the code (C and Java)
+docker run --rm -v "$PWD":/app -w /app/resources/tpc-h/dbgen gcc:8.2 make
+docker-compose run gradle gradle build
+
+# generates the TPC-H data
+cd resources/tpc-h/dbgen
+./dbgen -f 1
+
+# populate the postgres
+docker-compose exec --user postgres postgres /app/resources/tpc-h-postgres/populate_postgres
+
+# populate the mongodb
+docker-compose exec mongo mongo resources/tpc-h-mongo/DisableProfiler.js
+docker-compose exec mongo mongo resources/tpc-h-mongo/ClearProfiler.js
+docker-compose run gradle gradle convert_to_nosql
+docker-compose exec mongo mongo resources/tpc-h-mongo/EnableProfiler.js

@@ -1,7 +1,6 @@
 (function() {
 
-    // TPC-H Query 15 for MongoDB
-    finalDb = db.getSiblingDB("final");
+    var finalDb = db.getSiblingDB("final");
 
     // variables
     var start = new Date(__PARAM_START_DATE__);

@@ -1,7 +1,6 @@
 (function() {
 
-    // TPC-H Query 8 for MongoDB
-    finalDb = db.getSiblingDB("final");
+    var finalDb = db.getSiblingDB("final");
 
     // variables
     var start = new Date(1995, 0, 1); // month is 0-indexed

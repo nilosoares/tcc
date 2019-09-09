@@ -1,6 +1,5 @@
 (function() {
 
-    // TPC-H Query 1 for MongoDB using the native group-statement
     var finalDb = db.getSiblingDB("final");
 
     // random date

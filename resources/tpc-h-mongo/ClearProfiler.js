@@ -4,6 +4,6 @@ db.setProfilingLevel(0);
 
 db.system.profile.drop();
 
-db.createCollection("system.profile", { capped: true, size: 100 * 1000 * 1000 } ); // 100MB
+db.createCollection("system.profile", { capped: true, size: 10 * 1000 * 1000 } ); // 100MB
 
 db.setProfilingLevel(2);

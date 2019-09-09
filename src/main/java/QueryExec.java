@@ -147,6 +147,48 @@ public class QueryExec {
     /**
      *
      */
+    public static void query20() {
+        // Clear the profile
+        clearProfiler();
+
+        // Build the query using random parameters
+        Path path = queryGen.query20();
+
+        // Get the content of the query
+        String script = FileSystemHelper.getContent(path);
+
+        // Run the query
+        mongoDB.eval(script);
+
+        // Log the time
+        Integer executionTime = getLatestExecutionTime();
+        LoggerHelper.info("Q20 / Execution Time (in millis) = " + executionTime.toString());
+    }
+
+    /**
+     *
+     */
+    public static void query21() {
+        // Clear the profile
+        clearProfiler();
+
+        // Build the query using random parameters
+        Path path = queryGen.query21();
+
+        // Get the content of the query
+        String script = FileSystemHelper.getContent(path);
+
+        // Run the query
+        mongoDB.eval(script);
+
+        // Log the time
+        Integer executionTime = getLatestExecutionTime();
+        LoggerHelper.info("Q21 / Execution Time (in millis) = " + executionTime.toString());
+    }
+
+    /**
+     *
+     */
     public static void query22() {
         // Clear the profile
         clearProfiler();

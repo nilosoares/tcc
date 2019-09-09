@@ -3,13 +3,13 @@
     var finalDb = db.getSiblingDB("final");
 
     var countryCodes = [
-        __PARAM_COUNTRY_CODE_1__,
-        __PARAM_COUNTRY_CODE_2__,
-        __PARAM_COUNTRY_CODE_3__,
-        __PARAM_COUNTRY_CODE_4__,
-        __PARAM_COUNTRY_CODE_5__,
-        __PARAM_COUNTRY_CODE_6__,
-        __PARAM_COUNTRY_CODE_7__
+        "__PARAM_COUNTRY_CODE_1__",
+        "__PARAM_COUNTRY_CODE_2__",
+        "__PARAM_COUNTRY_CODE_3__",
+        "__PARAM_COUNTRY_CODE_4__",
+        "__PARAM_COUNTRY_CODE_5__",
+        "__PARAM_COUNTRY_CODE_6__",
+        "__PARAM_COUNTRY_CODE_7__"
     ];
 
     // query to match country code

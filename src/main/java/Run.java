@@ -18,8 +18,8 @@ public class Run {
         //for (int i = 1; i <= totalPerQuery; i++) QueryExec.query8();
         //for (int i = 1; i <= totalPerQuery; i++) QueryExec.query15();
         //for (int i = 1; i <= totalPerQuery; i++) QueryExec.query20();
-        for (int i = 1; i <= totalPerQuery; i++) QueryExec.query21();
-        //for (int i = 1; i <= totalPerQuery; i++) QueryExec.query22(); // ERROR
+        //for (int i = 1; i <= totalPerQuery; i++) QueryExec.query21();
+        //for (int i = 1; i <= totalPerQuery; i++) QueryExec.query22();
 
         // Create indexes
         // ...

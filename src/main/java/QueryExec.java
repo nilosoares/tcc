@@ -123,4 +123,25 @@ public class QueryExec {
         LoggerHelper.info("Q8 / Execution Time (in millis) = " + executionTime.toString());
     }
 
+    /**
+     *
+     */
+    public static void query15() {
+        // Clear the profile
+        clearProfiler();
+
+        // Build the query using random parameters
+        Path path = queryGen.query15();
+
+        // Get the content of the query
+        String script = FileSystemHelper.getContent(path);
+
+        // Run the query
+        mongoDB.eval(script);
+
+        // Log the time
+        Integer executionTime = getLatestExecutionTime();
+        LoggerHelper.info("Q15 / Execution Time (in millis) = " + executionTime.toString());
+    }
+
 }

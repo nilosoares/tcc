@@ -1,9 +1,12 @@
 import java.text.ParseException;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import org.bson.Document;
+
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
@@ -14,8 +17,8 @@ import com.mongodb.client.MongoDatabase;
 public class ConvertToNoSql {
 
     private static final int CURSOR_SIZE = 10000;
-    private static MongoDatabase mongoConn;
-    private static Connection pgsqlConn;
+    private static MongoDatabase mongoDatabase;
+    private static Connection pgDatabase;
 
     /**
      *
@@ -25,9 +28,8 @@ public class ConvertToNoSql {
      */
     public static void main(String[] args) throws SQLException, ParseException {
         // connect to MongoDB and PGSQL
-        ConnectorHelper ch = new ConnectorHelper();
-        mongoConn = ch.connectMongo();
-        pgsqlConn = ch.connectPostgres();
+        mongoDatabase = ConnectorHelper.getMongoDatabase("final");
+        pgDatabase = ConnectorHelper.getPgDatabase();
 
         // Convert the data
         convertLineItems();
@@ -39,11 +41,11 @@ public class ConvertToNoSql {
      */
     private static void convertLineItems() throws SQLException, ParseException {
         // Drop the "deals" collection
-        MongoCollection<Document> collection = mongoConn.getCollection("deals");
+        MongoCollection<Document> collection = mongoDatabase.getCollection("deals");
         collection.drop();
 
         // Fetch all lineItems in PgSQL
-        Statement st = pgsqlConn.createStatement();
+        Statement st = pgDatabase.createStatement();
         st.setFetchSize(CURSOR_SIZE);
         ResultSet rs = st.executeQuery("" +
             "SELECT " +
@@ -93,11 +95,11 @@ public class ConvertToNoSql {
      */
     private static void convertCustomers() throws SQLException {
         // Drop the "customers" collection
-        MongoCollection<Document> collection = mongoConn.getCollection("customers");
+        MongoCollection<Document> collection = mongoDatabase.getCollection("customers");
         collection.drop();
 
         // Fetch all customers without orders in PgSQL
-        Statement st = pgsqlConn.createStatement();
+        Statement st = pgDatabase.createStatement();
         st.setFetchSize(CURSOR_SIZE);
         ResultSet rs = st.executeQuery("" +
             "SELECT " +

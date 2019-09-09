@@ -42,19 +42,21 @@ public class QueryGen {
     /**
      *
      */
-    public void query1() {
+    public Path query1() {
         Path destPath = getTemplate("Q1");
 
         // Delta
         Integer delta = RandomHelper.getRandomInteger(60, 120);
         FileSystemHelper.findAndReplace(destPath, "__PARAM_DELTA__", delta.toString());
         LoggerHelper.info("Q1 / Parameter 1 (Delta) = " + delta.toString());
+
+        return destPath;
     }
 
     /**
      *
      */
-    public void query8() {
+    public Path query8() {
         Path destPath = getTemplate("Q8");
 
         // Country and Region
@@ -70,12 +72,14 @@ public class QueryGen {
         String type = RandomHelper.getRandomType();
         FileSystemHelper.findAndReplace(destPath, "__PARAM_TYPE__", type);
         LoggerHelper.info("Q8 / Parameter 3 (Type) = " + type);
+
+        return destPath;
     }
 
     /**
      *
      */
-    public void query15() {
+    public Path query15() {
         Path destPath = getTemplate("Q15");
 
         // Start Date
@@ -88,12 +92,14 @@ public class QueryGen {
         Calendar endDate = (Calendar) startDate.clone();
         endDate.add(Calendar.MONTH, 3);
         FileSystemHelper.findAndReplace(destPath, "__PARAM_END_DATE__", DateHelper.format(endDate));
+
+        return destPath;
     }
 
     /**
      *
      */
-    public void query20() {
+    public Path query20() {
         Path destPath = getTemplate("Q20");
 
         // Date
@@ -116,24 +122,28 @@ public class QueryGen {
         String country = RandomHelper.getRandomCountryName();
         FileSystemHelper.findAndReplace(destPath, "__PARAM_COUNTRY__", country);
         LoggerHelper.info("Q20 / Parameter 3 (Country) = " + country);
+
+        return destPath;
     }
 
     /**
      *
      */
-    public void query21() {
+    public Path query21() {
         Path destPath = getTemplate("Q21");
 
         // Country
         String country = RandomHelper.getRandomCountryName();
         FileSystemHelper.findAndReplace(destPath, "__PARAM_COUNTRY__", country);
         LoggerHelper.info("Q21 / Parameter 1 (Country) = " + country);
+
+        return destPath;
     }
 
     /**
      *
      */
-    public void query22() {
+    public Path query22() {
         Path destPath = getTemplate("Q22");
         ArrayList<Integer> countryCodes = new ArrayList<Integer>();
 
@@ -152,6 +162,8 @@ public class QueryGen {
                 break;
             }
         }
+
+        return destPath;
     }
 
 }

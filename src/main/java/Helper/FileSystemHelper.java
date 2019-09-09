@@ -53,16 +53,33 @@ public class FileSystemHelper {
     public static void findAndReplace(Path path, String find, String replace) {
         try {
             Charset charset = StandardCharsets.UTF_8;
-            String content = new String(Files.readAllBytes(path), charset);
-
+            String content = getContent(path);
             content = content.replaceAll(find, replace);
-
             Files.write(path, content.getBytes(charset));
 
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);
         }
+    }
+
+    /**
+     *
+     * @param Path path
+     */
+    public static String getContent(Path path) {
+        String content = "";
+
+        try {
+            Charset charset = StandardCharsets.UTF_8;
+            content = new String(Files.readAllBytes(path), charset);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+
+        return content;
     }
 
     /**

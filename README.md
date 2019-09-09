@@ -21,12 +21,14 @@ Para instalar o TPC-H no MongoDB, basta executar o comando abaixo na raiz do pro
 
     bin/install
     
-> Atenção: isso pode demorar alguns minutos.
+> Atenção: a instalação pode demorar alguns minutos.
 
 ## Executando o TPC-H
 
-...
+Após a instalação, execute o TPC-H usando o MongoDB usando o comando abaixo:
 
-## To do
+    bin/run
+    
+Os dados com os parâmetros utilizados e tempo de execução estarão disponíveis no arquivo "/var/logs/tpch.log".
 
-- Executando o TPC-H
+> Atenção: o benchmark pode demorar algumas horas.

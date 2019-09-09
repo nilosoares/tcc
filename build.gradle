@@ -24,10 +24,3 @@ task run(type:JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     main = "Run"
 }
-
-task monitor(type:JavaExec) {
-    group 'TPC-H'
-    description 'Start MongoDB monitoring.'
-    classpath = sourceSets.main.runtimeClasspath
-    main = "Monitor"
-}

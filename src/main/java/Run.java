@@ -11,7 +11,7 @@ public class Run {
      * @throws InterruptedException
      */
     public static void main(String[] args) {
-        String[] queries = {"Q1", "Q8", "Q15", "Q20", "Q21", "Q22"};
+        String[] queries = {"Q1"/*, "Q8", "Q15", "Q20", "Q21", "Q22"*/};
         int nbQueries = queries.length;
         int nbTests = 1;
 

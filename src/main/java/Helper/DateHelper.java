@@ -53,4 +53,13 @@ public class DateHelper {
         return sdf.format(date.getTime());
     }
 
+    /**
+     *
+     * @param format
+     * @return
+     */
+    public static String format(String format) {
+        return format(Calendar.getInstance(), format);
+    }
+
 }

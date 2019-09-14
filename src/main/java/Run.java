@@ -19,13 +19,7 @@ public class Run {
         for (int i = 0; i < nbQueries; i++) {
             for (int t = 1; t <= nbTests; t++) {
                 // Run without index
-                QueryExec.query(queries[i], t);
-
-                // Clear the cache
-                // ...
-
-                // Create index
-                // ...
+                QueryExec.query(queries[i]);
 
                 // Run with index
                 // ...

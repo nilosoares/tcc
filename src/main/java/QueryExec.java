@@ -25,6 +25,14 @@ public class QueryExec {
     /**
      *
      */
+    private static void clearCache() {
+        mongoDB.eval("db.customers.getPlanCache().clear();");
+        mongoDB.eval("db.deals.getPlanCache().clear();");
+    }
+
+    /**
+     *
+     */
     private static void clearProfiler() {
         // Disable profiling
         mongoDB.eval("db.setProfilingLevel(0);");
@@ -83,14 +91,16 @@ public class QueryExec {
      *
      * @param queryNumber ("Q1", "Q8", "Q15", "Q20", "Q21", "Q22")
      */
-    public static void query(String queryNumber, int t) {
+    public static void query(String queryNumber) {
+        // Clear the cache
+        clearCache();
+
         // Clear the profile
         clearProfiler();
 
         try {
-            QueryGen queryGen = new QueryGen();
-
             // Build the query using random parameters
+            QueryGen queryGen = new QueryGen();
             queryGen.generate(queryNumber);
 
             // Get the content of the query
@@ -98,7 +108,7 @@ public class QueryExec {
             String script = queryGen.getExecutableQuery(queryNumber);
 
             // Run the query
-            LoggerHelper.addLog(queryNumber, "Explain = " mongoDB.eval(explainScript).toString());
+            LoggerHelper.addLog(queryNumber, "Explain = " + mongoDB.eval(explainScript).toString());
             mongoDB.eval(script);
 
             // Log the time

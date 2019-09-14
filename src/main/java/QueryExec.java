@@ -94,9 +94,11 @@ public class QueryExec {
             queryGen.generate(queryNumber);
 
             // Get the content of the query
+            String explainScript = queryGen.getExplainQuery(queryNumber);
             String script = queryGen.getExecutableQuery(queryNumber);
 
             // Run the query
+            LoggerHelper.addLog(queryNumber, "Explain = " mongoDB.eval(explainScript).toString());
             mongoDB.eval(script);
 
             // Log the time

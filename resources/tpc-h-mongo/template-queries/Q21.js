@@ -33,7 +33,7 @@
     finalDb.tmp_q21_2.drop();
     finalDb.tmp_q21_2.insert(notExists.toArray());
 
-    return finalDb.deals.aggregate([
+    return finalDb.deals.__PARAM_MONGO_METHOD__([
         {
             $match: {
                 $and: [

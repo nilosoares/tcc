@@ -43,7 +43,7 @@
         }
     };
 
-    return finalDb.deals.aggregate([
+    return finalDb.deals.__PARAM_MONGO_METHOD__([
         {
             $match: subquery // eliminate items which are not matching
         },

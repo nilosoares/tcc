@@ -81,28 +81,27 @@ public class QueryExec {
 
     /**
      *
-     * @param queryNumber ("1", "8", "15", "20", "21", "22")
+     * @param queryNumber ("Q1", "Q8", "Q15", "Q20", "Q21", "Q22")
      */
-    public static void query(String queryNumber) {
+    public static void query(String queryNumber, int t) {
         // Clear the profile
         clearProfiler();
 
         try {
-            // Build the query using random parameters
             QueryGen queryGen = new QueryGen();
-            Path path = (Path) queryGen.getClass()
-                    .getMethod("query" + queryNumber)
-                    .invoke(queryGen);
+
+            // Build the query using random parameters
+            queryGen.generate(queryNumber);
 
             // Get the content of the query
-            String script = FileSystemHelper.getContent(path);
+            String script = queryGen.getExecutableQuery(queryNumber);
 
             // Run the query
             mongoDB.eval(script);
 
             // Log the time
             Integer executionTime = getLatestExecutionTime();
-            LoggerHelper.addLog("Q" + queryNumber, "Execution Time (in millis) = " + executionTime.toString());
+            LoggerHelper.addLog(queryNumber, "Execution Time (in millis) = " + executionTime.toString());
 
         } catch (Exception e) {
             e.printStackTrace();

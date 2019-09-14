@@ -15,7 +15,7 @@
     };
 
     // extracts the total revenue of each supplier
-    return finalDb.deals.aggregate([
+    return finalDb.deals.__PARAM_MONGO_METHOD__([
         {
             $match: subquery
         },

@@ -22,6 +22,6 @@
 ###< tpc-h-mongo ###
 
 ###> vars ###
-/var/logs/*.log
+/var/logs/*
 !/var/logs/.gitkeep
 ###< vars ###

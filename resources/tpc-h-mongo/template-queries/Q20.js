@@ -38,7 +38,7 @@
     finalDb.tmp_q20.drop();
     finalDb.tmp_q20.insert(halfQtyArr);
 
-    return finalDb.deals.aggregate([
+    return finalDb.deals.__PARAM_MONGO_METHOD__([
         {
             $match: {
                 "partsupp.part.name": {

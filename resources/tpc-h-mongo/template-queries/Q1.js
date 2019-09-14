@@ -8,7 +8,7 @@
     date.setDate(date.getDate() - delta);
 
     // run query
-    return finalDb.deals.aggregate([
+    return finalDb.deals.__PARAM_MONGO_METHOD__([
         {
             $match: {
                 "shipdate" : { $lte: date }

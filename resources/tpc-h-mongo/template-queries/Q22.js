@@ -78,7 +78,7 @@
     var avgAcctBal = (sum1.sumAcctBal + sum2.sumAcctBal) / (sum1.counter + sum2.counter);
 
     // Find the final result
-    return finalDb.customers.aggregate([
+    return finalDb.customers.__PARAM_MONGO_METHOD__([
         {
             $match: customersPhoneMatch
         },

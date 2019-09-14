@@ -1,5 +1,6 @@
 import java.util.Calendar;
 import java.lang.StringBuilder;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -26,7 +27,7 @@ public class DateHelper {
      * @param Calendar date
      * @return String
      */
-    public static String format(Calendar date) {
+    public static String jsFormat(Calendar date) {
         StringBuilder builder = new StringBuilder("");
 
         return builder
@@ -38,6 +39,18 @@ public class DateHelper {
             .append(date.get(Calendar.DATE))
             .append("\"")
             .toString();
+    }
+
+    /**
+     *
+     * @param date
+     * @param format
+     * @return
+     */
+    public static String format(Calendar date, String format) {
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+
+        return sdf.format(date.getTime());
     }
 
 }

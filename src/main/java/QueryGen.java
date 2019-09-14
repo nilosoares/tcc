@@ -156,15 +156,15 @@ public class QueryGen {
         // Parameter 1 - Start Date
         Calendar startDate = RandomHelper.getRandomDate(93, 0, 1, 97, 9, 1);
         startDate.set(Calendar.DATE, 1);
-        FileSystemHelper.findAndReplace(qPath, "__PARAM_START_DATE__", DateHelper.format(startDate));
-        FileSystemHelper.findAndReplace(ePath, "__PARAM_START_DATE__", DateHelper.format(startDate));
-        LoggerHelper.addLog("Q15", "Parameter 1 (Date) = " + DateHelper.format(startDate));
+        FileSystemHelper.findAndReplace(qPath, "__PARAM_START_DATE__", DateHelper.jsFormat(startDate));
+        FileSystemHelper.findAndReplace(ePath, "__PARAM_START_DATE__", DateHelper.jsFormat(startDate));
+        LoggerHelper.addLog("Q15", "Parameter 1 (Date) = " + DateHelper.jsFormat(startDate));
 
         // Parameter 2 - End Date (Date + 3 months)
         Calendar endDate = (Calendar) startDate.clone();
         endDate.add(Calendar.MONTH, 3);
-        FileSystemHelper.findAndReplace(qPath, "__PARAM_END_DATE__", DateHelper.format(endDate));
-        FileSystemHelper.findAndReplace(ePath, "__PARAM_END_DATE__", DateHelper.format(endDate));
+        FileSystemHelper.findAndReplace(qPath, "__PARAM_END_DATE__", DateHelper.jsFormat(endDate));
+        FileSystemHelper.findAndReplace(ePath, "__PARAM_END_DATE__", DateHelper.jsFormat(endDate));
     }
 
     /**
@@ -177,15 +177,15 @@ public class QueryGen {
         // Parameter 1 - Date
         Integer year = RandomHelper.getRandomInteger(1993, 1997);
         Calendar startDate = DateHelper.getInstance(year-1900, 0, 1);
-        FileSystemHelper.findAndReplace(qPath, "__PARAM_START_DATE__", DateHelper.format(startDate));
-        FileSystemHelper.findAndReplace(ePath, "__PARAM_START_DATE__", DateHelper.format(startDate));
-        LoggerHelper.addLog("Q20", "Parameter 1 (Date) = " + DateHelper.format(startDate));
+        FileSystemHelper.findAndReplace(qPath, "__PARAM_START_DATE__", DateHelper.jsFormat(startDate));
+        FileSystemHelper.findAndReplace(ePath, "__PARAM_START_DATE__", DateHelper.jsFormat(startDate));
+        LoggerHelper.addLog("Q20", "Parameter 1 (Date) = " + DateHelper.jsFormat(startDate));
 
         // Parameter 2 - End Date (Date + 1 year)
         Calendar endDate = (Calendar) startDate.clone();
         endDate.add(Calendar.YEAR, 1);
-        FileSystemHelper.findAndReplace(qPath, "__PARAM_END_DATE__", DateHelper.format(endDate));
-        FileSystemHelper.findAndReplace(ePath, "__PARAM_END_DATE__", DateHelper.format(endDate));
+        FileSystemHelper.findAndReplace(qPath, "__PARAM_END_DATE__", DateHelper.jsFormat(endDate));
+        FileSystemHelper.findAndReplace(ePath, "__PARAM_END_DATE__", DateHelper.jsFormat(endDate));
 
         // Parameter 3 - Colors
         String color = RandomHelper.getRandomColor();

@@ -64,6 +64,21 @@ public class FileSystemHelper {
 
     /**
      *
+     * @param filePath
+     */
+    public static void deleteFile(String filePath) {
+        try {
+            Path path = getPath(filePath);
+            Files.deleteIfExists(path);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
+
+    /**
+     *
      * @param Path path
      * @param String find
      * @param String replace

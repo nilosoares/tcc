@@ -107,13 +107,18 @@ public class QueryExec {
             String explainScript = queryGen.getExplainQuery(queryNumber);
             String script = queryGen.getExecutableQuery(queryNumber);
 
-            // Run the query
+            // Log the explain
             LoggerHelper.addLog(queryNumber, "Explain = " + mongoDB.eval(explainScript).toString());
+
+            // Run the query
             mongoDB.eval(script);
 
             // Log the time
             Integer executionTime = getLatestExecutionTime();
             LoggerHelper.addLog(queryNumber, "Execution Time (in millis) = " + executionTime.toString());
+
+            // Save the log
+            LoggerHelper.save(queryNumber);
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -20,10 +20,28 @@ public class FileSystemHelper {
 
     /**
      *
+     * @param filePath
+     * @return
+     */
+    public static Path getPath(String filePath) {
+        Path path = null;
+
+        try {
+            path = Paths.get(filePath);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+
+        return path;
+    }
+
+    /**
+     *
      * @param from
      * @param dest
      * @return
-     * @throws IOException
      */
     public static Path copyFile(String from, String dest) {
         Path fromPath = null;
@@ -61,6 +79,26 @@ public class FileSystemHelper {
             e.printStackTrace();
             System.exit(1);
         }
+    }
+
+    /**
+     *
+     * @param Path path
+     */
+    public static String getContent(String filePath) {
+        Path path = getPath(filePath);
+        String content = "";
+
+        try {
+            Charset charset = StandardCharsets.UTF_8;
+            content = new String(Files.readAllBytes(path), charset);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+
+        return content;
     }
 
     /**

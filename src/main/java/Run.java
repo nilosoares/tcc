@@ -11,21 +11,26 @@ public class Run {
      * @throws InterruptedException
      */
     public static void main(String[] args) {
-        int totalPerQuery = 1;
+        String[] queries = {"1"/*, "8", "15", "20", "21", "22"*/};
+        int nbQueries = queries.length;
+        int nbTests = 1;
 
         // Runs without index
-        //for (int i = 1; i <= totalPerQuery; i++) QueryExec.query1();
-        //for (int i = 1; i <= totalPerQuery; i++) QueryExec.query8();
-        //for (int i = 1; i <= totalPerQuery; i++) QueryExec.query15();
-        //for (int i = 1; i <= totalPerQuery; i++) QueryExec.query20();
-        //for (int i = 1; i <= totalPerQuery; i++) QueryExec.query21();
-        //for (int i = 1; i <= totalPerQuery; i++) QueryExec.query22();
+        for (int i = 0; i < nbQueries; i++) {
+            for (int t = 1; t <= nbTests; t++) {
+                // Run without index
+                QueryExec.query(queries[i]);
 
-        // Create indexes
-        // ...
+                // Clear the cache
+                // ...
 
-        // Runs with indexes
-        // ...
+                // Create index
+                // ...
+
+                // Run with index
+                // ...
+            }
+        }
     }
 
 }

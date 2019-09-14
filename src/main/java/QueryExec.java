@@ -1,3 +1,6 @@
+import java.lang.Class;
+import java.lang.reflect.Method;
+
 import java.nio.file.Path;
 
 import org.bson.Document;
@@ -10,7 +13,6 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.CursorType;
 import com.mongodb.DB;
-import com.mongodb.MongoClient;
 
 /**
  *
@@ -18,11 +20,7 @@ import com.mongodb.MongoClient;
  */
 public class QueryExec {
 
-    private static final QueryGen queryGen = new QueryGen();
-
-    private static final MongoClient mongoClient = ConnectorHelper.getMongoClient();
-
-    private static final DB mongoDB = mongoClient.getDB("final");
+    private static final DB mongoDB = ConnectorHelper.getMongoClient().getDB("final");
 
     /**
      *
@@ -83,128 +81,33 @@ public class QueryExec {
 
     /**
      *
+     * @param queryNumber ("1", "8", "15", "20", "21", "22")
      */
-    public static void query1() {
+    public static void query(String queryNumber) {
         // Clear the profile
         clearProfiler();
 
-        // Build the query using random parameters
-        Path path = queryGen.query1();
+        try {
+            // Build the query using random parameters
+            QueryGen queryGen = new QueryGen();
+            Path path = (Path) queryGen.getClass()
+                    .getMethod("query" + queryNumber)
+                    .invoke(queryGen);
 
-        // Get the content of the query
-        String script = FileSystemHelper.getContent(path);
+            // Get the content of the query
+            String script = FileSystemHelper.getContent(path);
 
-        // Run the query
-        mongoDB.eval(script);
+            // Run the query
+            mongoDB.eval(script);
 
-        // Log the time
-        Integer executionTime = getLatestExecutionTime();
-        LoggerHelper.info("Q1 / Execution Time (in millis) = " + executionTime.toString());
-    }
+            // Log the time
+            Integer executionTime = getLatestExecutionTime();
+            LoggerHelper.info("Q" + queryNumber + " / Execution Time (in millis) = " + executionTime.toString());
 
-    /**
-     *
-     */
-    public static void query8() {
-        // Clear the profile
-        clearProfiler();
-
-        // Build the query using random parameters
-        Path path = queryGen.query8();
-
-        // Get the content of the query
-        String script = FileSystemHelper.getContent(path);
-
-        // Run the query
-        mongoDB.eval(script);
-
-        // Log the time
-        Integer executionTime = getLatestExecutionTime();
-        LoggerHelper.info("Q8 / Execution Time (in millis) = " + executionTime.toString());
-    }
-
-    /**
-     *
-     */
-    public static void query15() {
-        // Clear the profile
-        clearProfiler();
-
-        // Build the query using random parameters
-        Path path = queryGen.query15();
-
-        // Get the content of the query
-        String script = FileSystemHelper.getContent(path);
-
-        // Run the query
-        mongoDB.eval(script);
-
-        // Log the time
-        Integer executionTime = getLatestExecutionTime();
-        LoggerHelper.info("Q15 / Execution Time (in millis) = " + executionTime.toString());
-    }
-
-    /**
-     *
-     */
-    public static void query20() {
-        // Clear the profile
-        clearProfiler();
-
-        // Build the query using random parameters
-        Path path = queryGen.query20();
-
-        // Get the content of the query
-        String script = FileSystemHelper.getContent(path);
-
-        // Run the query
-        mongoDB.eval(script);
-
-        // Log the time
-        Integer executionTime = getLatestExecutionTime();
-        LoggerHelper.info("Q20 / Execution Time (in millis) = " + executionTime.toString());
-    }
-
-    /**
-     *
-     */
-    public static void query21() {
-        // Clear the profile
-        clearProfiler();
-
-        // Build the query using random parameters
-        Path path = queryGen.query21();
-
-        // Get the content of the query
-        String script = FileSystemHelper.getContent(path);
-
-        // Run the query
-        mongoDB.eval(script);
-
-        // Log the time
-        Integer executionTime = getLatestExecutionTime();
-        LoggerHelper.info("Q21 / Execution Time (in millis) = " + executionTime.toString());
-    }
-
-    /**
-     *
-     */
-    public static void query22() {
-        // Clear the profile
-        clearProfiler();
-
-        // Build the query using random parameters
-        Path path = queryGen.query22();
-
-        // Get the content of the query
-        String script = FileSystemHelper.getContent(path);
-
-        // Run the query
-        mongoDB.eval(script);
-
-        // Log the time
-        Integer executionTime = getLatestExecutionTime();
-        LoggerHelper.info("Q22 / Execution Time (in millis) = " + executionTime.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 
 }

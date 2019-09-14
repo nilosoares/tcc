@@ -102,7 +102,7 @@ public class QueryExec {
 
             // Log the time
             Integer executionTime = getLatestExecutionTime();
-            LoggerHelper.info("Q" + queryNumber + " / Execution Time (in millis) = " + executionTime.toString());
+            LoggerHelper.addLog("Q" + queryNumber, "Execution Time (in millis) = " + executionTime.toString());
 
         } catch (Exception e) {
             e.printStackTrace();

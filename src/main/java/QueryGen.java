@@ -48,7 +48,7 @@ public class QueryGen {
         // Delta
         Integer delta = RandomHelper.getRandomInteger(60, 120);
         FileSystemHelper.findAndReplace(destPath, "__PARAM_DELTA__", delta.toString());
-        LoggerHelper.info("Q1 / Parameter 1 (Delta) = " + delta.toString());
+        LoggerHelper.addLog("Q1", "Parameter 1 (Delta) = " + delta.toString());
 
         return destPath;
     }
@@ -65,13 +65,13 @@ public class QueryGen {
         String regionName = (String) country.get("region_name");
         FileSystemHelper.findAndReplace(destPath, "__PARAM_COUNTRY__", countryName);
         FileSystemHelper.findAndReplace(destPath, "__PARAM_REGION__", regionName);
-        LoggerHelper.info("Q8 / Parameter 1 (Country) = " + countryName);
-        LoggerHelper.info("Q8 / Parameter 2 (Region) = " + regionName);
+        LoggerHelper.addLog("Q8", "Parameter 1 (Country) = " + countryName);
+        LoggerHelper.addLog("Q8", "Parameter 2 (Region) = " + regionName);
 
         // Type
         String type = RandomHelper.getRandomType();
         FileSystemHelper.findAndReplace(destPath, "__PARAM_TYPE__", type);
-        LoggerHelper.info("Q8 / Parameter 3 (Type) = " + type);
+        LoggerHelper.addLog("Q8" , "Parameter 3 (Type) = " + type);
 
         return destPath;
     }
@@ -86,7 +86,7 @@ public class QueryGen {
         Calendar startDate = RandomHelper.getRandomDate(93, 0, 1, 97, 9, 1);
         startDate.set(Calendar.DATE, 1);
         FileSystemHelper.findAndReplace(destPath, "__PARAM_START_DATE__", DateHelper.format(startDate));
-        LoggerHelper.info("Q15 / Parameter 1 (Date) = " + DateHelper.format(startDate));
+        LoggerHelper.addLog("Q15", "Parameter 1 (Date) = " + DateHelper.format(startDate));
 
         // End Date (Date + 3 months)
         Calendar endDate = (Calendar) startDate.clone();
@@ -106,7 +106,7 @@ public class QueryGen {
         Integer year = RandomHelper.getRandomInteger(1993, 1997);
         Calendar startDate = DateHelper.getInstance(year-1900, 0, 1);
         FileSystemHelper.findAndReplace(destPath, "__PARAM_START_DATE__", DateHelper.format(startDate));
-        LoggerHelper.info("Q20 / Parameter 1 (Date) = " + DateHelper.format(startDate));
+        LoggerHelper.addLog("Q20", "Parameter 1 (Date) = " + DateHelper.format(startDate));
 
         // End Date (Date + 1 year)
         Calendar endDate = (Calendar) startDate.clone();
@@ -116,12 +116,12 @@ public class QueryGen {
         // Colors
         String color = RandomHelper.getRandomColor();
         FileSystemHelper.findAndReplace(destPath, "__PARAM_COLOR__", color);
-        LoggerHelper.info("Q20 / Parameter 2 (Color) = " + color);
+        LoggerHelper.addLog("Q20", "Parameter 2 (Color) = " + color);
 
         // Country
         String country = RandomHelper.getRandomCountryName();
         FileSystemHelper.findAndReplace(destPath, "__PARAM_COUNTRY__", country);
-        LoggerHelper.info("Q20 / Parameter 3 (Country) = " + country);
+        LoggerHelper.addLog("Q20", "Parameter 3 (Country) = " + country);
 
         return destPath;
     }
@@ -135,7 +135,7 @@ public class QueryGen {
         // Country
         String country = RandomHelper.getRandomCountryName();
         FileSystemHelper.findAndReplace(destPath, "__PARAM_COUNTRY__", country);
-        LoggerHelper.info("Q21 / Parameter 1 (Country) = " + country);
+        LoggerHelper.addLog("Q21", "Parameter 1 (Country) = " + country);
 
         return destPath;
     }
@@ -158,7 +158,7 @@ public class QueryGen {
 
                 countryCodes.add(countryCode);
                 FileSystemHelper.findAndReplace(destPath, "__PARAM_COUNTRY_CODE_" + i + "__", countryCode.toString());
-                LoggerHelper.info("Q22 / Parameter " + i + " (Country Code) = " + countryCode.toString());
+                LoggerHelper.addLog("Q22", "Parameter " + i + " (Country Code) = " + countryCode.toString());
                 break;
             }
         }

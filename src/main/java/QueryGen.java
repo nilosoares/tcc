@@ -73,6 +73,17 @@ public class QueryGen {
      * @param queryNumber
      * @return
      */
+    private Path getCreateIndexPath(String queryNumber) {
+        Path path = copyTemplate(queryNumber + "_indexes", queryNumber + "_indexes");
+
+        return path;
+    }
+
+    /**
+     *
+     * @param queryNumber
+     * @return
+     */
     public String getExecutableQuery(String queryNumber) {
         String filePath = QUERIES_PATH + queryNumber + ".js";
 
@@ -86,6 +97,17 @@ public class QueryGen {
      */
     public String getExplainQuery(String queryNumber) {
         String filePath = QUERIES_PATH + queryNumber + "_explain.js";
+
+        return FileSystemHelper.getContent(filePath);
+    }
+
+    /**
+     *
+     * @param queryNumber
+     * @return
+     */
+    public String getCreateIndexQuery(String queryNumber) {
+        String filePath = QUERIES_PATH + queryNumber + "_indexes.js";
 
         return FileSystemHelper.getContent(filePath);
     }

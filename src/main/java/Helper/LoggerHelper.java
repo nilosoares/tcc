@@ -18,15 +18,6 @@ public class LoggerHelper {
      * @param entry
      * @return
      */
-    private static String getFileName(String entry) {
-        return "var/logs/" + entry + ".log";
-    }
-
-    /**
-     *
-     * @param entry
-     * @return
-     */
     public static Logger getInstance(String entry) {
         Logger logger = loggers.get(entry);
 
@@ -35,7 +26,8 @@ public class LoggerHelper {
             try {
                 logger = Logger.getLogger(entry);
 
-                FileHandler fh = new FileHandler(getFileName(entry));
+                String fileName = entry + "_" + DateHelper.format("yyyyMMdd_Hms_S");
+                FileHandler fh = new FileHandler("var/logs/" + fileName + ".log");
                 logger.addHandler(fh);
 
                 SimpleFormatter formatter = new SimpleFormatter();
@@ -62,20 +54,6 @@ public class LoggerHelper {
     public static void addLog(String entry, String message) {
         Logger logger = getInstance(entry);
         logger.info(message);
-    }
-
-    /**
-     *
-     * @param entry
-     */
-    public static void save(String entry) {
-        String timestamp = DateHelper.format("yyyyMMdd_Hms_S");
-        String currentFileName = getFileName(entry);
-        String newFileName = getFileName(entry + "_" + timestamp);
-
-        FileSystemHelper.copyFile(currentFileName, newFileName);
-
-        FileSystemHelper.deleteFile(currentFileName);
     }
 
 }

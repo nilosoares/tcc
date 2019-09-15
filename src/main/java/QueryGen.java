@@ -131,6 +131,7 @@ public class QueryGen {
     public void Q1() {
         Path qPath = getQueryPath("Q1");
         Path ePath = getExplainPath("Q1");
+        Path iPath = getCreateIndexPath("Q1");
 
         // Parameter 1 - Delta
         Integer delta = RandomHelper.getRandomInteger(60, 120);
@@ -139,6 +140,7 @@ public class QueryGen {
         // Replace the parameters
         FileSystemHelper.findAndReplace(qPath, "__PARAM_DELTA__", delta.toString());
         FileSystemHelper.findAndReplace(ePath, "__PARAM_DELTA__", delta.toString());
+        FileSystemHelper.findAndReplace(iPath, "__PARAM_DELTA__", delta.toString());
     }
 
     /**

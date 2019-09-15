@@ -117,9 +117,6 @@ public class QueryExec {
             Integer executionTime = getLatestExecutionTime();
             LoggerHelper.addLog(queryNumber, "Execution Time (in millis) = " + executionTime.toString());
 
-            // Save the log
-            LoggerHelper.save(queryNumber);
-
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(1);

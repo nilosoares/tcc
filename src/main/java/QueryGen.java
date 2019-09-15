@@ -242,11 +242,13 @@ public class QueryGen {
     public void Q21() {
         Path qPath = getQueryPath("Q21");
         Path ePath = getExplainPath("Q21");
+        Path iPath = getExplainPath("Q21");
 
         // Parameter 1 - Country
         String country = RandomHelper.getRandomCountryName();
         FileSystemHelper.findAndReplace(qPath, "__PARAM_COUNTRY__", country);
         FileSystemHelper.findAndReplace(ePath, "__PARAM_COUNTRY__", country);
+        FileSystemHelper.findAndReplace(iPath, "__PARAM_COUNTRY__", country);
         LoggerHelper.addLog("Q21", "Parameter 1 (Country) = " + country);
     }
 

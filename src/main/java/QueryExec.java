@@ -63,7 +63,7 @@ public class QueryExec {
      *
      * @return Integer
      */
-    private static Integer getLatestExecutionTime() {
+    private static Integer getExecutionTime() {
         // Filters
         Bson filters = Filters.and(
             Filters.ne("ns", "final.system.profile")
@@ -72,9 +72,6 @@ public class QueryExec {
         // Get the query details using a tailable cursor
         MongoCursor<Document> cursor = getProfile()
             .find(filters)
-            .limit(1)
-            .cursorType(CursorType.TailableAwait)
-            .noCursorTimeout(true)
             .iterator();
 
         // Get the execution time of the latest query
@@ -95,9 +92,6 @@ public class QueryExec {
         // Clear the cache
         clearCache();
 
-        // Clear the profile
-        clearProfiler();
-
         try {
             // Build the query using random parameters
             QueryGen queryGen = new QueryGen();
@@ -110,11 +104,14 @@ public class QueryExec {
             // Log the explain
             LoggerHelper.addLog(queryNumber, "Explain = " + mongoDB.eval(explainScript).toString());
 
+            // Clear the profile
+            clearProfiler();
+
             // Run the query
             mongoDB.eval(script);
 
             // Log the time
-            Integer executionTime = getLatestExecutionTime();
+            Integer executionTime = getExecutionTime();
             LoggerHelper.addLog(queryNumber, "Execution Time (in millis) = " + executionTime.toString());
 
         } catch (Exception e) {

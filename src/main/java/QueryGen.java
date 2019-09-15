@@ -180,12 +180,14 @@ public class QueryGen {
     public void Q15() {
         Path qPath = getQueryPath("Q15");
         Path ePath = getExplainPath("Q15");
+        Path iPath = getCreateIndexPath("Q15");
 
         // Parameter 1 - Start Date
         Calendar startDate = RandomHelper.getRandomDate(93, 0, 1, 97, 9, 1);
         startDate.set(Calendar.DATE, 1);
         FileSystemHelper.findAndReplace(qPath, "__PARAM_START_DATE__", DateHelper.jsFormat(startDate));
         FileSystemHelper.findAndReplace(ePath, "__PARAM_START_DATE__", DateHelper.jsFormat(startDate));
+        FileSystemHelper.findAndReplace(iPath, "__PARAM_START_DATE__", DateHelper.jsFormat(startDate));
         LoggerHelper.addLog("Q15", "Parameter 1 (Date) = " + DateHelper.jsFormat(startDate));
 
         // Parameter 2 - End Date (Date + 3 months)
@@ -193,6 +195,7 @@ public class QueryGen {
         endDate.add(Calendar.MONTH, 3);
         FileSystemHelper.findAndReplace(qPath, "__PARAM_END_DATE__", DateHelper.jsFormat(endDate));
         FileSystemHelper.findAndReplace(ePath, "__PARAM_END_DATE__", DateHelper.jsFormat(endDate));
+        FileSystemHelper.findAndReplace(iPath, "__PARAM_END_DATE__", DateHelper.jsFormat(endDate));
     }
 
     /**

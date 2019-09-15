@@ -13,7 +13,7 @@
     var subquery = {
         $and: [
             {
-                "order.customer.nation.region.name": { $regex : '^' + region }
+                "order.customer.nation.region.name": { $eq : region }
             },
             {
                 "partsupp.part.type": part_type

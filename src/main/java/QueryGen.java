@@ -149,24 +149,28 @@ public class QueryGen {
     public void Q8() {
         Path qPath = getQueryPath("Q8");
         Path ePath = getExplainPath("Q8");
+        Path iPath = getCreateIndexPath("Q8");
         JSONObject country = RandomHelper.getRandomCountry();
 
         // Parameter 1 - Country
         String countryName = (String) country.get("nation_name");
         FileSystemHelper.findAndReplace(qPath, "__PARAM_COUNTRY__", countryName);
         FileSystemHelper.findAndReplace(ePath, "__PARAM_COUNTRY__", countryName);
+        FileSystemHelper.findAndReplace(iPath, "__PARAM_COUNTRY__", countryName);
         LoggerHelper.addLog("Q8", "Parameter 1 (Country) = " + countryName);
 
         // Parameter 2 - Region
         String regionName = (String) country.get("region_name");
         FileSystemHelper.findAndReplace(qPath, "__PARAM_REGION__", regionName);
         FileSystemHelper.findAndReplace(ePath, "__PARAM_REGION__", regionName);
+        FileSystemHelper.findAndReplace(iPath, "__PARAM_REGION__", regionName);
         LoggerHelper.addLog("Q8", "Parameter 2 (Region) = " + regionName);
 
         // Parameter 3 - Type
         String type = RandomHelper.getRandomType();
         FileSystemHelper.findAndReplace(qPath, "__PARAM_TYPE__", type);
         FileSystemHelper.findAndReplace(ePath, "__PARAM_TYPE__", type);
+        FileSystemHelper.findAndReplace(iPath, "__PARAM_TYPE__", type);
         LoggerHelper.addLog("Q8", "Parameter 3 (Type) = " + type);
     }
 

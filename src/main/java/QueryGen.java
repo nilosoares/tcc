@@ -204,12 +204,14 @@ public class QueryGen {
     public void Q20() {
         Path qPath = getQueryPath("Q20");
         Path ePath = getExplainPath("Q20");
+        Path iPath = getCreateIndexPath("Q20");
 
         // Parameter 1 - Date
         Integer year = RandomHelper.getRandomInteger(1993, 1997);
         Calendar startDate = DateHelper.getInstance(year-1900, 0, 1);
         FileSystemHelper.findAndReplace(qPath, "__PARAM_START_DATE__", DateHelper.jsFormat(startDate));
         FileSystemHelper.findAndReplace(ePath, "__PARAM_START_DATE__", DateHelper.jsFormat(startDate));
+        FileSystemHelper.findAndReplace(iPath, "__PARAM_START_DATE__", DateHelper.jsFormat(startDate));
         LoggerHelper.addLog("Q20", "Parameter 1 (Date) = " + DateHelper.jsFormat(startDate));
 
         // Parameter 2 - End Date (Date + 1 year)
@@ -217,17 +219,20 @@ public class QueryGen {
         endDate.add(Calendar.YEAR, 1);
         FileSystemHelper.findAndReplace(qPath, "__PARAM_END_DATE__", DateHelper.jsFormat(endDate));
         FileSystemHelper.findAndReplace(ePath, "__PARAM_END_DATE__", DateHelper.jsFormat(endDate));
+        FileSystemHelper.findAndReplace(iPath, "__PARAM_END_DATE__", DateHelper.jsFormat(endDate));
 
         // Parameter 3 - Colors
         String color = RandomHelper.getRandomColor();
         FileSystemHelper.findAndReplace(qPath, "__PARAM_COLOR__", color);
         FileSystemHelper.findAndReplace(ePath, "__PARAM_COLOR__", color);
+        FileSystemHelper.findAndReplace(iPath, "__PARAM_COLOR__", color);
         LoggerHelper.addLog("Q20", "Parameter 2 (Color) = " + color);
 
         // Parameter 4 - Country
         String country = RandomHelper.getRandomCountryName();
         FileSystemHelper.findAndReplace(qPath, "__PARAM_COUNTRY__", country);
         FileSystemHelper.findAndReplace(ePath, "__PARAM_COUNTRY__", country);
+        FileSystemHelper.findAndReplace(iPath, "__PARAM_COUNTRY__", country);
         LoggerHelper.addLog("Q20", "Parameter 3 (Country) = " + country);
     }
 

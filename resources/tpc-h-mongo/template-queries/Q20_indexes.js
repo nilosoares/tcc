@@ -1,0 +1,38 @@
+(function() {
+
+    var finalDb = db.getSiblingDB("final");
+
+    // variables
+    var start = new Date(__PARAM_START_DATE__);
+    var end = new Date(__PARAM_END_DATE__);
+
+    // subquery indexes
+    finalDb.deals.createIndex(
+        {
+            "shipdate": 1
+        },
+        {
+            partialFilterExpression: {
+                "shipdate": {
+                    $gte: start,
+                    $lt: end
+                }
+            }
+        }
+    );
+
+    // run the query
+    return finalDb.deals.createIndex(
+       {
+           "partsupp.supplier.name": 1
+       },
+       {
+           partialFilterExpression: {
+               "partsupp.supplier.nation.name": {
+                   $eq: '__PARAM_COUNTRY__'
+               }
+           }
+       }
+   );
+
+})();

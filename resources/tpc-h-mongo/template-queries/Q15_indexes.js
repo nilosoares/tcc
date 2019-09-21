@@ -12,6 +12,7 @@
             total_revenue: -1
         },
         {
+            name: "q15.deals.shipdate",
             partialFilterExpression: {
                 "shipdate": {
                     "$gte": start,

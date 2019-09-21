@@ -14,6 +14,7 @@
             o_year: 1
         },
         {
+            name: "q8.deals.region_name__part_type__orderdate",
             partialFilterExpression: {
                 "order.customer.nation.region.name": { $eq: region },
                 "partsupp.part.type": { $eq: part_type },

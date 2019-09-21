@@ -14,6 +14,7 @@
             linestatus: 1
         },
         {
+            name: "q1.deals.shipdate",
             partialFilterExpression: {
                 "shipdate": { $lte: date }
             }

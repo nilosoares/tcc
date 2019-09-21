@@ -12,6 +12,7 @@
             "shipdate": 1
         },
         {
+            name: "q20.deals.shipdate",
             partialFilterExpression: {
                 "shipdate": {
                     $gte: start,
@@ -27,11 +28,12 @@
            "partsupp.supplier.name": 1
        },
        {
-           partialFilterExpression: {
-               "partsupp.supplier.nation.name": {
-                   $eq: '__PARAM_COUNTRY__'
-               }
-           }
+            name: "q20.deals.nation_name",
+            partialFilterExpression: {
+                "partsupp.supplier.nation.name": {
+                    $eq: '__PARAM_COUNTRY__'
+                }
+            }
        }
    );
 

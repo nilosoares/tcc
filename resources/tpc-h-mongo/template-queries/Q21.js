@@ -38,7 +38,7 @@
             $match: {
                 $and: [
                     { "order.orderstatus": "F" },
-                    { "partsupp.supplier.nation.name": { $regex : '^__PARAM_COUNTRY__' } },
+                    { "partsupp.supplier.nation.name": { $eq : '__PARAM_COUNTRY__' } },
                     { $expr: { $gt: ["$receiptdate", "$commitdate"] } }
                 ]
             }

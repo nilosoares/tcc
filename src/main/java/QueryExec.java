@@ -24,10 +24,41 @@ public class QueryExec {
 
     /**
      *
+     * @param queryNumber ("Q1", "Q8", "Q15", "Q20", "Q21", "Q22")
+     */
+    public static void query(String queryNumber) {
+        try {
+            // Build the query using random parameters
+            QueryGen queryGen = new QueryGen();
+            queryGen.generate(queryNumber);
+            String queryScript = queryGen.getExecutableQuery(queryNumber);
+            String explainScript = queryGen.getExplainQuery(queryNumber);
+            String createIndexScript = queryGen.getCreateIndexQuery(queryNumber);
+
+            // Execute queries with and without indexes
+            execWithouIndexes(queryNumber, explainScript, queryScript);
+            execWithIndexes(queryNumber, createIndexScript, explainScript, queryScript);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
+
+    /**
+     *
      */
     private static void clearCache() {
         mongoDB.eval("db.customers.getPlanCache().clear();");
         mongoDB.eval("db.deals.getPlanCache().clear();");
+    }
+
+    /**
+     *
+     */
+    private static void clearIndexes() {
+        mongoDB.eval("db.customers.dropIndexes();");
+        mongoDB.eval("db.deals.dropIndexes();");
     }
 
     /**
@@ -53,10 +84,55 @@ public class QueryExec {
 
     /**
      *
-     * @return MongoCollection<Document>
+     * @param queryNumber
+     * @param explainScript
+     * @param queryScript
      */
-    private static MongoCollection<Document> getProfile() {
-        return ConnectorHelper.getMongoDatabase("final").getCollection("system.profile");
+    private static void execWithouIndexes(
+        String queryNumber,
+        String explainScript,
+        String queryScript
+    ) {
+        // Clear cache
+        clearCache();
+
+        // Clear indexes
+        clearIndexes();
+
+        // Explain
+        LoggerHelper.addLog(queryNumber, "Explain (w/o indexes) = " + mongoDB.eval(explainScript).toString());
+
+        // Exec without indexes
+//        clearProfiler();
+//        mongoDB.eval(queryScript);
+//        LoggerHelper.addLog(queryNumber, "Execution Time (w/o indexes) (in millis) = " + getExecutionTime().toString());
+    }
+
+    /**
+     *
+     * @param queryNumber
+     * @param createIndexScript
+     * @param queryScript
+     */
+    private static void execWithIndexes(
+        String queryNumber,
+        String createIndexScript,
+        String explainScript,
+        String queryScript
+    ) {
+        // Clear cache
+        clearCache();
+
+        // Create indexes
+        mongoDB.eval(createIndexScript);
+
+        // Explain
+        LoggerHelper.addLog(queryNumber, "Explain (w/ indexes) = " + mongoDB.eval(explainScript).toString());
+
+        // Exec with indexes
+//        clearProfiler();
+//        mongoDB.eval(queryScript);
+//        LoggerHelper.addLog(queryNumber, "Execution Time (w/ indexes) (in millis) = " + getExecutionTime().toString());
     }
 
     /**
@@ -86,38 +162,10 @@ public class QueryExec {
 
     /**
      *
-     * @param queryNumber ("Q1", "Q8", "Q15", "Q20", "Q21", "Q22")
+     * @return MongoCollection<Document>
      */
-    public static void query(String queryNumber) {
-        // Clear the cache
-        clearCache();
-
-        try {
-            // Build the query using random parameters
-            QueryGen queryGen = new QueryGen();
-            queryGen.generate(queryNumber);
-
-            // Get the content of the query
-            String explainScript = queryGen.getExplainQuery(queryNumber);
-            String script = queryGen.getExecutableQuery(queryNumber);
-
-            // Log the explain
-            LoggerHelper.addLog(queryNumber, "Explain = " + mongoDB.eval(explainScript).toString());
-
-            // Clear the profile
-            clearProfiler();
-
-            // Run the query
-            mongoDB.eval(script);
-
-            // Log the time
-            Integer executionTime = getExecutionTime();
-            LoggerHelper.addLog(queryNumber, "Execution Time (in millis) = " + executionTime.toString());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
+    private static MongoCollection<Document> getProfile() {
+        return ConnectorHelper.getMongoDatabase("final").getCollection("system.profile");
     }
 
 }

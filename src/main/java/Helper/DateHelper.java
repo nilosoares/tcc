@@ -31,13 +31,11 @@ public class DateHelper {
         StringBuilder builder = new StringBuilder("");
 
         return builder
-            .append("\"")
             .append(1900 + date.get(Calendar.YEAR))
-            .append("-")
-            .append(date.get(Calendar.MONTH) + 1)
-            .append("-")
+            .append(", ")
+            .append(date.get(Calendar.MONTH))
+            .append(", ")
             .append(date.get(Calendar.DATE))
-            .append("\"")
             .toString();
     }
 

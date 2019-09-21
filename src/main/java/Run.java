@@ -13,14 +13,15 @@ public class Run {
     public static void main(String[] args) {
         String[] queries = {
             "Q1",
-            //"Q8",
-            //"Q15",
-            //"Q20",
-            //"Q21",
-            //"Q22"
+            "Q8",
+            "Q15",
+            "Q20",
+            "Q22",
+            "Q21",
         };
+
         int nbQueries = queries.length;
-        int nbTests = 1;
+        int nbTests = 5;
 
         for (int i = 0; i < nbQueries; i++) {
             for (int j = 1; j <= nbTests; j++) {

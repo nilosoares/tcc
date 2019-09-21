@@ -2,13 +2,17 @@
 
     var finalDb = db.getSiblingDB("final");
 
+    // variables
+    var start = new Date(__PARAM_START_DATE__);
+    var end = new Date(__PARAM_END_DATE__);
+
     // Find the half of the quantity first
     var halfQtyArr = finalDb.deals.aggregate([
         {
             $match: {
                 "shipdate": {
-                    $gte: new Date(__PARAM_START_DATE__),
-                    $lt: new Date(__PARAM_END_DATE__)
+                    $gte: start,
+                    $lt: end
                 }
             }
         },
@@ -46,7 +50,7 @@
                     $options: 'i' // option i makes case insensitive
                 },
                 "partsupp.supplier.nation.name": {
-                    $regex: '^__PARAM_COUNTRY__' // use regex because of whitespaces in the end
+                    $eq: '__PARAM_COUNTRY__' // use regex because of whitespaces in the end
                 }
             }
         },

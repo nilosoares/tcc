@@ -2,6 +2,7 @@
 
     var finalDb = db.getSiblingDB("final");
 
+    // variables
     var countryCodes = [
         "__PARAM_COUNTRY_CODE_1__",
         "__PARAM_COUNTRY_CODE_2__",
@@ -12,33 +13,21 @@
         "__PARAM_COUNTRY_CODE_7__"
     ];
 
-    // query to match country code
-    var dealsPhoneMatch = {
-        $expr: {
-            $in: [
-                { $substr: ["$order.customer.phone", 0, 2] },
-                countryCodes
-            ]
-        }
-    };
-
-    var customersPhoneMatch = {
-        $expr: {
-            $in: [
-                { $substr: ["$phone", 0, 2] },
-                countryCodes
-            ]
-        }
-    };
-
     // Calculates the avg of the acctbal
     var sum1 = finalDb.customers.aggregate([
         {
-            $match: customersPhoneMatch
+            $match: {
+                $expr: {
+                    $in: [
+                        { $substr: ["$phone", 0, 2] },
+                        countryCodes
+                    ]
+                }
+            }
         },
         {
             $match: {
-                "acctbal": { $gt: 0.00 },
+                "acctbal": { $gt: 0.00 }
             }
         },
         {
@@ -52,11 +41,18 @@
 
     var sum2 = finalDb.deals.aggregate([
         {
-            $match: dealsPhoneMatch
+            $match: {
+                $expr: {
+                    $in: [
+                        { $substr: ["$order.customer.phone", 0, 2] },
+                        countryCodes
+                    ]
+                }
+            }
         },
         {
             $match: {
-                "order.customer.acctbal": { $gt: 0.00 },
+                "order.customer.acctbal": { $gt: 0.00 }
             }
         },
         {
@@ -80,7 +76,14 @@
     // Find the final result
     return finalDb.customers.__PARAM_MONGO_METHOD__([
         {
-            $match: customersPhoneMatch
+            $match: {
+                $expr: {
+                    $in: [
+                        { $substr: ["$phone", 0, 2] },
+                        countryCodes
+                    ]
+                }
+            }
         },
         {
             $match: {

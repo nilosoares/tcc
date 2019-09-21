@@ -258,6 +258,7 @@ public class QueryGen {
     public void Q22() {
         Path qPath = getQueryPath("Q22");
         Path ePath = getExplainPath("Q22");
+        Path iPath = getCreateIndexPath("Q22");
         ArrayList<Integer> countryCodes = new ArrayList<Integer>();
 
         // Parameter 1 - 7 unique country codes
@@ -272,6 +273,7 @@ public class QueryGen {
                 countryCodes.add(countryCode);
                 FileSystemHelper.findAndReplace(qPath, "__PARAM_COUNTRY_CODE_" + i + "__", countryCode.toString());
                 FileSystemHelper.findAndReplace(ePath, "__PARAM_COUNTRY_CODE_" + i + "__", countryCode.toString());
+                FileSystemHelper.findAndReplace(iPath, "__PARAM_COUNTRY_CODE_" + i + "__", countryCode.toString());
                 LoggerHelper.addLog("Q22", "Parameter " + i + " (Country Code) = " + countryCode.toString());
                 break;
             }

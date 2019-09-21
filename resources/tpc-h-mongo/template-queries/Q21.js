@@ -2,6 +2,7 @@
 
     var finalDb = db.getSiblingDB("final");
 
+    // Exists
     var exists = finalDb.deals.aggregate([
         {
             $project: {
@@ -10,10 +11,10 @@
             }
         }
     ]);
-
     finalDb.tmp_q21_1.drop();
     finalDb.tmp_q21_1.insert(exists.toArray());
 
+    // Not Exists
     var notExists = finalDb.deals.aggregate([
         {
             $match: {
@@ -29,10 +30,10 @@
             }
         }
     ]);
-
     finalDb.tmp_q21_2.drop();
     finalDb.tmp_q21_2.insert(notExists.toArray());
 
+    // Final Query
     return finalDb.deals.__PARAM_MONGO_METHOD__([
         {
             $match: {

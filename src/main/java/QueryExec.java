@@ -93,18 +93,19 @@ public class QueryExec {
         String explainScript,
         String queryScript
     ) {
+        // Clear cache
+        clearCache();
+
         // Clear indexes
         clearIndexes();
 
         // Explain
-        clearCache();
         LoggerHelper.addLog(queryNumber, "Explain (w/o indexes) = " + mongoDB.eval(explainScript).toString());
 
         // Exec without indexes
-        clearCache();
-        clearProfiler();
-        //mongoDB.eval(queryScript);
-        //LoggerHelper.addLog(queryNumber, "Execution Time (w/o indexes) (in millis) = " + getExecutionTime().toString());
+//        clearProfiler();
+//        mongoDB.eval(queryScript);
+//        LoggerHelper.addLog(queryNumber, "Execution Time (w/o indexes) (in millis) = " + getExecutionTime().toString());
     }
 
     /**
@@ -119,18 +120,19 @@ public class QueryExec {
         String explainScript,
         String queryScript
     ) {
+        // Clear cache
+        clearCache();
+
         // Create indexes
         mongoDB.eval(createIndexScript);
 
         // Explain
-        clearCache();
         LoggerHelper.addLog(queryNumber, "Explain (w/ indexes) = " + mongoDB.eval(explainScript).toString());
 
         // Exec with indexes
-        clearCache();
-        clearProfiler();
-        //mongoDB.eval(queryScript);
-        //LoggerHelper.addLog(queryNumber, "Execution Time (w/ indexes) (in millis) = " + getExecutionTime().toString());
+//        clearProfiler();
+//        mongoDB.eval(queryScript);
+//        LoggerHelper.addLog(queryNumber, "Execution Time (w/ indexes) (in millis) = " + getExecutionTime().toString());
     }
 
     /**

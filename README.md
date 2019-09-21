@@ -6,7 +6,7 @@ Esse é o repositório do projeto de final de curso do aluno Nilo Soares, orient
 
 - Ubuntu 16.04 ou superior
 - Docker 18.09 ou superior
-- Docker Compose 1.23.2 ou superior
+- Docker Compose 1.17.1 ou superior
 - Git
 
 ## Clonando o projeto

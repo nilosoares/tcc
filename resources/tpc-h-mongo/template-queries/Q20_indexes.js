@@ -22,10 +22,9 @@
         }
     );
 
-    // run the query
-    return finalDb.deals.createIndex(
+    finalDb.deals.createIndex(
        {
-           "partsupp.supplier.name": 1
+           "partsupp.supplier.nation.name": 1
        },
        {
             name: "q20.deals.nation_name",

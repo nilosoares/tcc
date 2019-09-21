@@ -16,7 +16,7 @@
     // sum1 index
     finalDb.customers.createIndex(
         {
-            "order.customer.phone": 1
+            "acctbal": 1
         },
         {
             name: "q22.sum1.acctbal",
@@ -31,7 +31,7 @@
     // sum2 index
     finalDb.deals.createIndex(
     	{
-    		"order.customer.phone": 1
+    		"order.customer.acctbal": 1
     	},
     	{
     		name: "q22.sum2.acctbal",

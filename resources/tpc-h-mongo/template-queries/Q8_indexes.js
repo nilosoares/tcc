@@ -8,20 +8,21 @@
     var region = "__PARAM_REGION__";
     var part_type = "__PARAM_TYPE__";
 
-    // run query
-    return finalDb.deals.createIndex(
+    finalDb.deals.createIndex(
         {
-            o_year: 1
+            "order.customer.nation.region.name": 1,
+            "partsupp.part.type": 1,
+            "order.orderdate": 1
         },
         {
-            name: "q8.deals.region_name__part_type__orderdate",
+            name: "q8.deals.region_name",
             partialFilterExpression: {
                 "order.customer.nation.region.name": { $eq: region },
                 "partsupp.part.type": { $eq: part_type },
                 "order.orderdate": {
-                   "$gte": start,
-                   "$lte": end
-               }
+                    "$gte": start,
+                    "$lte": end
+                }
             }
         }
     );

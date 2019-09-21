@@ -9,27 +9,29 @@
             "partsupp.supplier.suppkey": 1
         },
         {
-           partialFilterExpression: {
-               "receiptdate": {
-                   $gt: "$commitdate"
-               }
-           }
+            name: "q21.deals.receiptdate",
+            partialFilterExpression: {
+                "receiptdate": {
+                    $gt: "$commitdate"
+                }
+            }
        }
     );
 
-    return finalDb.deals.createIndex(
+    finalDb.deals.createIndex(
        {
            "order.orderstatus": 1,
            "partsupp.supplier.nation.name": 1,
            "receiptdate": 1
        },
        {
-           partialFilterExpression: {
-               "order.orderstatus": { $eq: "F" },
-               "partsupp.supplier.nation.name": { $eq: "__PARAM_COUNTRY__" },
-               "receiptdate": { $gt: "$commitdate" }
-           }
-       }
+            name: "q21.deals.orderstatus__nation_name__receiptdate",
+            partialFilterExpression: {
+                "order.orderstatus": { $eq: "F" },
+                "partsupp.supplier.nation.name": { $eq: "__PARAM_COUNTRY__" },
+                "receiptdate": { $gt: "$commitdate" }
+            }
+        }
    );
 
 })();

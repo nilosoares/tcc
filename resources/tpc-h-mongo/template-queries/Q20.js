@@ -36,11 +36,11 @@
                     $divide: ["$sum_qty", 2]
                 }
             }
+        },
+        {
+            $out: "tmp_q20"
         }
-    ]).toArray();
-
-    finalDb.tmp_q20.drop();
-    finalDb.tmp_q20.insert(halfQtyArr);
+    ]);
 
     return finalDb.deals.__PARAM_MONGO_METHOD__([
         {

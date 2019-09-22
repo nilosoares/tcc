@@ -63,7 +63,7 @@ public class QueryGen {
     private Path getExplainPath(String queryNumber) {
         Path path = copyTemplate(queryNumber, queryNumber + "_explain");
 
-        FileSystemHelper.findAndReplace(path, "__PARAM_MONGO_METHOD__", "explain('executionStats').aggregate");
+        FileSystemHelper.findAndReplace(path, "__PARAM_MONGO_METHOD__", "explain().aggregate");
 
         return path;
     }

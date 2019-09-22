@@ -105,7 +105,7 @@ public class QueryExec {
 
         // Exec without indexes
         clearProfiler();
-        mongoDB.eval(queryScript);
+        LoggerHelper.addLog(queryNumber, "Result (w/o indexes) = " + mongoDB.eval(queryScript).toString());
         LoggerHelper.addLog(queryNumber, "Execution Time (w/o indexes) (in millis) = " + getExecutionTime().toString());
     }
 
@@ -132,7 +132,7 @@ public class QueryExec {
 
         // Exec with indexes
         clearProfiler();
-        mongoDB.eval(queryScript);
+        LoggerHelper.addLog(queryNumber, "Result (w/ indexes) = " + mongoDB.eval(queryScript).toString());
         LoggerHelper.addLog(queryNumber, "Execution Time (w/ indexes) (in millis) = " + getExecutionTime().toString());
     }
 

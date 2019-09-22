@@ -38,6 +38,7 @@ public class QueryExec {
             // Execute queries with and without indexes
             execWithouIndexes(queryNumber, explainScript, queryScript);
             execWithIndexes(queryNumber, createIndexScript, explainScript, queryScript);
+            LoggerHelper.persist(queryNumber);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -103,9 +104,9 @@ public class QueryExec {
         LoggerHelper.addLog(queryNumber, "Explain (w/o indexes) = " + mongoDB.eval(explainScript).toString());
 
         // Exec without indexes
-//        clearProfiler();
-//        mongoDB.eval(queryScript);
-//        LoggerHelper.addLog(queryNumber, "Execution Time (w/o indexes) (in millis) = " + getExecutionTime().toString());
+        clearProfiler();
+        mongoDB.eval(queryScript);
+        LoggerHelper.addLog(queryNumber, "Execution Time (w/o indexes) (in millis) = " + getExecutionTime().toString());
     }
 
     /**
@@ -130,9 +131,9 @@ public class QueryExec {
         LoggerHelper.addLog(queryNumber, "Explain (w/ indexes) = " + mongoDB.eval(explainScript).toString());
 
         // Exec with indexes
-//        clearProfiler();
-//        mongoDB.eval(queryScript);
-//        LoggerHelper.addLog(queryNumber, "Execution Time (w/ indexes) (in millis) = " + getExecutionTime().toString());
+        clearProfiler();
+        mongoDB.eval(queryScript);
+        LoggerHelper.addLog(queryNumber, "Execution Time (w/ indexes) (in millis) = " + getExecutionTime().toString());
     }
 
     /**

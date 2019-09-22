@@ -9,10 +9,11 @@
                 orderkey: "$order.orderkey",
                 suppkey: "$partsupp.supplier.suppkey"
             }
+        },
+        {
+            $out: "tmp_q21_1"
         }
     ]);
-    finalDb.tmp_q21_1.drop();
-    finalDb.tmp_q21_1.insert(exists.toArray());
 
     // Not Exists
     var notExists = finalDb.deals.aggregate([
@@ -28,10 +29,11 @@
                 orderkey: "$order.orderkey",
                 suppkey: "$partsupp.supplier.suppkey"
             }
+        },
+        {
+            $out: "tmp_q21_2"
         }
     ]);
-    finalDb.tmp_q21_2.drop();
-    finalDb.tmp_q21_2.insert(notExists.toArray());
 
     // Final Query
     return finalDb.deals.__PARAM_MONGO_METHOD__([
@@ -42,28 +44,6 @@
                     { "partsupp.supplier.nation.name": { $eq : '__PARAM_COUNTRY__' } },
                     { $expr: { $gt: ["$receiptdate", "$commitdate"] } }
                 ]
-            }
-        },
-        {
-            $lookup: {
-                from: "tmp_q21_1",
-                let: {
-                    thisOrderKey: "$order.orderkey",
-                    thisSuppKey: "$partsupp.supplier.suppkey"
-                },
-                pipeline: [
-                    {
-                        $match: {
-                            $expr: {
-                                $and: [
-                                    { $eq: ["$orderkey",  "$$thisOrderKey"] },
-                                    { $ne: ["$suppkey",  "$$thisSuppKey"] }
-                                ]
-                            }
-                        }
-                    }
-                ],
-                as: "multisupp"
             }
         },
         {
@@ -91,10 +71,36 @@
         {
             $match: {
                 $expr: {
-                    $and: [
-                        { $gt: [{ $size: "$multisupp" }, 0] },
-                        { $eq: [{ $size: "$onlyfail" }, 0] }
-                    ]
+                    $eq: [{ $size: "$onlyfail" }, 0]
+                }
+            }
+        },
+        {
+            $lookup: {
+                from: "tmp_q21_1",
+                let: {
+                    thisOrderKey: "$order.orderkey",
+                    thisSuppKey: "$partsupp.supplier.suppkey"
+                },
+                pipeline: [
+                    {
+                        $match: {
+                            $expr: {
+                                $and: [
+                                    { $eq: ["$orderkey",  "$$thisOrderKey"] },
+                                    { $ne: ["$suppkey",  "$$thisSuppKey"] }
+                                ]
+                            }
+                        }
+                    }
+                ],
+                as: "multisupp"
+            }
+        },
+        {
+            $match: {
+                $expr: {
+                    $gt: [{ $size: "$multisupp" }, 0]
                 }
             }
         },

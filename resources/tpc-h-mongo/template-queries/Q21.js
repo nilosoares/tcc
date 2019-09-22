@@ -48,28 +48,6 @@
         },
         {
             $lookup: {
-                from: "tmp_q21_1",
-                let: {
-                    thisOrderKey: "$order.orderkey",
-                    thisSuppKey: "$partsupp.supplier.suppkey"
-                },
-                pipeline: [
-                    {
-                        $match: {
-                            $expr: {
-                                $and: [
-                                    { $eq: ["$orderkey",  "$$thisOrderKey"] },
-                                    { $ne: ["$suppkey",  "$$thisSuppKey"] }
-                                ]
-                            }
-                        }
-                    }
-                ],
-                as: "multisupp"
-            }
-        },
-        {
-            $lookup: {
                 from: "tmp_q21_2",
                 let: {
                     thisOrderKey: "$order.orderkey",
@@ -93,10 +71,36 @@
         {
             $match: {
                 $expr: {
-                    $and: [
-                        { $gt: [{ $size: "$multisupp" }, 0] },
-                        { $eq: [{ $size: "$onlyfail" }, 0] }
-                    ]
+                    $eq: [{ $size: "$onlyfail" }, 0]
+                }
+            }
+        },
+        {
+            $lookup: {
+                from: "tmp_q21_1",
+                let: {
+                    thisOrderKey: "$order.orderkey",
+                    thisSuppKey: "$partsupp.supplier.suppkey"
+                },
+                pipeline: [
+                    {
+                        $match: {
+                            $expr: {
+                                $and: [
+                                    { $eq: ["$orderkey",  "$$thisOrderKey"] },
+                                    { $ne: ["$suppkey",  "$$thisSuppKey"] }
+                                ]
+                            }
+                        }
+                    }
+                ],
+                as: "multisupp"
+            }
+        },
+        {
+            $match: {
+                $expr: {
+                    $gt: [{ $size: "$multisupp" }, 0]
                 }
             }
         },

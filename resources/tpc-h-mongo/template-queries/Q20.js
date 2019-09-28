@@ -30,9 +30,9 @@
         {
             $project: {
                 "_id": 0,
-                "suppkey": "$_id.suppkey",
-                "partkey": "$_id.partkey",
-                "halfqty": {
+                "agg_suppkey": "$_id.suppkey",
+                "agg_partkey": "$_id.partkey",
+                "agg_quantity": {
                     $divide: ["$sum_qty", 2]
                 }
             }
@@ -67,9 +67,9 @@
                         $match: {
                             $expr: {
                                 $and: [
-                                    { $eq: ["$suppkey", "$$thisSuppKey"] },
-                                    { $ne: ["$partkey", "$$thisPartKey"] },
-                                    { $gt: ["$$thisAvailQty", "$halfqty"] }
+                                    { $eq: ["$agg_suppkey", "$$thisSuppKey"] },
+                                    { $eq: ["$agg_partkey", "$$thisPartKey"] },
+                                    { $gt: ["$$thisAvailQty", "$agg_quantity"] }
                                 ]
                             }
                         }

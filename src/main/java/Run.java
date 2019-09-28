@@ -13,14 +13,14 @@ public class Run {
     public static void main(String[] args) {
         String[] queries = {
             "Q1",
-//            "Q8",
-//            "Q15",
-//            "Q20",
-//            "Q22",
-//            "Q21",
+            "Q8",
+            "Q15",
+            "Q20",
+            "Q21",
+            "Q22"
         };
         int nbQueries = queries.length;
-        int nbOfTests = 2;
+        int nbOfTests = 5;
 
         for (int i = 0; i < nbQueries; i++) {
             QueryExec queryExec = new QueryExec(queries[i]);

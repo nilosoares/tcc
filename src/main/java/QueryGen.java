@@ -70,7 +70,7 @@ public class QueryGen {
     private Path getExplainPath() {
         Path path = copyTemplate(this.queryNumber, this.queryNumber + "_explain");
 
-        FileSystemHelper.findAndReplace(path, "__PARAM_MONGO_METHOD__", "explain().aggregate");
+        FileSystemHelper.findAndReplace(path, "__PARAM_MONGO_METHOD__", "explain('allPlansExecution').aggregate");
 
         return path;
     }

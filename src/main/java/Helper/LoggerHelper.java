@@ -56,16 +56,4 @@ public class LoggerHelper {
         logger.info(message);
     }
 
-    /**
-     *
-     * @param entry
-     */
-    public static void persist(String entry) {
-        Logger logger = loggers.get(entry);
-
-        if (logger != null) {
-            loggers.remove(entry);
-        }
-    }
-
 }

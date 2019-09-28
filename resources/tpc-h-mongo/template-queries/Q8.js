@@ -16,7 +16,7 @@
                 "order.customer.nation.region.name": { $eq : region }
             },
             {
-                "partsupp.part.type": part_type
+                "partsupp.part.type": { $eq: part_type }
             },
             {
                 "order.orderdate": {
@@ -73,7 +73,7 @@
             },
         },
         {
-            $sort: { o_year: 1 }
+            $sort: { "_id": 1 }
         },
         {
             $limit: 1

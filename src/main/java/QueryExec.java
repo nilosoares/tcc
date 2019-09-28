@@ -38,7 +38,6 @@ public class QueryExec {
             // Execute queries with and without indexes
             execWithouIndexes(queryNumber, explainScript, queryScript);
             execWithIndexes(queryNumber, createIndexScript, explainScript, queryScript);
-            LoggerHelper.persist(queryNumber);
 
         } catch (Exception e) {
             e.printStackTrace();

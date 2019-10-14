@@ -12,19 +12,32 @@ public class Run {
      */
     public static void main(String[] args) {
         String[] queries = {
+            // Alain's queries
             "Q1",
-            "Q8",
-            "Q15",
-            "Q20",
-            "Q21",
-            "Q22"
+            //"Q3",
+            //"Q5",
+            //"Q6",
+            //"Q10",
+            //"Q12",
+            //"Q14",
+            //"Q17",
+
+             // Nico's queries
+            //"Q1",
+            //"Q3",
+            //"Q8",
+            //"Q15",
+            //"Q20",
+            //"Q21",
+            //"Q22"
         };
         int nbQueries = queries.length;
-        int nbOfTests = 5;
 
         for (int i = 0; i < nbQueries; i++) {
-            QueryExec queryExec = new QueryExec(queries[i]);
-            queryExec.execute(nbOfTests);
+            AbstractQuery query = QueryFactory.createFromName(queries[i]);
+
+            QueryExec queryExec = new QueryExec();
+            queryExec.execute(query, true);
         }
     }
 

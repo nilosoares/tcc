@@ -1,8 +1,3 @@
-import java.lang.Class;
-import java.lang.reflect.Method;
-
-import java.nio.file.Path;
-
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
@@ -21,53 +16,48 @@ import com.mongodb.DB;
 public class QueryExec {
 
     private final DB mongoDB = ConnectorHelper.getMongoClient().getDB("final");
-    private String queryNumber;
-    private QueryGen queryGen;
 
     /**
      *
-     * @param String queryNumber ("Q1", "Q8", "Q15", "Q20", "Q21", "Q22")
+     * @param query
+     * @param debug
      */
-    public QueryExec(String queryNumber) {
-        this.queryNumber = queryNumber;
-    }
-
-    /**
-     *
-     * @param int nbOfTests
-     */
-    public void execute(int nbOfTests) {
+    public void execute(AbstractQuery query, boolean debug) {
         try {
+            int nbOfTests = debug ? 1 : query.getNbOfTests();
+
             // Build the query using random parameters
-            QueryGen queryGen = new QueryGen(queryNumber);
-            queryGen.generate();
-            String queryScript = queryGen.getExecutableQuery();
-            String explainScript = queryGen.getExplainQuery();
-            String createIndexScript = queryGen.getCreateIndexQuery();
+            query.replaceParameters();
+
+            // Get the scripts
+            String queryScript = query.getQueryScript();
+            String explainScript = query.getExplainScript();
+            String createIndexScript = query.getCreateIndexScript();
 
             // Explain without indexes
-            LoggerHelper.addLog(queryNumber, "Explain (w/o indexes) = " + mongoDB.eval(explainScript).toString());
+            LoggerHelper.addLog(query.getName(), "Explain (w/o indexes) = " + mongoDB.eval(explainScript).toString());
 
             // Execute queries without indexes
             for (int i = 1; i <= nbOfTests; i++) {
                 clearCache();
                 clearProfiler();
-                LoggerHelper.addLog(queryNumber, "Result (w/o indexes) = " + mongoDB.eval(queryScript).toString());
-                LoggerHelper.addLog(queryNumber, "Execution Time (w/o indexes) (in millis) = " + getExecutionTime().toString());
+                LoggerHelper.addLog(query.getName(), "Result (w/o indexes) = " + mongoDB.eval(queryScript).toString());
+                LoggerHelper.addLog(query.getName(), "Execution Time (w/o indexes) (in millis) = " + getExecutionTime().toString());
             }
 
             // Create indexes
             mongoDB.eval(createIndexScript);
+            LoggerHelper.addLog(query.getName(), "Execution Time (Create Index) (in millis) = " + getExecutionTime().toString());
 
             // Explain with indexes
-            LoggerHelper.addLog(queryNumber, "Explain (w/ indexes) = " + mongoDB.eval(explainScript).toString());
+            LoggerHelper.addLog(query.getName(), "Explain (w/ indexes) = " + mongoDB.eval(explainScript).toString());
 
             // Execute queries without indexes
             for (int i = 1; i <= nbOfTests; i++) {
                 clearCache();
                 clearProfiler();
-                LoggerHelper.addLog(queryNumber, "Result (w/ indexes) = " + mongoDB.eval(queryScript).toString());
-                LoggerHelper.addLog(queryNumber, "Execution Time (w/ indexes) (in millis) = " + getExecutionTime().toString());
+                LoggerHelper.addLog(query.getName(), "Result (w/ indexes) = " + mongoDB.eval(queryScript).toString());
+                LoggerHelper.addLog(query.getName(), "Execution Time (w/ indexes) (in millis) = " + getExecutionTime().toString());
             }
 
         } catch (Exception e) {

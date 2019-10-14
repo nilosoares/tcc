@@ -47,10 +47,10 @@ public class QueryExec {
 
             // Create indexes
             mongoDB.eval(createIndexScript);
+            LoggerHelper.addLog(query.getName(), "Execution Time (Create Index) (in millis) = " + getExecutionTime().toString());
 
             // Explain with indexes
             LoggerHelper.addLog(query.getName(), "Explain (w/ indexes) = " + mongoDB.eval(explainScript).toString());
-            LoggerHelper.addLog(query.getName(), "Execution Time of the Create Index (in millis) = " + getExecutionTime().toString());
 
             // Execute queries without indexes
             for (int i = 1; i <= nbOfTests; i++) {

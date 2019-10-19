@@ -135,6 +135,19 @@ public class RandomHelper {
 
     /**
      *
+     * @return String
+     */
+    public static String getRandomRegion() {
+        String file = "resources/tpc-h-mongo/parameters/regions.json";
+        JSONArray regions = FileSystemHelper.readJSONArray(file);
+
+        int randomIndex = RandomHelper.getRandomInteger(0, regions.size() - 1);
+
+        return (String) regions.get(randomIndex);
+    }
+
+    /**
+     *
      * @return
      */
     public static String getRandomSegment() {

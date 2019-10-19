@@ -172,4 +172,17 @@ public class RandomHelper {
         return (String) types.get(randomIndex);
     }
 
+    /**
+     *
+     * @return String
+     */
+    public static String getRandomShipMode() {
+        String file = "resources/tpc-h-mongo/parameters/ship_modes.json";
+        JSONArray shipModes = FileSystemHelper.readJSONArray(file);
+
+        int randomIndex = RandomHelper.getRandomInteger(0, shipModes.size() - 1);
+
+        return (String) shipModes.get(randomIndex);
+    }
+
 }

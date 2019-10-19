@@ -1,5 +1,3 @@
--- using 1472396759 as a seed to the RNG
-
 select
 	o_year,
 	sum(case

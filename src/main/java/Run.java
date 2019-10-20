@@ -14,17 +14,16 @@ public class Run {
         String[] queries = {
             // Alain's queries
             "Q1",
-            //"Q3",
-            //"Q5",
-            //"Q6",
-            //"Q10",
-            //"Q12",
-            //"Q14",
-            //"Q17",
+            "Q3",
+            "Q5",
+            "Q6",
+            "Q10",
+            "Q12",
+            "Q14",
+            "Q19"
 
              // Nico's queries
             //"Q1",
-            //"Q3",
             //"Q8",
             //"Q15",
             //"Q20",

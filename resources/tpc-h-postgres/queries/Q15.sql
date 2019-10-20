@@ -1,5 +1,3 @@
--- using 1472396759 as a seed to the RNG
-
 drop view if exists revenue0;
 
 create view revenue0 (supplier_no, total_revenue) as

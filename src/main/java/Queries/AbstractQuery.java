@@ -2,7 +2,23 @@ import java.nio.file.Path;
 
 abstract class AbstractQuery {
 
-    private Path copyTemplate(String copyName) {
+    private Path copyTemplateIndex(String copyName) {
+        Path destPath = null;
+
+        try {
+            String templateFilePath = "resources/tpc-h-mongo/template-indexes/" + this.getName() + ".js";
+            String destFilePath = "resources/tpc-h-mongo/executable-indexes/" + copyName + ".js";
+            destPath = FileSystemHelper.copyFile(templateFilePath, destFilePath);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
+
+        return destPath;
+    }
+
+    private Path copyTemplateQuery(String copyName) {
         Path destPath = null;
 
         try {
@@ -27,7 +43,13 @@ abstract class AbstractQuery {
     }
 
     public String getCreateIndexFilePath() {
-        return "resources/tpc-h-mongo/indexes/" + this.getName() + ".js";
+        return "resources/tpc-h-mongo/executable-indexes/" + this.getName() + ".js";
+    }
+
+    protected Path getCreateIndexTemplate() {
+        Path path = this.copyTemplateIndex(this.getName());
+
+        return path;
     }
 
     public Path getExplain() {
@@ -43,7 +65,7 @@ abstract class AbstractQuery {
     }
 
     protected Path getExplainTemplate() {
-        Path path = this.copyTemplate(this.getName() + "_explain");
+        Path path = this.copyTemplateQuery(this.getName() + "_explain");
         FileSystemHelper.findAndReplace(path, "__PARAM_MONGO_METHOD__", "explain('allPlansExecution').aggregate");
 
         return path;
@@ -62,8 +84,8 @@ abstract class AbstractQuery {
     }
 
     protected Path getScriptTemplate() {
-        Path path = this.copyTemplate(this.getName());
-        FileSystemHelper.findAndReplace(path, "__PARAM_MONGO_METHOD__", "explain('allPlansExecution').aggregate");
+        Path path = this.copyTemplateQuery(this.getName());
+        FileSystemHelper.findAndReplace(path, "__PARAM_MONGO_METHOD__", "aggregate");
 
         return path;
     }

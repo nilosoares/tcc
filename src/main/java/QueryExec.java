@@ -36,6 +36,9 @@ public class QueryExec {
             String explainScript = query.getExplainScript();
             ArrayList<String> createIndexScripts = query.getCreateIndexScripts();
 
+            // Delete all indexes
+            clearIndexes();
+
             // Explain without indexes
             LoggerHelper.addLog(query.getName(), "Explain (w/o indexes) = " + mongoDB.eval(explainScript).toString());
 

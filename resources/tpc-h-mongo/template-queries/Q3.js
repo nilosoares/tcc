@@ -5,7 +5,7 @@
     var segment = "__PARAM_SEGMENT__";
     var date = new Date(__PARAM_DATE__); // month is 0-indexed
 
-    return finalDb.deals.aggregate([
+    return finalDb.deals.__PARAM_MONGO_METHOD__([
         {
             $match: {
                 "order.customer.mktsegment": { $eq: segment },

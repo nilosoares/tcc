@@ -6,7 +6,7 @@
     var startDate = new Date(__PARAM_START_DATE__); // month is 0-indexed
     var endDate = new Date(__PARAM_END_DATE__);
 
-    return finalDb.deals.aggregate([
+    return finalDb.deals.__PARAM_MONGO_METHOD__([
         {
             $match: {
                 $and: [

@@ -85,7 +85,7 @@ abstract class AbstractQuery {
 
     protected Path getScriptTemplate() {
         Path path = this.copyTemplateQuery(this.getName());
-        FileSystemHelper.findAndReplace(path, "__PARAM_MONGO_METHOD__", "explain('allPlansExecution').aggregate");
+        FileSystemHelper.findAndReplace(path, "__PARAM_MONGO_METHOD__", "aggregate");
 
         return path;
     }

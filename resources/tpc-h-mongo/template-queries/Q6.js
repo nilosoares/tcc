@@ -10,7 +10,7 @@
     var startDiscount = parseFloat((discount - 0.01).toFixed(2));
     var endDiscount = parseFloat((discount + 0.01).toFixed(2));
 
-    return finalDb.deals.aggregate([
+    return finalDb.deals.__PARAM_MONGO_METHOD__([
         {
             $match: {
                 $and: [

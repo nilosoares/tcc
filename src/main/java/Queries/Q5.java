@@ -1,4 +1,5 @@
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 class Q5 extends AbstractQuery {
@@ -11,16 +12,22 @@ class Q5 extends AbstractQuery {
         return 10;
     }
 
+    protected ArrayList<String> getIndexesNames() {
+        ArrayList<String> names = new ArrayList();
+
+        names.add("C_104");
+
+        return names;
+    }
+
     protected void replaceParameters() {
         Path sTemplate = this.getScriptTemplate();
         Path eTemplate = this.getExplainTemplate();
-        Path iTemplate = this.getCreateIndexTemplate();
 
         // Parameter 1 - Segment
         String region = RandomHelper.getRandomRegion();
         FileSystemHelper.findAndReplace(sTemplate, "__PARAM_REGION__", region);
         FileSystemHelper.findAndReplace(eTemplate, "__PARAM_REGION__", region);
-        FileSystemHelper.findAndReplace(iTemplate, "__PARAM_REGION__", region);
         LoggerHelper.addLog(this.getName(), "Parameter 1 (Region) = " + region);
 
         // Parameter 2 - Start Date
@@ -28,7 +35,6 @@ class Q5 extends AbstractQuery {
         Calendar startDate = DateHelper.getInstance(year, 0, 1);
         FileSystemHelper.findAndReplace(sTemplate, "__PARAM_START_DATE__", DateHelper.jsFormat(startDate));
         FileSystemHelper.findAndReplace(eTemplate, "__PARAM_START_DATE__", DateHelper.jsFormat(startDate));
-        FileSystemHelper.findAndReplace(iTemplate, "__PARAM_START_DATE__", DateHelper.jsFormat(startDate));
         LoggerHelper.addLog(this.getName(), "Parameter 2 (Start Date) = " + DateHelper.jsFormat(startDate));
 
         // Parameter 3 - End Date (Date + 1 year)
@@ -36,7 +42,6 @@ class Q5 extends AbstractQuery {
         endDate.add(Calendar.YEAR, 1);
         FileSystemHelper.findAndReplace(sTemplate, "__PARAM_END_DATE__", DateHelper.jsFormat(endDate));
         FileSystemHelper.findAndReplace(eTemplate, "__PARAM_END_DATE__", DateHelper.jsFormat(endDate));
-        FileSystemHelper.findAndReplace(iTemplate, "__PARAM_END_DATE__", DateHelper.jsFormat(endDate));
         LoggerHelper.addLog(this.getName(), "Parameter 3 (End Date) = " + DateHelper.jsFormat(endDate));
 
     }

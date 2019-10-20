@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Read the database size
+read -p "Please, inform the size of the database in GB (default = 1): " dbSize;
+dbSize=${dbSize:-1}
+
 # stop docker containers
 docker-compose stop
 
@@ -18,7 +22,7 @@ docker-compose run gradle gradle build
 
 # generates the TPC-H data
 cd resources/tpc-h/dbgen
-./dbgen -f 1
+./dbgen -f $dbSize
 
 # populate the postgres
 docker-compose exec --user postgres postgres /app/resources/tpc-h-postgres/populate_postgres

@@ -25,9 +25,6 @@
         {
             $group: {
                 "_id": null,
-                "count": {
-                    $sum: 1
-                },
                 "revenue": {
                     $sum: {
                         $multiply: ["$extendedprice", "$discount"]
@@ -38,7 +35,6 @@
         {
             $project: {
                 "_id": 0,
-                "count": 1,
                 "revenue": 1
             }
         }

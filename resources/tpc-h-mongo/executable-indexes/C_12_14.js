@@ -16,7 +16,7 @@ USING btree
             "receiptdate": 1
         },
          {
-             name: "C1214"
+             name: "C_12_14"
          }
     );
 

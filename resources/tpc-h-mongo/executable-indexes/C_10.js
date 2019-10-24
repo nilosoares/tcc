@@ -15,7 +15,7 @@ USING btree
             "l_shipdate": 1
         },
          {
-             name: "C10"
+             name: "C_10"
          }
     );
 

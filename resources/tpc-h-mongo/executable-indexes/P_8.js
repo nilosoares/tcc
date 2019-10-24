@@ -16,7 +16,7 @@ WHERE l_returnflag = 'A'::bpchar;
             "l_returnflag": 1
         },
         {
-            name: "P8",
+            name: "P_8",
             partialFilterExpression: {
                 "l_returnflag": { $eq: 'A' }
             }

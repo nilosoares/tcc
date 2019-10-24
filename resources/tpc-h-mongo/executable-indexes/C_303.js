@@ -15,7 +15,7 @@ USING btree
             "partsupp.part.brand": 1
         },
          {
-             name: "C303"
+             name: "C_303"
          }
     );
 

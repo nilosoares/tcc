@@ -34,7 +34,7 @@ class Q20 extends AbstractQuery {
         endDate.add(Calendar.YEAR, 1);
         FileSystemHelper.findAndReplace(sTemplate, "__PARAM_END_DATE__", DateHelper.jsFormat(endDate));
         FileSystemHelper.findAndReplace(eTemplate, "__PARAM_END_DATE__", DateHelper.jsFormat(endDate));
-        LoggerHelper.addLog(this.getName(), "Parameter 2 (End Date) = " + DateHelper.jsFormat(startDate));
+        LoggerHelper.addLog(this.getName(), "Parameter 2 (End Date) = " + DateHelper.jsFormat(endDate));
 
         // Parameter 3 - Colors
         String color = RandomHelper.getRandomColor();

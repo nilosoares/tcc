@@ -46,9 +46,9 @@ class Q6 extends AbstractQuery {
 
         // Parameter 3 - Discount
         Double discount = RandomHelper.getRandomInteger(2, 9) / (new Double(100));
-        FileSystemHelper.findAndReplace(sTemplate, "__PARAM_QUANTITY__", discount.toString());
-        FileSystemHelper.findAndReplace(eTemplate, "__PARAM_QUANTITY__", discount.toString());
-        LoggerHelper.addLog(this.getName(), "Parameter 4 (Quantity) = " + discount.toString());
+        FileSystemHelper.findAndReplace(sTemplate, "__PARAM_DISCOUNT__", discount.toString());
+        FileSystemHelper.findAndReplace(eTemplate, "__PARAM_DISCOUNT__", discount.toString());
+        LoggerHelper.addLog(this.getName(), "Parameter 4 (Dicount) = " + discount.toString());
 
     }
 

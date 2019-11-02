@@ -51,6 +51,8 @@ public class QueryExec {
             }
 
             // Create indexes
+            clearCache();
+            clearProfiler();
             for (int i = 0; i < createIndexScripts.size(); i++) {
                 mongoDB.eval(createIndexScripts.get(i));
             }

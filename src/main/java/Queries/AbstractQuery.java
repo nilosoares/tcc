@@ -1,22 +1,7 @@
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 abstract class AbstractQuery {
-
-    private Path copyTemplateIndex(String copyName) {
-        Path destPath = null;
-
-        try {
-            String templateFilePath = "resources/tpc-h-mongo/template-indexes/" + this.getName() + ".js";
-            String destFilePath = "resources/tpc-h-mongo/executable-indexes/" + copyName + ".js";
-            destPath = FileSystemHelper.copyFile(templateFilePath, destFilePath);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-
-        return destPath;
-    }
 
     private Path copyTemplateQuery(String copyName) {
         Path destPath = null;
@@ -34,33 +19,23 @@ abstract class AbstractQuery {
         return destPath;
     }
 
-    public Path getCreateIndex() {
-        return FileSystemHelper.getPath(this.getCreateIndexFilePath());
-    }
+    public ArrayList<String> getCreateIndexScripts() {
+        ArrayList<String> names = this.getIndexesNames();
+        ArrayList<String> scripts = new ArrayList();
 
-    public String getCreateIndexScript() {
-        return FileSystemHelper.getContent(this.getCreateIndexFilePath());
-    }
+        for (int i = 0; i < names.size(); i++) {
+            String filePath = "resources/tpc-h-mongo/executable-indexes/" + names.get(i) + ".js";
+            scripts.add(FileSystemHelper.getContent(filePath));
+        }
 
-    public String getCreateIndexFilePath() {
-        return "resources/tpc-h-mongo/executable-indexes/" + this.getName() + ".js";
-    }
-
-    protected Path getCreateIndexTemplate() {
-        Path path = this.copyTemplateIndex(this.getName());
-
-        return path;
-    }
-
-    public Path getExplain() {
-        return FileSystemHelper.getPath(this.getExplainFilePath());
+        return scripts;
     }
 
     public String getExplainScript() {
         return FileSystemHelper.getContent(this.getExplainFilePath());
     }
 
-    public String getExplainFilePath() {
+    private String getExplainFilePath() {
         return "resources/tpc-h-mongo/executable-queries/" + this.getName() + "_explain.js";
     }
 
@@ -71,15 +46,11 @@ abstract class AbstractQuery {
         return path;
     }
 
-    public Path getQuery() {
-        return FileSystemHelper.getPath(this.getQueryFilePath());
-    }
-
     public String getQueryScript() {
         return FileSystemHelper.getContent(this.getQueryFilePath());
     }
 
-    public String getQueryFilePath() {
+    private String getQueryFilePath() {
         return "resources/tpc-h-mongo/executable-queries/" + this.getName() + ".js";
     }
 
@@ -93,6 +64,8 @@ abstract class AbstractQuery {
     public abstract String getName();
 
     public abstract int getNbOfTests();
+
+    protected abstract ArrayList<String> getIndexesNames();
 
     protected abstract void replaceParameters();
 

@@ -36,7 +36,7 @@ public class Run {
             AbstractQuery query = QueryFactory.createFromName(queries[i]);
 
             QueryExec queryExec = new QueryExec();
-            queryExec.execute(query, true);
+            queryExec.execute(query, false);
         }
     }
 

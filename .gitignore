@@ -16,9 +16,7 @@
 ###< tpc-h ###
 
 ###> tpc-h-mongo ###
-/resources/tpc-h-mongo/executable-indexes/*.js
 /resources/tpc-h-mongo/executable-queries/*.js
-!/resources/tpc-h-mongo/executable-indexes/.gitkeep
 !/resources/tpc-h-mongo/executable-queries/.gitkeep
 /resources/tpc-h-mongo/template-queries/*.out
 ###< tpc-h-mongo ###

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
@@ -32,7 +34,10 @@ public class QueryExec {
             // Get the scripts
             String queryScript = query.getQueryScript();
             String explainScript = query.getExplainScript();
-            String createIndexScript = query.getCreateIndexScript();
+            ArrayList<String> createIndexScripts = query.getCreateIndexScripts();
+
+            // Delete all indexes
+            clearIndexes();
 
             // Explain without indexes
             LoggerHelper.addLog(query.getName(), "Explain (w/o indexes) = " + mongoDB.eval(explainScript).toString());
@@ -46,7 +51,11 @@ public class QueryExec {
             }
 
             // Create indexes
-            mongoDB.eval(createIndexScript);
+            clearCache();
+            clearProfiler();
+            for (int i = 0; i < createIndexScripts.size(); i++) {
+                mongoDB.eval(createIndexScripts.get(i));
+            }
             LoggerHelper.addLog(query.getName(), "Execution Time (Create Index) (in millis) = " + getExecutionTime().toString());
 
             // Explain with indexes

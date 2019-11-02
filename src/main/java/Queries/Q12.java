@@ -1,4 +1,5 @@
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 class Q12 extends AbstractQuery {
@@ -11,16 +12,22 @@ class Q12 extends AbstractQuery {
         return 7;
     }
 
+    protected ArrayList<String> getIndexesNames() {
+        ArrayList<String> names = new ArrayList();
+
+        names.add("C_12_14");
+
+        return names;
+    }
+
     protected void replaceParameters() {
         Path sTemplate = this.getScriptTemplate();
         Path eTemplate = this.getExplainTemplate();
-        Path iTemplate = this.getCreateIndexTemplate();
 
         // Parameter 1 - Ship Mode 1
         String shipMode1 = RandomHelper.getRandomShipMode();
         FileSystemHelper.findAndReplace(sTemplate, "__PARAM_SHIP_MODE_1__", shipMode1);
         FileSystemHelper.findAndReplace(eTemplate, "__PARAM_SHIP_MODE_1__", shipMode1);
-        FileSystemHelper.findAndReplace(iTemplate, "__PARAM_SHIP_MODE_1__", shipMode1);
         LoggerHelper.addLog(this.getName(), "Parameter 1 (Ship Mode 1) = " + shipMode1);
 
         // Parameter 2 - End Date (Date + 1 month)
@@ -29,7 +36,6 @@ class Q12 extends AbstractQuery {
             if (shipMode1 != shipMode2) {
                 FileSystemHelper.findAndReplace(sTemplate, "__PARAM_SHIP_MODE_2__", shipMode2);
                 FileSystemHelper.findAndReplace(eTemplate, "__PARAM_SHIP_MODE_2__", shipMode2);
-                FileSystemHelper.findAndReplace(iTemplate, "__PARAM_SHIP_MODE_2__", shipMode2);
                 LoggerHelper.addLog(this.getName(), "Parameter 2 (Ship Mode 2) = " + shipMode2);
                 break;
             }
@@ -40,7 +46,6 @@ class Q12 extends AbstractQuery {
         Calendar startDate = DateHelper.getInstance(year, 0, 1);
         FileSystemHelper.findAndReplace(sTemplate, "__PARAM_START_DATE__", DateHelper.jsFormat(startDate));
         FileSystemHelper.findAndReplace(eTemplate, "__PARAM_START_DATE__", DateHelper.jsFormat(startDate));
-        FileSystemHelper.findAndReplace(iTemplate, "__PARAM_START_DATE__", DateHelper.jsFormat(startDate));
         LoggerHelper.addLog(this.getName(), "Parameter 3 (Start Date) = " + DateHelper.jsFormat(startDate));
 
         // Parameter 4 - End Date (Date + 1 year)
@@ -48,7 +53,6 @@ class Q12 extends AbstractQuery {
         endDate.add(Calendar.YEAR, 1);
         FileSystemHelper.findAndReplace(sTemplate, "__PARAM_END_DATE__", DateHelper.jsFormat(endDate));
         FileSystemHelper.findAndReplace(eTemplate, "__PARAM_END_DATE__", DateHelper.jsFormat(endDate));
-        FileSystemHelper.findAndReplace(iTemplate, "__PARAM_END_DATE__", DateHelper.jsFormat(endDate));
         LoggerHelper.addLog(this.getName(), "Parameter 4 (End Date) = " + DateHelper.jsFormat(endDate));
     }
 

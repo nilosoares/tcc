@@ -22,7 +22,7 @@ docker-compose run gradle gradle build
 
 # generates the TPC-H data
 cd resources/tpc-h/dbgen
-./dbgen -f $dbSize
+./dbgen -f -s $dbSize
 
 # populate the postgres
 docker-compose exec --user postgres postgres /app/resources/tpc-h-postgres/populate_postgres

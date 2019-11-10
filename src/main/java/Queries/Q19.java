@@ -43,22 +43,31 @@ class Q19 extends AbstractQuery {
         LoggerHelper.addLog(this.getName(), "Parameter 3 (Quantity 3) = " + quantity3.toString());
 
         // Parameter 4, 5 and 6 - Brand 1, 2 and 3
+        ArrayList<String> brands = new ArrayList<String>();
+        String brand;
         for (int i = 1; i <= 3; i++) {
             int p = i + 3;
 
-            Integer m = RandomHelper.getRandomInteger(1, 5);
-            Integer n;
             while (true) {
-                n = RandomHelper.getRandomInteger(1, 5);
-                if (m != n) {
+                Integer m = RandomHelper.getRandomInteger(1, 5);
+                Integer n;
+
+                while (true) {
+                    n = RandomHelper.getRandomInteger(1, 5);
+                    if (!m.equals(n)) {
+                        break;
+                    }
+                }
+
+                brand = "Brand#" + m.toString() + n.toString();
+                if (!brands.contains(brand)) {
+                    brands.add(brand);
                     break;
                 }
             }
 
-            String brand = "Brand#" + m.toString() + n.toString();
-
-            FileSystemHelper.findAndReplace(sTemplate, "__PARAM_BRAND_" + (Integer.toString(p)) + "__", brand);
-            FileSystemHelper.findAndReplace(eTemplate, "__PARAM_BRAND_" + (Integer.toString(p)) + "__", brand);
+            FileSystemHelper.findAndReplace(sTemplate, "__PARAM_BRAND_" + (Integer.toString(i)) + "__", brand);
+            FileSystemHelper.findAndReplace(eTemplate, "__PARAM_BRAND_" + (Integer.toString(i)) + "__", brand);
             LoggerHelper.addLog(this.getName(), "Parameter " + Integer.toString(p) + " (Brand " + (Integer.toString(i)) + ") = " + brand);
         }
     }

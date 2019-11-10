@@ -33,7 +33,7 @@ class Q12 extends AbstractQuery {
         // Parameter 2 - End Date (Date + 1 month)
         while (true) {
             String shipMode2 = RandomHelper.getRandomShipMode();
-            if (shipMode1 != shipMode2) {
+            if (!shipMode1.equals(shipMode2)) {
                 FileSystemHelper.findAndReplace(sTemplate, "__PARAM_SHIP_MODE_2__", shipMode2);
                 FileSystemHelper.findAndReplace(eTemplate, "__PARAM_SHIP_MODE_2__", shipMode2);
                 LoggerHelper.addLog(this.getName(), "Parameter 2 (Ship Mode 2) = " + shipMode2);

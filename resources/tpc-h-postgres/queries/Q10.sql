@@ -19,7 +19,6 @@ where
     and o_orderdate < date '1993-10-01' + interval '3' month
     and l_returnflag = 'R'
     and c_nationkey = n_nationkey
-    and n_name = 'INDONESIA'
 group by
     c_custkey,
     c_name,

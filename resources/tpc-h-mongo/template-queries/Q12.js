@@ -75,6 +75,6 @@
                 "shipmode": 1
             }
         },
-    ]);
+    ], { allowDiskUse: true });
 
 })();

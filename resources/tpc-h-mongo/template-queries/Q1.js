@@ -81,6 +81,6 @@
         {
             $limit: 1
         }
-    ]);
+    ], { allowDiskUse: true });
 
 })();

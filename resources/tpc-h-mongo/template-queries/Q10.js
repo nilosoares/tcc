@@ -57,6 +57,6 @@
         {
             $limit: 20
         }
-    ]);
+    ], { allowDiskUse: true });
 
 })();

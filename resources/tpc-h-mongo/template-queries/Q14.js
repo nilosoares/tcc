@@ -57,6 +57,6 @@
                 }
             }
         }
-    ]);
+    ], { allowDiskUse: true });
 
 })();

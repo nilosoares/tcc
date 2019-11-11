@@ -38,6 +38,6 @@
                 "revenue": 1
             }
         }
-    ]);
+    ], { allowDiskUse: true });
 
 })();

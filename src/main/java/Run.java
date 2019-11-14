@@ -13,7 +13,7 @@ public class Run {
     public static void main(String[] args) {
         String[] queries = {
             // Alain's queries
-            "Q1",
+            "Q1_Mod",
             "Q3",
             "Q5",
             "Q6",

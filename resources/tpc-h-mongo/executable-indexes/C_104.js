@@ -15,7 +15,7 @@ USING btree
             "order.orderdate": 1
         },
         {
-         name: "C_104"
+            name: "C_104"
         }
     );
 

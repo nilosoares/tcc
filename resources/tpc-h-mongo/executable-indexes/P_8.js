@@ -13,12 +13,12 @@ WHERE l_returnflag = 'A'::bpchar;
 
     finalDb.deals.createIndex(
         {
-            "l_returnflag": 1
+            "returnflag": 1
         },
         {
             name: "P_8",
             partialFilterExpression: {
-                "l_returnflag": { $eq: 'A' }
+                "returnflag": { $eq: 'A' }
             }
         }
     );

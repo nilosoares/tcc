@@ -12,11 +12,11 @@ USING btree
 
     finalDb.deals.createIndex(
         {
-            "l_shipdate": 1
+            "shipdate": 1
         },
-         {
-             name: "C_10"
-         }
+        {
+            name: "C_10"
+        }
     );
 
 })();

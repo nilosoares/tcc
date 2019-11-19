@@ -198,7 +198,7 @@ WHERE
             },
             expression: {
                 $and: [
-                    { "shipdate": { $lt: new Date('1997-7-28') } }
+                    { "shipdate": { $gt: new Date('1997-7-28') } }
                 ]
             }
         },

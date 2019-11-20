@@ -16,7 +16,7 @@ public class Run {
             "Q1_Mod",
             "Q3",
             "Q5",
-            "Q6",
+            "Q6_Mod",
             "Q10",
             "Q12",
             "Q14",

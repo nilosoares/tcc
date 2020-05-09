@@ -7,8 +7,8 @@
     var startDate = new Date(__PARAM_START_DATE__); // month is 0-indexed
     var endDate = new Date(__PARAM_END_DATE__);
 
-    var startDiscount = parseFloat((discount - 0.01).toFixed(2));
-    var endDiscount = parseFloat((discount + 0.01).toFixed(2));
+    var startDiscount = parseFloat((discount - 0.01).toFixed(4));
+    var endDiscount = parseFloat((discount + 0.01).toFixed(4));
 
     return finalDb.deals.__PARAM_MONGO_METHOD__([
         {

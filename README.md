@@ -13,7 +13,7 @@ Esse é o repositório do projeto de final de curso do aluno Nilo Soares, orient
 
 Após instalar e configurar o Git, abra o terminal (Ctrl Alt T) e execute os comandos abaixo:
 
-    git clone git@bitbucket.org:nilosoares/uerj-projeto-final-v2.git
+    git clone git@github.com:nilosoares/tcc.git
   
 ## Instalando o TPC-H
 

@@ -20,7 +20,7 @@ abstract class AbstractQuery {
     }
 
     public ArrayList<String> getCreateIndexScripts() {
-        ArrayList<String> names = this.getIndexesNames();
+        ArrayList<String> names = this.getIndexes();
         ArrayList<String> scripts = new ArrayList();
 
         for (int i = 0; i < names.size(); i++) {
@@ -67,7 +67,7 @@ abstract class AbstractQuery {
 
     public abstract int getNbOfTests();
 
-    protected abstract ArrayList<String> getIndexesNames();
+    protected abstract ArrayList<String> getIndexes();
 
     protected abstract void replaceParameters();
 

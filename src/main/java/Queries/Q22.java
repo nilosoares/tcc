@@ -15,7 +15,7 @@ class Q22 extends AbstractQuery {
         return 5;
     }
 
-    protected ArrayList<String> getIndexesNames() {
+    protected ArrayList<String> getIndexes() {
         ArrayList<String> names = new ArrayList();
 
         return names;

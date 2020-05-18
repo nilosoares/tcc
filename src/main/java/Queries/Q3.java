@@ -16,7 +16,7 @@ class Q3 extends AbstractQuery {
         return 12;
     }
 
-    protected ArrayList<String> getIndexesNames() {
+    protected ArrayList<String> getIndexes() {
         ArrayList<String> names = new ArrayList();
 
         names.add("C_10");

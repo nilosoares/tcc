@@ -4,6 +4,10 @@ import org.json.simple.JSONObject;
 
 class Q8 extends AbstractQuery {
 
+    public int getNumber() {
+        return 8;
+    }
+
     public String getName() {
         return "Q8";
     }

@@ -61,6 +61,8 @@ abstract class AbstractQuery {
         return path;
     }
 
+    public abstract int getNumber();
+
     public abstract String getName();
 
     public abstract int getNbOfTests();

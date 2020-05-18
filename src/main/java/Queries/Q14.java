@@ -4,6 +4,10 @@ import java.util.Calendar;
 
 class Q14 extends AbstractQuery {
 
+    public int getNumber() {
+        return 14;
+    }
+
     public String getName() {
         return "Q14";
     }

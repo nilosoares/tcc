@@ -3,6 +3,10 @@ import java.util.ArrayList;
 
 class Q22 extends AbstractQuery {
 
+    public int getNumber() {
+        return 22;
+    }
+
     public String getName() {
         return "Q22";
     }

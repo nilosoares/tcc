@@ -1,4 +1,6 @@
 import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ArrayList;
 
 class Q1 extends AbstractQuery {
@@ -13,6 +15,15 @@ class Q1 extends AbstractQuery {
 
     public int getNbOfTests() {
         return 13;
+    }
+
+    public Map<Integer, Object> getParameters() {
+        Map<Integer, Object> parameters = new HashMap<Integer, Object>();
+
+        Integer delta = RandomHelper.getRandomInteger(60, 120);
+        parameters.put(1, delta);
+
+        return parameters;
     }
 
     protected ArrayList<String> getIndexes() {

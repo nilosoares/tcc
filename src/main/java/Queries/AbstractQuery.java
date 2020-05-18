@@ -1,5 +1,7 @@
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 abstract class AbstractQuery {
 
@@ -66,6 +68,8 @@ abstract class AbstractQuery {
     public abstract String getName();
 
     public abstract int getNbOfTests();
+
+    public abstract Map<Integer, Object> getParameters();
 
     protected abstract ArrayList<String> getIndexes();
 

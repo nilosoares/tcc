@@ -1,5 +1,7 @@
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 class Q21 extends AbstractQuery {
 
@@ -13,6 +15,15 @@ class Q21 extends AbstractQuery {
 
     public int getNbOfTests() {
         return 5;
+    }
+
+    public Map<Integer, Object> getParameters() {
+        Map<Integer, Object> parameters = new HashMap<Integer, Object>();
+
+        String country = RandomHelper.getRandomCountryName();
+        parameters.put(1, country);
+
+        return parameters;
     }
 
     protected ArrayList<String> getIndexes() {

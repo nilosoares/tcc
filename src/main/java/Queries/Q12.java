@@ -1,6 +1,8 @@
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 class Q12 extends AbstractQuery {
 
@@ -14,6 +16,31 @@ class Q12 extends AbstractQuery {
 
     public int getNbOfTests() {
         return 7;
+    }
+
+    public Map<Integer, Object> getParameters() {
+        Map<Integer, Object> parameters = new HashMap<Integer, Object>();
+
+        String shipMode1 = RandomHelper.getRandomShipMode();
+        parameters.put(1, shipMode1);
+
+        while (true) {
+            String shipMode2 = RandomHelper.getRandomShipMode();
+            if (!shipMode1.equals(shipMode2)) {
+                parameters.put(2, shipMode2);
+                break;
+            }
+        }
+
+        int year = (int) RandomHelper.getRandomInteger(93, 97);
+        Calendar startDate = DateHelper.getInstance(year, 0, 1);
+        parameters.put(3, startDate);
+
+        Calendar endDate = (Calendar) startDate.clone();
+        endDate.add(Calendar.YEAR, 1);
+        parameters.put(4, startDate);
+
+        return parameters;
     }
 
     protected ArrayList<String> getIndexes() {

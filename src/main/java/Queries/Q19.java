@@ -1,5 +1,7 @@
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 class Q19 extends AbstractQuery {
 
@@ -13,6 +15,46 @@ class Q19 extends AbstractQuery {
 
     public int getNbOfTests() {
         return 22;
+    }
+
+    public Map<Integer, Object> getParameters() {
+        Map<Integer, Object> parameters = new HashMap<Integer, Object>();
+
+        Integer quantity1 = RandomHelper.getRandomInteger(1, 10);
+        parameters.put(1, quantity1);
+
+        Integer quantity2 = RandomHelper.getRandomInteger(10, 20);
+        parameters.put(2, quantity2);
+
+        Integer quantity3 = RandomHelper.getRandomInteger(20, 30);
+        parameters.put(3, quantity3);
+
+        ArrayList<String> brands = new ArrayList<String>();
+        String brand;
+        for (int p = 4; p <= 6; p++) {
+            while (true) {
+                Integer m = RandomHelper.getRandomInteger(1, 5);
+                Integer n;
+
+                while (true) {
+                    n = RandomHelper.getRandomInteger(1, 5);
+                    if (!m.equals(n)) {
+                        break;
+                    }
+                }
+
+                brand = "Brand#" + m.toString() + n.toString();
+                if (!brands.contains(brand)) {
+                    brands.add(brand);
+
+                    parameters.put(p, brand);
+
+                    break;
+                }
+            }
+        }
+
+        return parameters;
     }
 
     protected ArrayList<String> getIndexes() {

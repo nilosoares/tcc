@@ -1,6 +1,8 @@
 import java.nio.file.Path;
 import java.util.ArrayList;
 import org.json.simple.JSONObject;
+import java.util.HashMap;
+import java.util.Map;
 
 class Q8 extends AbstractQuery {
 
@@ -14,6 +16,23 @@ class Q8 extends AbstractQuery {
 
     public int getNbOfTests() {
         return 5;
+    }
+
+    public Map<Integer, Object> getParameters() {
+        Map<Integer, Object> parameters = new HashMap<Integer, Object>();
+
+        JSONObject country = RandomHelper.getRandomCountry();
+
+        String countryName = (String) country.get("nation_name");
+        parameters.put(1, countryName);
+
+        String regionName = (String) country.get("region_name");
+        parameters.put(2, regionName);
+
+        String type = RandomHelper.getRandomType();
+        parameters.put(3, type);
+
+        return parameters;
     }
 
     protected ArrayList<String> getIndexes() {

@@ -1,11 +1,10 @@
-import java.lang.System;
 import java.nio.file.Path;
 import java.util.Map;
 
 /**
  * @author Nilo Soares
  */
-public class QueryGen {
+public class QueryGen extends AbstractGen {
 
     /**
      *
@@ -45,63 +44,32 @@ public class QueryGen {
         }
     }
 
-    private Path getTemplate(AbstractQuery query, String outputFolder) {
-        Path path = null;
-
-        try {
-            String templateFilePath = "resources/tpc-h-mongo/templates/" + query.getName() + ".js";
-
-            String destinationFileName = query.getName() + "_" + DateHelper.format("yyyyMMdd_Hms_S");
-            String destinationFilePath = "output/" + outputFolder + "/" + destinationFileName + ".js";
-
-            path = FileSystemHelper.copyFile(templateFilePath, destinationFilePath);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-
-        return path;
-    }
-
-    private Path replaceParameters(Path script, QueryParameters parameters) {
-        for (Map.Entry<String, String> parameter : parameters.getAllAsStrings().entrySet()) {
-            FileSystemHelper.findAndReplace(script, parameter.getKey(), parameter.getValue());
-        }
-
-        return script;
-    }
-
-    public Path getQueryTemplate(AbstractQuery query) {
-        return this.getTemplate(query, "mongo_query");
-    }
-
     public Path generateQuery(AbstractQuery query, QueryParameters parameters) {
         // Get an empty template
-        Path queryScript = this.getQueryTemplate(query);
+        Path queryScript = this.getTemplate(query, "templates", "mongo_query");
 
         // Replace the mongo method
         FileSystemHelper.findAndReplace(queryScript, "__PARAM_MONGO_METHOD__", "aggregate");
 
         // Replace parameters
-        replaceParameters(queryScript, parameters);
+        for (Map.Entry<String, String> parameter : parameters.getAllAsStrings().entrySet()) {
+            FileSystemHelper.findAndReplace(queryScript, parameter.getKey(), parameter.getValue());
+        }
 
         return queryScript;
     }
 
-    public Path getExplainTemplate(AbstractQuery query) {
-        return this.getTemplate(query, "mongo_explain");
-    }
-
     public Path generateExplain(AbstractQuery query, QueryParameters parameters) {
         // Get an empty template
-        Path explainScript = this.getExplainTemplate(query);
+        Path explainScript = this.getTemplate(query, "templates", "mongo_explain");
 
         // Replace the mongo method
         FileSystemHelper.findAndReplace(explainScript, "__PARAM_MONGO_METHOD__", "explain('allPlansExecution').aggregate");
 
         // Replace parameters
-        replaceParameters(explainScript, parameters);
+        for (Map.Entry<String, String> parameter : parameters.getAllAsStrings().entrySet()) {
+            FileSystemHelper.findAndReplace(explainScript, parameter.getKey(), parameter.getValue());
+        }
 
         return explainScript;
     }

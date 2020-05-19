@@ -34,15 +34,4 @@ class Q1 extends AbstractQuery {
         return names;
     }
 
-    protected void replaceParameters() {
-        Path sTemplate = this.getScriptTemplate();
-        Path eTemplate = this.getExplainTemplate();
-
-        // Parameter 1 - Delta
-        Integer delta = RandomHelper.getRandomInteger(60, 120);
-        FileSystemHelper.findAndReplace(sTemplate, "__PARAM_DELTA__", delta.toString());
-        FileSystemHelper.findAndReplace(eTemplate, "__PARAM_DELTA__", delta.toString());
-        LoggerHelper.addLog(this.getName(), "Parameter 1 (Delta) = " + delta.toString());
-    }
-
 }

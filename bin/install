@@ -14,7 +14,9 @@ docker-compose pull
 docker-compose up -d
 
 # update folder permissions
+find ./output -type d -exec chmod 777 {} \;
 find ./resources -type d -exec chmod 777 {} \;
+find ./var -type d -exec chmod 777 {} \;
 
 # compile the code (C and Java)
 docker run --rm -v "$PWD":/app -w /app/resources/tpc-h/dbgen gcc:8.2 make

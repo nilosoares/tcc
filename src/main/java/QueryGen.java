@@ -83,9 +83,13 @@ public class QueryGen {
         return script;
     }
 
+    public Path getQueryTemplate(AbstractQuery query) {
+        return this.getTemplate(query, "mongo_query");
+    }
+
     public Path generateQuery(AbstractQuery query, QueryParameters parameters) {
         // Get an empty template
-        Path queryScript = this.getTemplate(query, "mongo_query");
+        Path queryScript = this.getQueryTemplate(query);
 
         // Replace the mongo method
         FileSystemHelper.findAndReplace(queryScript, "__PARAM_MONGO_METHOD__", "aggregate");
@@ -96,9 +100,13 @@ public class QueryGen {
         return queryScript;
     }
 
+    public Path getExplainTemplate(AbstractQuery query) {
+        return this.getTemplate(query, "mongo_explain");
+    }
+
     public Path generateExplain(AbstractQuery query, QueryParameters parameters) {
         // Get an empty template
-        Path explainScript = this.getTemplate(query, "mongo_explain");
+        Path explainScript = this.getExplainTemplate(query);
 
         // Replace the mongo method
         FileSystemHelper.findAndReplace(explainScript, "__PARAM_MONGO_METHOD__", "explain('allPlansExecution').aggregate");

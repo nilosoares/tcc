@@ -1,7 +1,5 @@
 import java.lang.System;
 import java.nio.file.Path;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -67,17 +65,8 @@ public class QueryGen {
     }
 
     private Path replaceParameters(Path script, QueryParameters parameters) {
-        for (Map.Entry parameter : parameters.entrySet()) {
-            String parameterKey = parameter.getKey().toString();
-
-            String parameterValue;
-            if (parameter.getValue() instanceof Calendar) {
-                parameterValue = DateHelper.jsFormat((Calendar) parameter.getValue());
-            } else {
-                parameterValue = parameter.getValue().toString();
-            }
-
-            FileSystemHelper.findAndReplace(script, parameterKey, parameterValue);
+        for (Map.Entry<String, String> parameter : parameters.getAllAsStrings().entrySet()) {
+            FileSystemHelper.findAndReplace(script, parameter.getKey(), parameter.getValue());
         }
 
         return script;

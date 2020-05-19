@@ -46,32 +46,32 @@ public class QueryGen extends AbstractGen {
 
     public Path generateQuery(AbstractQuery query, QueryParameters parameters) {
         // Get an empty template
-        Path queryScript = this.getTemplate(query, "templates", "mongo_query");
+        Path queryPath = this.getTemplate(query.getName(), "query_templates", "mongo_query");
 
         // Replace the mongo method
-        FileSystemHelper.findAndReplace(queryScript, "__PARAM_MONGO_METHOD__", "aggregate");
+        FileSystemHelper.findAndReplace(queryPath, "__PARAM_MONGO_METHOD__", "aggregate");
 
         // Replace parameters
         for (Map.Entry<String, String> parameter : parameters.getAllAsStrings().entrySet()) {
-            FileSystemHelper.findAndReplace(queryScript, parameter.getKey(), parameter.getValue());
+            FileSystemHelper.findAndReplace(queryPath, parameter.getKey(), parameter.getValue());
         }
 
-        return queryScript;
+        return queryPath;
     }
 
     public Path generateExplain(AbstractQuery query, QueryParameters parameters) {
         // Get an empty template
-        Path explainScript = this.getTemplate(query, "templates", "mongo_explain");
+        Path explainPath = this.getTemplate(query.getName(), "query_templates", "mongo_explain");
 
         // Replace the mongo method
-        FileSystemHelper.findAndReplace(explainScript, "__PARAM_MONGO_METHOD__", "explain('allPlansExecution').aggregate");
+        FileSystemHelper.findAndReplace(explainPath, "__PARAM_MONGO_METHOD__", "explain('allPlansExecution').aggregate");
 
         // Replace parameters
         for (Map.Entry<String, String> parameter : parameters.getAllAsStrings().entrySet()) {
-            FileSystemHelper.findAndReplace(explainScript, parameter.getKey(), parameter.getValue());
+            FileSystemHelper.findAndReplace(explainPath, parameter.getKey(), parameter.getValue());
         }
 
-        return explainScript;
+        return explainPath;
     }
 
 }

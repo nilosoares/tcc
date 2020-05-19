@@ -49,6 +49,9 @@ public class QueryExec {
             // Delete all indexes
             clearIndexes();
 
+            // DbStats without indexes
+            LoggerHelper.addLog(query.getName(), "db.stats = " + mongoDB.eval("db.deals.stats();").toString());
+
             // Run explain without indexes
             LoggerHelper.addLog(query.getName(), "Explain (w/o indexes) = " + mongoDB.eval(explainScript).toString());
 
@@ -72,6 +75,9 @@ public class QueryExec {
                 mongoDB.eval(indexScript);
                 LoggerHelper.addLog(query.getName(), "Execution Time (Create Index) (in millis) = " + getExecutionTime().toString());
             }
+
+            // DbStats with indexes
+            LoggerHelper.addLog(query.getName(), "db.stats = " + mongoDB.eval("db.deals.stats();").toString());
 
             // Explain with indexes
             LoggerHelper.addLog(query.getName(), "Explain (w/ indexes) = " + mongoDB.eval(explainScript).toString());

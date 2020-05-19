@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.Map;
+
+import java.nio.file.Path;
 
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -25,21 +28,28 @@ public class QueryExec {
      * @param debug
      */
     public void execute(AbstractQuery query, boolean debug) {
+        int nbOfTests = debug ? 1 : query.getNbOfTests();
+
         try {
-            int nbOfTests = debug ? 1 : query.getNbOfTests();
+            // Generate explain and query using random parameters
+            QueryGen qGen = new QueryGen();
+            QueryParameters parameters = query.getParameters();
+            Path queryPath = qGen.generateQuery(query, parameters);
+            Path explainPath = qGen.generateExplain(query, parameters);
+            String queryScript = FileSystemHelper.getContent(queryPath);
+            String explainScript = FileSystemHelper.getContent(explainPath);
+            System.out.println(queryScript);
+            System.out.println(explainScript);
 
-            // Build the query using random parameters
-            query.replaceParameters();
-
-            // Get the scripts
-            String queryScript = query.getQueryScript();
-            String explainScript = query.getExplainScript();
-            ArrayList<String> createIndexScripts = query.getCreateIndexScripts();
+            // Log parameters
+            for (Map.Entry<String, String> parameter : parameters.getAllAsStrings().entrySet()) {
+                LoggerHelper.addLog(query.getName(), parameter.getKey() + " = " + parameter.getValue());
+            }
 
             // Delete all indexes
             clearIndexes();
 
-            // Explain without indexes
+            // Run explain without indexes
             LoggerHelper.addLog(query.getName(), "Explain (w/o indexes) = " + mongoDB.eval(explainScript).toString());
 
             // Execute queries without indexes
@@ -51,12 +61,17 @@ public class QueryExec {
             }
 
             // Create indexes
-            clearCache();
-            clearProfiler();
-            for (int i = 0; i < createIndexScripts.size(); i++) {
-                mongoDB.eval(createIndexScripts.get(i));
+            IndexGen iGen = new IndexGen();
+            QueryIndexes indexes = query.getIndexes();
+            for (int i = 0; i < indexes.size(); i++) {
+                Path indexPath = iGen.generateIndex(indexes.get(i));
+                String indexScript = FileSystemHelper.getContent(indexPath);
+
+                clearCache();
+                clearProfiler();
+                mongoDB.eval(indexScript);
+                LoggerHelper.addLog(query.getName(), "Execution Time (Create Index) (in millis) = " + getExecutionTime().toString());
             }
-            LoggerHelper.addLog(query.getName(), "Execution Time (Create Index) (in millis) = " + getExecutionTime().toString());
 
             // Explain with indexes
             LoggerHelper.addLog(query.getName(), "Explain (w/ indexes) = " + mongoDB.eval(explainScript).toString());

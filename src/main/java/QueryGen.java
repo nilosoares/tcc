@@ -40,10 +40,10 @@ public class QueryGen {
 
         for (int i = 0; i < nbQueries; i++) {
             AbstractQuery query = QueryFactory.createFromName(queries[i]);
+            QueryParameters parameters = query.getParameters();
 
-            qGen.generateQuery(query, query.getParameters());
-
-            qGen.generateExplain(query, query.getParameters());
+            qGen.generateQuery(query, parameters);
+            qGen.generateExplain(query, parameters);
         }
     }
 

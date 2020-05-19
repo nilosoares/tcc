@@ -23,9 +23,9 @@
 
 ###> vars ###
 /output/mongo_explain/*
-/output/mongo_explain/.gitkeep
+!/output/mongo_explain/.gitkeep
 /output/mongo_query/*
-/output/mongo_query/.gitkeep
+!/output/mongo_query/.gitkeep
 /var/logs/*
 !/var/logs/.gitkeep
 ###< vars ###

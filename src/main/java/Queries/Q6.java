@@ -18,22 +18,22 @@ class Q6 extends AbstractQuery {
         return 14;
     }
 
-    public Map<Integer, Object> getParameters() {
-        Map<Integer, Object> parameters = new HashMap<Integer, Object>();
+    public Map<String, Object> getParameters() {
+        Map<String, Object> parameters = new HashMap<String, Object>();
 
         int year = (int) RandomHelper.getRandomInteger(93, 97);
         Calendar startDate = DateHelper.getInstance(year, 0, 1);
-        parameters.put(1, startDate);
+        parameters.put("__PARAM_START_DATE__", startDate);
 
         Calendar endDate = (Calendar) startDate.clone();
         endDate.add(Calendar.YEAR, 1);
-        parameters.put(2, endDate);
+        parameters.put("__PARAM_END_DATE__", endDate);
 
         Integer quantity = RandomHelper.getRandomInteger(24, 25);
-        parameters.put(3, quantity);
+        parameters.put("__PARAM_QUANTITY__", quantity);
 
         Double discount = RandomHelper.getRandomInteger(2, 9) / (new Double(100));
-        parameters.put(4, discount);
+        parameters.put("__PARAM_DISCOUNT__", discount);
 
         return parameters;
     }

@@ -17,11 +17,11 @@ class Q21 extends AbstractQuery {
         return 5;
     }
 
-    public Map<Integer, Object> getParameters() {
-        Map<Integer, Object> parameters = new HashMap<Integer, Object>();
+    public Map<String, Object> getParameters() {
+        Map<String, Object> parameters = new HashMap<String, Object>();
 
         String country = RandomHelper.getRandomCountryName();
-        parameters.put(1, country);
+        parameters.put("__PARAM_COUNTRY__", country);
 
         return parameters;
     }

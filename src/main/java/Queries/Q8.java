@@ -18,19 +18,19 @@ class Q8 extends AbstractQuery {
         return 5;
     }
 
-    public Map<Integer, Object> getParameters() {
-        Map<Integer, Object> parameters = new HashMap<Integer, Object>();
+    public Map<String, Object> getParameters() {
+        Map<String, Object> parameters = new HashMap<String, Object>();
 
         JSONObject country = RandomHelper.getRandomCountry();
 
         String countryName = (String) country.get("nation_name");
-        parameters.put(1, countryName);
+        parameters.put("__PARAM_COUNTRY__", countryName);
 
         String regionName = (String) country.get("region_name");
-        parameters.put(2, regionName);
+        parameters.put("__PARAM_REGION__", regionName);
 
         String type = RandomHelper.getRandomType();
-        parameters.put(3, type);
+        parameters.put("__PARAM_TYPE__", type);
 
         return parameters;
     }

@@ -18,27 +18,27 @@ class Q12 extends AbstractQuery {
         return 7;
     }
 
-    public Map<Integer, Object> getParameters() {
-        Map<Integer, Object> parameters = new HashMap<Integer, Object>();
+    public Map<String, Object> getParameters() {
+        Map<String, Object> parameters = new HashMap<String, Object>();
 
         String shipMode1 = RandomHelper.getRandomShipMode();
-        parameters.put(1, shipMode1);
+        parameters.put("__PARAM_SHIP_MODE_1__", shipMode1);
 
         while (true) {
             String shipMode2 = RandomHelper.getRandomShipMode();
             if (!shipMode1.equals(shipMode2)) {
-                parameters.put(2, shipMode2);
+                parameters.put("__PARAM_SHIP_MODE_2__", shipMode2);
                 break;
             }
         }
 
         int year = (int) RandomHelper.getRandomInteger(93, 97);
         Calendar startDate = DateHelper.getInstance(year, 0, 1);
-        parameters.put(3, startDate);
+        parameters.put("__PARAM_START_DATE__", startDate);
 
         Calendar endDate = (Calendar) startDate.clone();
         endDate.add(Calendar.YEAR, 1);
-        parameters.put(4, startDate);
+        parameters.put("__PARAM_END_DATE__", endDate);
 
         return parameters;
     }

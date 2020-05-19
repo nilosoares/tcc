@@ -17,21 +17,21 @@ class Q19 extends AbstractQuery {
         return 22;
     }
 
-    public Map<Integer, Object> getParameters() {
-        Map<Integer, Object> parameters = new HashMap<Integer, Object>();
+    public Map<String, Object> getParameters() {
+        Map<String, Object> parameters = new HashMap<String, Object>();
 
         Integer quantity1 = RandomHelper.getRandomInteger(1, 10);
-        parameters.put(1, quantity1);
+        parameters.put("__PARAM_QUANTITY_1__", quantity1);
 
         Integer quantity2 = RandomHelper.getRandomInteger(10, 20);
-        parameters.put(2, quantity2);
+        parameters.put("__PARAM_QUANTITY_2__", quantity2);
 
         Integer quantity3 = RandomHelper.getRandomInteger(20, 30);
-        parameters.put(3, quantity3);
+        parameters.put("__PARAM_QUANTITY_3__", quantity3);
 
         ArrayList<String> brands = new ArrayList<String>();
         String brand;
-        for (int p = 4; p <= 6; p++) {
+        for (int i = 1; i <= 3; i++) {
             while (true) {
                 Integer m = RandomHelper.getRandomInteger(1, 5);
                 Integer n;
@@ -47,7 +47,7 @@ class Q19 extends AbstractQuery {
                 if (!brands.contains(brand)) {
                     brands.add(brand);
 
-                    parameters.put(p, brand);
+                    parameters.put("__PARAM_BRAND_" + (Integer.toString(i)) + "__", brand);
 
                     break;
                 }

@@ -17,11 +17,11 @@ class Q1 extends AbstractQuery {
         return 13;
     }
 
-    public Map<Integer, Object> getParameters() {
-        Map<Integer, Object> parameters = new HashMap<Integer, Object>();
+    public Map<String, Object> getParameters() {
+        Map<String, Object> parameters = new HashMap<String, Object>();
 
         Integer delta = RandomHelper.getRandomInteger(60, 120);
-        parameters.put(1, delta);
+        parameters.put("__PARAM_DELTA__", delta);
 
         return parameters;
     }

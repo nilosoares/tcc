@@ -18,14 +18,14 @@ class Q3 extends AbstractQuery {
         return 12;
     }
 
-    public Map<Integer, Object> getParameters() {
-        Map<Integer, Object> parameters = new HashMap<Integer, Object>();
+    public Map<String, Object> getParameters() {
+        Map<String, Object> parameters = new HashMap<String, Object>();
 
         String segment = RandomHelper.getRandomSegment();
-        parameters.put(1, segment);
+        parameters.put("__PARAM_SEGMENT__", segment);
 
         Calendar date = RandomHelper.getRandomDate(95, 2, 1, 95, 2, 31);
-        parameters.put(2, date);
+        parameters.put("__PARAM_DATE__", date);
 
         return parameters;
     }

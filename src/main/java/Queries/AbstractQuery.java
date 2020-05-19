@@ -69,7 +69,7 @@ abstract class AbstractQuery {
 
     public abstract int getNbOfTests();
 
-    public abstract Map<Integer, Object> getParameters();
+    public abstract Map<String, Object> getParameters();
 
     protected abstract ArrayList<String> getIndexes();
 

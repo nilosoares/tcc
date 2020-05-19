@@ -18,19 +18,19 @@ class Q5 extends AbstractQuery {
         return 10;
     }
 
-    public Map<Integer, Object> getParameters() {
-        Map<Integer, Object> parameters = new HashMap<Integer, Object>();
+    public Map<String, Object> getParameters() {
+        Map<String, Object> parameters = new HashMap<String, Object>();
 
         String region = RandomHelper.getRandomRegion();
-        parameters.put(1, region);
+        parameters.put("__PARAM_REGION__", region);
 
         int year = (int) RandomHelper.getRandomInteger(93, 97);
         Calendar startDate = DateHelper.getInstance(year, 0, 1);
-        parameters.put(2, startDate);
+        parameters.put("__PARAM_START_DATE__", startDate);
 
         Calendar endDate = (Calendar) startDate.clone();
         endDate.add(Calendar.YEAR, 1);
-        parameters.put(3, endDate);
+        parameters.put("__PARAM_END_DATE__", endDate);
 
         return parameters;
     }

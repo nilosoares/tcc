@@ -18,16 +18,16 @@ class Q10 extends AbstractQuery {
         return 13;
     }
 
-    public Map<Integer, Object> getParameters() {
-        Map<Integer, Object> parameters = new HashMap<Integer, Object>();
+    public Map<String, Object> getParameters() {
+        Map<String, Object> parameters = new HashMap<String, Object>();
 
         Calendar startDate = RandomHelper.getRandomDate(93, 0, 1, 95, 9, 1);
         startDate.set(Calendar.DATE, 1);
-        parameters.put(1, startDate);
+        parameters.put("__PARAM_START_DATE__", startDate);
 
         Calendar endDate = (Calendar) startDate.clone();
         endDate.add(Calendar.MONTH, 3);
-        parameters.put(2, endDate);
+        parameters.put("__PARAM_END_DATE__", endDate);
 
         return parameters;
     }

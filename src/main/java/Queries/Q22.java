@@ -17,8 +17,8 @@ class Q22 extends AbstractQuery {
         return 5;
     }
 
-    public Map<Integer, Object> getParameters() {
-        Map<Integer, Object> parameters = new HashMap<Integer, Object>();
+    public Map<String, Object> getParameters() {
+        Map<String, Object> parameters = new HashMap<String, Object>();
 
         ArrayList<Integer> countryCodes = new ArrayList<Integer>();
 
@@ -32,7 +32,7 @@ class Q22 extends AbstractQuery {
 
                 countryCodes.add(countryCode);
 
-                parameters.put(i, countryCode);
+                parameters.put("__PARAM_COUNTRY_CODE_" + i + "__", countryCode);
 
                 break;
             }

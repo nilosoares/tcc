@@ -18,8 +18,8 @@ class Q1_Mod extends AbstractQuery {
         return 13;
     }
 
-    public Map<Integer, Object> getParameters() {
-        Map<Integer, Object> parameters = new HashMap<Integer, Object>();
+    public Map<String, Object> getParameters() {
+        Map<String, Object> parameters = new HashMap<String, Object>();
 
         Calendar startDate = RandomHelper.getRandomDate(97, 0, 1, 98, 0, 1);
         Calendar endDate = RandomHelper.getRandomDate(97, 0, 1, 98, 0, 1);
@@ -29,9 +29,9 @@ class Q1_Mod extends AbstractQuery {
             endDate = tmp;
         }
 
-        parameters.put(1, startDate);
+        parameters.put("__PARAM_START_DATE__", startDate);
 
-        parameters.put(2, endDate);
+        parameters.put("__PARAM_END_DATE__", endDate);
 
         return parameters;
     }

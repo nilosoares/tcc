@@ -18,22 +18,22 @@ class Q20 extends AbstractQuery {
         return 5;
     }
 
-    public Map<Integer, Object> getParameters() {
-        Map<Integer, Object> parameters = new HashMap<Integer, Object>();
+    public Map<String, Object> getParameters() {
+        Map<String, Object> parameters = new HashMap<String, Object>();
 
         Integer year = RandomHelper.getRandomInteger(1993, 1997);
         Calendar startDate = DateHelper.getInstance(year-1900, 0, 1);
-        parameters.put(1, startDate);
+        parameters.put("__PARAM_START_DATE__", startDate);
 
         Calendar endDate = (Calendar) startDate.clone();
         endDate.add(Calendar.YEAR, 1);
-        parameters.put(2, endDate);
+        parameters.put("__PARAM_END_DATE__", endDate);
 
         String color = RandomHelper.getRandomColor();
-        parameters.put(3, color);
+        parameters.put("__PARAM_COLOR__", color);
 
         String country = RandomHelper.getRandomCountryName();
-        parameters.put(4, country);
+        parameters.put("__PARAM_COUNTRY__", country);
 
         return parameters;
     }

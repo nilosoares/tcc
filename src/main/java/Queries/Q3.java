@@ -1,8 +1,6 @@
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
 class Q3 extends AbstractQuery {
 
@@ -18,8 +16,8 @@ class Q3 extends AbstractQuery {
         return 12;
     }
 
-    public Map<String, Object> getParameters() {
-        Map<String, Object> parameters = new HashMap<String, Object>();
+    public QueryParameters getParameters() {
+        QueryParameters parameters = new QueryParameters();
 
         String segment = RandomHelper.getRandomSegment();
         parameters.put("__PARAM_SEGMENT__", segment);

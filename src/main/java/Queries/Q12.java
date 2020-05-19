@@ -1,8 +1,6 @@
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
 class Q12 extends AbstractQuery {
 
@@ -18,8 +16,8 @@ class Q12 extends AbstractQuery {
         return 7;
     }
 
-    public Map<String, Object> getParameters() {
-        Map<String, Object> parameters = new HashMap<String, Object>();
+    public QueryParameters getParameters() {
+        QueryParameters parameters = new QueryParameters();
 
         String shipMode1 = RandomHelper.getRandomShipMode();
         parameters.put("__PARAM_SHIP_MODE_1__", shipMode1);

@@ -1,7 +1,5 @@
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 class Q22 extends AbstractQuery {
 
@@ -17,8 +15,8 @@ class Q22 extends AbstractQuery {
         return 5;
     }
 
-    public Map<String, Object> getParameters() {
-        Map<String, Object> parameters = new HashMap<String, Object>();
+    public QueryParameters getParameters() {
+        QueryParameters parameters = new QueryParameters();
 
         ArrayList<Integer> countryCodes = new ArrayList<Integer>();
 

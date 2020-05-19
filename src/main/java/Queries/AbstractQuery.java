@@ -1,6 +1,4 @@
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 abstract class AbstractQuery {
 
@@ -10,7 +8,7 @@ abstract class AbstractQuery {
 
     public abstract int getNbOfTests();
 
-    public abstract Map<String, Object> getParameters();
+    public abstract QueryParameters getParameters();
 
     protected abstract ArrayList<String> getIndexes();
 

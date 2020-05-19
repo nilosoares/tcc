@@ -1,8 +1,6 @@
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
 class Q20 extends AbstractQuery {
 
@@ -18,8 +16,8 @@ class Q20 extends AbstractQuery {
         return 5;
     }
 
-    public Map<String, Object> getParameters() {
-        Map<String, Object> parameters = new HashMap<String, Object>();
+    public QueryParameters getParameters() {
+        QueryParameters parameters = new QueryParameters();
 
         Integer year = RandomHelper.getRandomInteger(1993, 1997);
         Calendar startDate = DateHelper.getInstance(year-1900, 0, 1);

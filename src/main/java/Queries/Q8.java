@@ -1,8 +1,6 @@
 import java.nio.file.Path;
 import java.util.ArrayList;
 import org.json.simple.JSONObject;
-import java.util.HashMap;
-import java.util.Map;
 
 class Q8 extends AbstractQuery {
 
@@ -18,8 +16,8 @@ class Q8 extends AbstractQuery {
         return 5;
     }
 
-    public Map<String, Object> getParameters() {
-        Map<String, Object> parameters = new HashMap<String, Object>();
+    public QueryParameters getParameters() {
+        QueryParameters parameters = new QueryParameters();
 
         JSONObject country = RandomHelper.getRandomCountry();
 

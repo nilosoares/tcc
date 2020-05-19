@@ -1,6 +1,4 @@
 import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ArrayList;
 
 class Q1 extends AbstractQuery {
@@ -17,8 +15,8 @@ class Q1 extends AbstractQuery {
         return 13;
     }
 
-    public Map<String, Object> getParameters() {
-        Map<String, Object> parameters = new HashMap<String, Object>();
+    public QueryParameters getParameters() {
+        QueryParameters parameters = new QueryParameters();
 
         Integer delta = RandomHelper.getRandomInteger(60, 120);
         parameters.put("__PARAM_DELTA__", delta);

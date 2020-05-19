@@ -1,8 +1,10 @@
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 class Q1_Mod extends AbstractQuery {
+
+    public int getNumber() {
+        return 1;
+    }
 
     public String getName() {
         return "Q1_Mod";
@@ -12,17 +14,8 @@ class Q1_Mod extends AbstractQuery {
         return 13;
     }
 
-    protected ArrayList<String> getIndexesNames() {
-        ArrayList<String> names = new ArrayList();
-
-        names.add("P_10");
-
-        return names;
-    }
-
-    protected void replaceParameters() {
-        Path sTemplate = this.getScriptTemplate();
-        Path eTemplate = this.getExplainTemplate();
+    public QueryParameters getParameters() {
+        QueryParameters parameters = new QueryParameters();
 
         Calendar startDate = RandomHelper.getRandomDate(97, 0, 1, 98, 0, 1);
         Calendar endDate = RandomHelper.getRandomDate(97, 0, 1, 98, 0, 1);
@@ -32,15 +25,19 @@ class Q1_Mod extends AbstractQuery {
             endDate = tmp;
         }
 
-        // Parameter 1 - Start Date
-        FileSystemHelper.findAndReplace(sTemplate, "__PARAM_START_DATE__", DateHelper.jsFormat(startDate));
-        FileSystemHelper.findAndReplace(eTemplate, "__PARAM_START_DATE__", DateHelper.jsFormat(startDate));
-        LoggerHelper.addLog(this.getName(), "Parameter 1 (Start Date) = " + DateHelper.jsFormat(startDate));
+        parameters.put("__PARAM_START_DATE__", startDate);
 
-        // Parameter 2 - End Date
-        FileSystemHelper.findAndReplace(sTemplate, "__PARAM_END_DATE__", DateHelper.jsFormat(endDate));
-        FileSystemHelper.findAndReplace(eTemplate, "__PARAM_END_DATE__", DateHelper.jsFormat(endDate));
-        LoggerHelper.addLog(this.getName(), "Parameter 2 (End Date) = " + DateHelper.jsFormat(endDate));
+        parameters.put("__PARAM_END_DATE__", endDate);
+
+        return parameters;
+    }
+
+    protected QueryIndexes getIndexes() {
+        QueryIndexes names = new QueryIndexes();
+
+        names.add("P_10");
+
+        return names;
     }
 
 }

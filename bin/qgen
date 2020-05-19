@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Run the benchmark
+docker-compose run gradle gradle qgen

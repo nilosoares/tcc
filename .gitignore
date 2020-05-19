@@ -15,13 +15,13 @@
 /resources/tpc-h/dbgen/*.csv
 ###< tpc-h ###
 
-###> tpc-h-mongo ###
-/resources/tpc-h-mongo/executable-queries/*.js
-!/resources/tpc-h-mongo/executable-queries/.gitkeep
-/resources/tpc-h-mongo/template-queries/*.out
-###< tpc-h-mongo ###
-
 ###> vars ###
+/output/mongo_explain/*
+!/output/mongo_explain/.gitkeep
+/output/mongo_index/*
+!/output/mongo_index/.gitkeep
+/output/mongo_query/*
+!/output/mongo_query/.gitkeep
 /var/logs/*
 !/var/logs/.gitkeep
 ###< vars ###

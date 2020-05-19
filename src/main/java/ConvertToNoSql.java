@@ -33,7 +33,7 @@ public class ConvertToNoSql {
 
         // Convert the data
         convertLineItems();
-        convertCustomers();
+        //convertCustomers();
     }
 
     /**

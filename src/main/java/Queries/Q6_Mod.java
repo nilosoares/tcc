@@ -1,8 +1,10 @@
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 class Q6_Mod extends AbstractQuery {
+
+    public int getNumber() {
+        return 6;
+    }
 
     public String getName() {
         return "Q6_Mod";
@@ -12,17 +14,8 @@ class Q6_Mod extends AbstractQuery {
         return 14;
     }
 
-    protected ArrayList<String> getIndexesNames() {
-        ArrayList<String> names = new ArrayList();
-
-        names.add("P_4_6_10");
-
-        return names;
-    }
-
-    protected void replaceParameters() {
-        Path sTemplate = this.getScriptTemplate();
-        Path eTemplate = this.getExplainTemplate();
+    public QueryParameters getParameters() {
+        QueryParameters parameters = new QueryParameters();
 
         Calendar startDate = RandomHelper.getRandomDate(97, 0, 1, 98, 0, 1);
         Calendar endDate = RandomHelper.getRandomDate(97, 0, 1, 98, 0, 1);
@@ -32,28 +25,25 @@ class Q6_Mod extends AbstractQuery {
             endDate = tmp;
         }
 
-        // Parameter 1 - Start Date
-        FileSystemHelper.findAndReplace(sTemplate, "__PARAM_START_DATE__", DateHelper.jsFormat(startDate));
-        FileSystemHelper.findAndReplace(eTemplate, "__PARAM_START_DATE__", DateHelper.jsFormat(startDate));
-        LoggerHelper.addLog(this.getName(), "Parameter 1 (Start Date) = " + DateHelper.jsFormat(startDate));
+        parameters.put("__PARAM_START_DATE__", startDate);
 
-        // Parameter 2 - End Date (Date + 1 year)
-        FileSystemHelper.findAndReplace(sTemplate, "__PARAM_END_DATE__", DateHelper.jsFormat(endDate));
-        FileSystemHelper.findAndReplace(eTemplate, "__PARAM_END_DATE__", DateHelper.jsFormat(endDate));
-        LoggerHelper.addLog(this.getName(), "Parameter 2 (End Date) = " + DateHelper.jsFormat(endDate));
+        parameters.put("__PARAM_END_DATE__", endDate);
 
-        // Parameter 3 - Quantity
         Integer quantity = RandomHelper.getRandomInteger(2, 21);
-        FileSystemHelper.findAndReplace(sTemplate, "__PARAM_QUANTITY__", quantity.toString());
-        FileSystemHelper.findAndReplace(eTemplate, "__PARAM_QUANTITY__", quantity.toString());
-        LoggerHelper.addLog(this.getName(), "Parameter 3 (Quantity) = " + quantity.toString());
+        parameters.put("__PARAM_QUANTITY__", quantity);
 
-        // Parameter 3 - Discount
         Double discount = RandomHelper.getRandomInteger(10, 19) / (new Double(1000));
-        FileSystemHelper.findAndReplace(sTemplate, "__PARAM_DISCOUNT__", discount.toString());
-        FileSystemHelper.findAndReplace(eTemplate, "__PARAM_DISCOUNT__", discount.toString());
-        LoggerHelper.addLog(this.getName(), "Parameter 4 (Dicount) = " + discount.toString());
+        parameters.put("__PARAM_DISCOUNT__", discount);
 
+        return parameters;
+    }
+
+    protected QueryIndexes getIndexes() {
+        QueryIndexes names = new QueryIndexes();
+
+        names.add("P_4_6_10");
+
+        return names;
     }
 
 }

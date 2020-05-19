@@ -1,5 +1,3 @@
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 class Q6_Mod extends AbstractQuery {
@@ -40,8 +38,8 @@ class Q6_Mod extends AbstractQuery {
         return parameters;
     }
 
-    protected ArrayList<String> getIndexes() {
-        ArrayList<String> names = new ArrayList();
+    protected QueryIndexes getIndexes() {
+        QueryIndexes names = new QueryIndexes();
 
         names.add("P_4_6_10");
 

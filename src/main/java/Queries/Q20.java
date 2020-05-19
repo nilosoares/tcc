@@ -1,5 +1,3 @@
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.Calendar;
 
 class Q20 extends AbstractQuery {
@@ -36,8 +34,8 @@ class Q20 extends AbstractQuery {
         return parameters;
     }
 
-    protected ArrayList<String> getIndexes() {
-        ArrayList<String> names = new ArrayList();
+    protected QueryIndexes getIndexes() {
+        QueryIndexes names = new QueryIndexes();
 
         return names;
     }

@@ -1,4 +1,3 @@
-import java.nio.file.Path;
 import java.util.ArrayList;
 
 class Q22 extends AbstractQuery {
@@ -39,8 +38,8 @@ class Q22 extends AbstractQuery {
         return parameters;
     }
 
-    protected ArrayList<String> getIndexes() {
-        ArrayList<String> names = new ArrayList();
+    protected QueryIndexes getIndexes() {
+        QueryIndexes names = new QueryIndexes();
 
         return names;
     }

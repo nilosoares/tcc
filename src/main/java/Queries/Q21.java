@@ -1,6 +1,3 @@
-import java.nio.file.Path;
-import java.util.ArrayList;
-
 class Q21 extends AbstractQuery {
 
     public int getNumber() {
@@ -24,8 +21,8 @@ class Q21 extends AbstractQuery {
         return parameters;
     }
 
-    protected ArrayList<String> getIndexes() {
-        ArrayList<String> names = new ArrayList();
+    protected QueryIndexes getIndexes() {
+        QueryIndexes names = new QueryIndexes();
 
         return names;
     }

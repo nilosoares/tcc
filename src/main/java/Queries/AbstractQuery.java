@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 abstract class AbstractQuery {
 
     public abstract int getNumber();
@@ -10,6 +8,6 @@ abstract class AbstractQuery {
 
     public abstract QueryParameters getParameters();
 
-    protected abstract ArrayList<String> getIndexes();
+    protected abstract QueryIndexes getIndexes();
 
 }

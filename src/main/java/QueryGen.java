@@ -41,18 +41,20 @@ public class QueryGen {
         for (int i = 0; i < nbQueries; i++) {
             AbstractQuery query = QueryFactory.createFromName(queries[i]);
 
-            qGen.generateQuery(query);
+            qGen.generateQuery(query, query.getParameters());
+
+            qGen.generateExplain(query, query.getParameters());
         }
     }
 
-    private Path getTemplate(AbstractQuery query, String folder) {
+    private Path getTemplate(AbstractQuery query, String outputFolder) {
         Path path = null;
 
         try {
             String templateFilePath = "resources/tpc-h-mongo/templates/" + query.getName() + ".js";
 
             String destinationFileName = query.getName() + "_" + DateHelper.format("yyyyMMdd_Hms_S");
-            String destinationFilePath = "output/" + folder + "/" + destinationFileName + ".js";
+            String destinationFilePath = "output/" + outputFolder + "/" + destinationFileName + ".js";
 
             path = FileSystemHelper.copyFile(templateFilePath, destinationFilePath);
 
@@ -64,17 +66,7 @@ public class QueryGen {
         return path;
     }
 
-    public Path generateQuery(AbstractQuery query) {
-        // Get an empty template
-        Path queryScript = this.getTemplate(query, "mongo_query");
-        Path explainScript = this.getTemplate(query, "mongo_explain");
-
-        // Replace the mongo method
-        FileSystemHelper.findAndReplace(queryScript, "__PARAM_MONGO_METHOD__", "aggregate");
-        FileSystemHelper.findAndReplace(explainScript, "__PARAM_MONGO_METHOD__", "explain('allPlansExecution').aggregate");
-
-        // Replace parameters
-        Map<String, Object> parameters = query.getParameters();
+    private Path replaceParameters(Path script, QueryParameters parameters) {
         for (Map.Entry parameter : parameters.entrySet()) {
             String parameterKey = parameter.getKey().toString();
 
@@ -85,11 +77,36 @@ public class QueryGen {
                 parameterValue = parameter.getValue().toString();
             }
 
-            FileSystemHelper.findAndReplace(queryScript, parameterKey, parameterValue);
-            FileSystemHelper.findAndReplace(explainScript, parameterKey, parameterValue);
+            FileSystemHelper.findAndReplace(script, parameterKey, parameterValue);
         }
 
+        return script;
+    }
+
+    public Path generateQuery(AbstractQuery query, QueryParameters parameters) {
+        // Get an empty template
+        Path queryScript = this.getTemplate(query, "mongo_query");
+
+        // Replace the mongo method
+        FileSystemHelper.findAndReplace(queryScript, "__PARAM_MONGO_METHOD__", "aggregate");
+
+        // Replace parameters
+        replaceParameters(queryScript, parameters);
+
         return queryScript;
+    }
+
+    public Path generateExplain(AbstractQuery query, QueryParameters parameters) {
+        // Get an empty template
+        Path explainScript = this.getTemplate(query, "mongo_explain");
+
+        // Replace the mongo method
+        FileSystemHelper.findAndReplace(explainScript, "__PARAM_MONGO_METHOD__", "explain('allPlansExecution').aggregate");
+
+        // Replace parameters
+        replaceParameters(explainScript, parameters);
+
+        return explainScript;
     }
 
 }

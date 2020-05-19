@@ -18,6 +18,13 @@ task convert_to_nosql(type:JavaExec) {
     main = "ConvertToNoSql"
 }
 
+task qgen(type:JavaExec) {
+    group 'TPC-H'
+    description 'Generete MongoDB queries for TPC-H.'
+    classpath = sourceSets.main.runtimeClasspath
+    main = "QueryGen"
+}
+
 task run(type:JavaExec) {
     group 'TPC-H'
     description 'Run the TPC-H benchmark using MongoDB.'

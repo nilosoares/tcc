@@ -11,15 +11,22 @@ Esse é o repositório do projeto de final de curso do aluno Nilo Soares, orient
 
 ## Clonando o projeto
 
-Após instalar e configurar o Git, abra o terminal (Ctrl Alt T) e execute os comandos abaixo:
+Após instalar e configurar o Git, abra o terminal (Ctrl Alt T) e execute o comando abaixo:
 
     git clone git@github.com:nilosoares/tcc.git
+
+## Iniciando os containers
+
+Antes de executar qualquer programa é necessário baixar as imagens e iniciar os containers do Docker.
+Para isso, basta executar o comando abaixo:
+
+    bin/start
   
 ## Instalando o TPC-H
 
 Para instalar o TPC-H no MongoDB, basta executar o comando abaixo na raiz do projeto:
 
-    bin/install
+    bin/dbgen
     
 > Atenção: a instalação pode demorar alguns minutos.
 
@@ -29,6 +36,7 @@ Após a instalação, execute o TPC-H usando o MongoDB usando o comando abaixo:
 
     bin/run
     
-Os dados com os parâmetros utilizados e tempo de execução estarão disponíveis no arquivo "/var/logs/tpch.log".
+O código das consultas, explain e índices criados podem ser encontrados na pasta "output/mongo_query", "output/mongo_explain" e "output_index" respectivamente.
+Cada consulta também gerará um arquivo ".log" que pode ser encontrado na pasta "output/logs". Esse arquivo contém os parâmetros utilizados, tempo de execução e plano de execução da consulta, tempo de criação de cada índice utilizado e estado do banco de dados. 
 
-> Atenção: o benchmark pode demorar algumas horas.
+> Atenção: o benchmark pode demorar algumas horas dependendo da configuração da máquina.

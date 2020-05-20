@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# stop docker containers
+docker-compose stop
+
+# pull docker images
+docker-compose pull
+
+# start docker containers
+docker-compose up -d
+
+# update folder permissions
+find ./output -type d -exec chmod 777 {} \;
+find ./resources -type d -exec chmod 777 {} \;
+find ./var -type d -exec chmod 777 {} \;

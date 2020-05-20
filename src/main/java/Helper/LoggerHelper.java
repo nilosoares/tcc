@@ -27,7 +27,7 @@ public class LoggerHelper {
                 logger = Logger.getLogger(entry);
 
                 String fileName = entry + "_" + DateHelper.format("yyyyMMdd_Hms_S");
-                FileHandler fh = new FileHandler("var/logs/" + fileName + ".log");
+                FileHandler fh = new FileHandler("output/logs/" + fileName + ".log");
                 logger.addHandler(fh);
 
                 SimpleFormatter formatter = new SimpleFormatter();

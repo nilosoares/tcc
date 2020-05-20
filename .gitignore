@@ -22,6 +22,6 @@
 !/output/mongo_index/.gitkeep
 /output/mongo_query/*
 !/output/mongo_query/.gitkeep
-/var/logs/*
-!/var/logs/.gitkeep
+/output/logs/*
+!/output/logs/.gitkeep
 ###< vars ###

@@ -7,8 +7,8 @@ class QueryParameters extends HashMap<String, Object> {
     public Map<String, String> getAllAsStrings() {
         Map<String, String> stringParameters = new HashMap<String, String>();
 
-        for (Map.Entry parameter : this.entrySet()) {
-            String parameterKey = parameter.getKey().toString();
+        for (Map.Entry<String, Object> parameter : this.entrySet()) {
+            String parameterKey = parameter.getKey();
 
             String parameterValue;
             if (parameter.getValue() instanceof Calendar) {

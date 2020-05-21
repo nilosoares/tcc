@@ -44,9 +44,13 @@ services:
     mongo:
         container_name: 'uerj.projeto_final.mongo'
         image: mongo:3.6.9
+        ports:
+            - 27017:27017
         volumes:
+            - ./docker/mongo/mongod.conf:/etc/mongod.conf
             - ./resources:/app/resources
         working_dir: /app
+        entrypoint: ["mongod", "--config", "/etc/mongod.conf"]
 
     # mongo-express
     mongo-express:

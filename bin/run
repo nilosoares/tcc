@@ -1,10 +1,4 @@
 #!/bin/bash
 
-# Stop some containers
-docker stop uerj.projeto_final.postgres uerj.projeto_final.adminer uerj.projeto_final.mongo_express
-
 # Run the benchmark
 docker-compose run gradle gradle run
-
-# Start containers again
-docker start uerj.projeto_final.postgres uerj.projeto_final.adminer uerj.projeto_final.mongo_express

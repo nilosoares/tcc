@@ -43,7 +43,7 @@ services:
     # mongo
     mongo:
         container_name: 'uerj.projeto_final.mongo'
-        image: mongo:3.6.18
+        image: mongo:3.6.9
         ports:
             - 27017:27017
         volumes:

@@ -38,8 +38,6 @@ public class QueryExec {
             Path explainPath = qGen.generateExplain(query, parameters);
             String queryScript = FileSystemHelper.getContent(queryPath);
             String explainScript = FileSystemHelper.getContent(explainPath);
-            System.out.println(queryScript);
-            System.out.println(explainScript);
 
             // Log parameters
             for (Map.Entry<String, String> parameter : parameters.getAllAsStrings().entrySet()) {

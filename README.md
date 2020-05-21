@@ -13,7 +13,7 @@ Esse é o repositório do projeto de final de curso do aluno Nilo Soares, orient
 
 Após instalar e configurar o Git, abra o terminal (Ctrl Alt T) e execute o comando abaixo:
 
-    git clone git@github.com:nilosoares/tcc.git
+    git clone https://github.com/nilosoares/tcc.git
 
 ## Iniciando os containers
 

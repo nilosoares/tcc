@@ -58,7 +58,7 @@ public class QueryExec {
                 clearCache();
                 clearProfiler();
                 LoggerHelper.addLog(query.getName(), "Result (w/o indexes) = " + mongoDB.eval(queryScript).toString());
-                LoggerHelper.addLog(query.getName(), "Execution Time (w/o indexes) (in millis) = " + getExecutionTime().toString());
+                LoggerHelper.addLog(query.getName(), "Execution Time (w/o indexes) = " + getExecutionTime().toString());
             }
 
             // Create indexes
@@ -71,7 +71,7 @@ public class QueryExec {
                 clearCache();
                 clearProfiler();
                 mongoDB.eval(indexScript);
-                LoggerHelper.addLog(query.getName(), "Execution Time (Create Index) (in millis) = " + getExecutionTime().toString());
+                LoggerHelper.addLog(query.getName(), "Create Index Time (" + indexes.get(i) + ") = " + getExecutionTime().toString());
             }
 
             // DbStats with indexes
@@ -85,7 +85,7 @@ public class QueryExec {
                 clearCache();
                 clearProfiler();
                 LoggerHelper.addLog(query.getName(), "Result (w/ indexes) = " + mongoDB.eval(queryScript).toString());
-                LoggerHelper.addLog(query.getName(), "Execution Time (w/ indexes) (in millis) = " + getExecutionTime().toString());
+                LoggerHelper.addLog(query.getName(), "Execution Time (w/ indexes) = " + getExecutionTime().toString());
             }
 
         } catch (Exception e) {

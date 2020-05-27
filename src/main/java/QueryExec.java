@@ -105,7 +105,6 @@ public class QueryExec {
      *
      */
     private void clearCache() {
-        mongoDB.eval("db.customers.getPlanCache().clear();");
         mongoDB.eval("db.deals.getPlanCache().clear();");
     }
 
@@ -113,7 +112,6 @@ public class QueryExec {
      *
      */
     private void clearIndexes() {
-        mongoDB.eval("db.customers.dropIndexes();");
         mongoDB.eval("db.deals.dropIndexes();");
     }
 

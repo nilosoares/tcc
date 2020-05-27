@@ -40,20 +40,24 @@ public class QueryExec {
             String explainScript = FileSystemHelper.getContent(explainPath);
 
             // Log parameters
+            LoggerHelper.addLog(query.getName(), "Running queries without indexes...");
             for (Map.Entry<String, String> parameter : parameters.getAllAsStrings().entrySet()) {
                 LoggerHelper.addLog(query.getName(), parameter.getKey() + " = " + parameter.getValue());
             }
 
             // Delete all indexes
+            LoggerHelper.addLog(query.getName(), "Removing indexes...");
             clearIndexes();
 
             // DbStats without indexes
             LoggerHelper.addLog(query.getName(), "db.stats = " + mongoDB.eval("db.deals.stats();").toString());
 
             // Run explain without indexes
+            LoggerHelper.addLog(query.getName(), "Running explain...");
             LoggerHelper.addLog(query.getName(), "Explain (w/o indexes) = " + mongoDB.eval(explainScript).toString());
 
             // Execute queries without indexes
+            LoggerHelper.addLog(query.getName(), "Running queries...");
             for (int i = 1; i <= nbOfTests; i++) {
                 clearCache();
                 clearProfiler();
@@ -64,6 +68,7 @@ public class QueryExec {
             // Create indexes
             IndexGen iGen = new IndexGen();
             QueryIndexes indexes = query.getIndexes();
+            LoggerHelper.addLog(query.getName(), "Creating indexes...");
             for (int i = 0; i < indexes.size(); i++) {
                 Path indexPath = iGen.generateIndex(indexes.get(i));
                 String indexScript = FileSystemHelper.getContent(indexPath);
@@ -78,9 +83,11 @@ public class QueryExec {
             LoggerHelper.addLog(query.getName(), "db.stats = " + mongoDB.eval("db.deals.stats();").toString());
 
             // Explain with indexes
+            LoggerHelper.addLog(query.getName(), "Running explain...");
             LoggerHelper.addLog(query.getName(), "Explain (w/ indexes) = " + mongoDB.eval(explainScript).toString());
 
             // Execute queries without indexes
+            LoggerHelper.addLog(query.getName(), "Running queries with indexes...");
             for (int i = 1; i <= nbOfTests; i++) {
                 clearCache();
                 clearProfiler();

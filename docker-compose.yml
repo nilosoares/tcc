@@ -49,8 +49,9 @@ services:
         volumes:
             - ./docker/mongo/mongod.conf:/etc/mongod.conf
             - ./resources:/app/resources
+            - /mnt/mongodb/data/db:/data/db
         working_dir: /app
-        entrypoint: ["mongod", "--config", "/etc/mongod.conf"]
+        entrypoint: ["mongod", "--config", "/etc/mongod.conf", "--noIndexBuildRetry"]
 
     # mongo-express
     mongo-express:

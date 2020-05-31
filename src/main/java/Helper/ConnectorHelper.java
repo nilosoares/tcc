@@ -37,6 +37,7 @@ public class ConnectorHelper {
         ServerAddress serverAddress = new ServerAddress(mongoHost, mongoPort);
         MongoClientOptions mongoClientOptions = MongoClientOptions.builder()
             .socketKeepAlive(true)
+            .connectionsPerHost(10000)
             .build();
         mongoClient = new MongoClient(serverAddress, mongoClientOptions);
 

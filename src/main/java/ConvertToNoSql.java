@@ -33,7 +33,6 @@ public class ConvertToNoSql {
 
         // Convert the data
         convertLineItems();
-        //convertCustomers();
     }
 
     /**
@@ -84,42 +83,6 @@ public class ConvertToNoSql {
         // Convert each lineItem to MongoDB
         while (rs.next()) {
             collection.insertOne(getLineItem(rs));
-        }
-
-        rs.close();
-        st.close();
-    }
-
-    /**
-     *
-     */
-    private static void convertCustomers() throws SQLException {
-        // Drop the "customers" collection
-        MongoCollection<Document> collection = mongoDatabase.getCollection("customers");
-        collection.drop();
-
-        // Fetch all customers without orders in PgSQL
-        Statement st = pgDatabase.createStatement();
-        st.setFetchSize(CURSOR_SIZE);
-        ResultSet rs = st.executeQuery("" +
-            "SELECT " +
-                "customer.*, " +
-                "cnation.n_nationkey AS cn_nationkey, " +
-                "cnation.n_name AS cn_name, " +
-                "cnation.n_regionkey AS cn_regionkey, " +
-                "cnation.n_comment AS cn_comment, " +
-                "cregion.r_regionkey AS cr_regionkey, " +
-                "cregion.r_name AS cr_name, " +
-                "cregion.r_comment AS cr_comment " +
-            "FROM customer " +
-            "INNER JOIN nation AS cnation ON cnation.n_nationkey = customer.c_nationkey " +
-            "INNER JOIN region AS cregion ON cregion.r_regionkey = cnation.n_regionkey " +
-            "WHERE NOT EXISTS (SELECT 1 FROM orders WHERE customer.c_custkey = orders.o_custkey) "
-        );
-
-        // Convert each lineItem to MongoDB
-        while (rs.next()) {
-            collection.insertOne(getCustomer(rs));
         }
 
         rs.close();

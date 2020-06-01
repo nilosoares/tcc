@@ -1,4 +1,4 @@
-version: '3.3'
+version: '2.4'
 
 services:
     # gradle
@@ -50,7 +50,8 @@ services:
             - ./docker/mongo/mongod.conf:/etc/mongod.conf
             - ./resources:/app/resources
         working_dir: /app
-        entrypoint: ["mongod", "--config", "/etc/mongod.conf"]
+        entrypoint: ["mongod", "--config", "/etc/mongod.conf", "--noIndexBuildRetry"]
+        mem_limit: 4gb
 
     # mongo-express
     mongo-express:

@@ -2,6 +2,8 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
+import com.mongodb.ServerAddress;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -32,7 +34,12 @@ public class ConnectorHelper {
         // Connect to MongoDB
         String mongoHost = dotenv.get("MONGO_HOST");
         Integer mongoPort = CastHelper.castInt(dotenv.get("MONGO_PORT"));
-        mongoClient = new MongoClient(mongoHost, mongoPort);
+        ServerAddress serverAddress = new ServerAddress(mongoHost, mongoPort);
+        MongoClientOptions mongoClientOptions = MongoClientOptions.builder()
+            .socketKeepAlive(true)
+            .connectionsPerHost(10000)
+            .build();
+        mongoClient = new MongoClient(serverAddress, mongoClientOptions);
 
         // Connect to Postgres
         try {

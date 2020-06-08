@@ -31,6 +31,8 @@ public class QueryExec {
         int nbOfTests = debug ? 1 : query.getNbOfTests();
 
         try {
+            LoggerHelper.addLog(query.getName(), "Running " + query.getName());
+
             // Generate explain and query using random parameters
             QueryGen qGen = new QueryGen();
             QueryParameters parameters = query.getParameters();

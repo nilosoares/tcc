@@ -31,6 +31,8 @@ public class QueryExec {
         int nbOfTests = debug ? 1 : query.getNbOfTests();
 
         try {
+            LoggerHelper.addLog(query.getName(), "Running " + query.getName());
+
             // Generate explain and query using random parameters
             QueryGen qGen = new QueryGen();
             QueryParameters parameters = query.getParameters();
@@ -86,7 +88,7 @@ public class QueryExec {
             LoggerHelper.addLog(query.getName(), "Running explain...");
             LoggerHelper.addLog(query.getName(), "Explain (w/ indexes) = " + mongoDB.eval(explainScript).toString());
 
-            // Execute queries without indexes
+            // Execute queries with indexes
             LoggerHelper.addLog(query.getName(), "Running queries with indexes...");
             for (int i = 1; i <= nbOfTests; i++) {
                 clearCache();

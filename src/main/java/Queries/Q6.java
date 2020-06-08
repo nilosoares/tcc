@@ -37,7 +37,26 @@ class Q6 extends AbstractQuery {
     protected QueryIndexes getIndexes() {
         QueryIndexes names = new QueryIndexes();
 
-        names.add("P_4_6_10");
+        //names.add("P_4_6_10");
+        names.add("P_4_6_10_1");
+        names.add("P_4_6_10_2");
+        names.add("P_4_6_10_3");
+        names.add("P_4_6_10_4");
+        names.add("P_4_6_10_5");
+        names.add("P_4_6_10_6");
+        names.add("P_4_6_10_7");
+        names.add("P_4_6_10_8");
+        names.add("P_4_6_10_9");
+        names.add("P_4_6_10_10");
+        names.add("P_4_6_10_11");
+        names.add("P_4_6_10_12");
+        names.add("P_4_6_10_13");
+        names.add("P_4_6_10_14");
+        names.add("P_4_6_10_15");
+        names.add("P_4_6_10_16");
+        names.add("P_4_6_10_17");
+        names.add("P_4_6_10_18");
+        names.add("P_4_6_10_19");
 
         return names;
     }

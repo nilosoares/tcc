@@ -15,13 +15,13 @@ public class QueryGen extends AbstractGen {
         String[] queries = {
                 // Alain's queries
                 "Q1_Mod",
-                "Q3",
-                "Q5",
+                "Q3_Mod",
+                "Q5_Mod",
                 "Q6_Mod",
-                "Q10",
-                "Q12",
-                "Q14",
-                "Q19"
+                "Q10_Mod",
+                "Q12_Mod",
+                "Q14_Mod",
+                "Q19_Mod"
 
                 // Nico's queries
                 //"Q1",

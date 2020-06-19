@@ -53,3 +53,5 @@ Cada consulta também gerará um arquivo ".log" que pode ser encontrado na pasta
 
 Os dados utilizados na elaboração das tabelas, gráficos e texto do TCC podem ser encontrados na pasta "resources/tpc-h-mongo-results".
 Os resultados estão divididos em pastas que representam a quantidade de memória RAM de cada máquina utilizada nos testes.
+
+Os templates das consultas e índices adaptados para o MongoDB podem ser encontrados na pasta "resources/tpc-h-mongo/query_templates" e "resources/tpc-h-mongo/index_templates" respectivamente.

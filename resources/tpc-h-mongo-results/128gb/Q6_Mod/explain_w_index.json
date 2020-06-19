@@ -1,0 +1,826 @@
+{
+   "stages":[
+      {
+         "$cursor":{
+            "query":{
+               "$and":[
+                  {
+                     "shipdate":{
+                        "$gt":{
+                           "$date":"1997-03-25T00:00:00.000Z"
+                        }
+                     }
+                  },
+                  {
+                     "shipdate":{
+                        "$lt":{
+                           "$date":"1997-05-26T00:00:00.000Z"
+                        }
+                     }
+                  },
+                  {
+                     "discount":{
+                        "$gt":0.005
+                     }
+                  },
+                  {
+                     "discount":{
+                        "$lt":0.025
+                     }
+                  },
+                  {
+                     "quantity":{
+                        "$lt":13.0
+                     }
+                  }
+               ]
+            },
+            "fields":{
+               "discount":1,
+               "extendedprice":1,
+               "_id":0
+            },
+            "queryPlanner":{
+               "plannerVersion":1,
+               "namespace":"final.deals",
+               "indexFilterSet":false,
+               "parsedQuery":{
+                  "$and":[
+                     {
+                        "discount":{
+                           "$lt":0.025
+                        }
+                     },
+                     {
+                        "quantity":{
+                           "$lt":13.0
+                        }
+                     },
+                     {
+                        "shipdate":{
+                           "$lt":{
+                              "$date":"1997-05-26T00:00:00.000Z"
+                           }
+                        }
+                     },
+                     {
+                        "discount":{
+                           "$gt":0.005
+                        }
+                     },
+                     {
+                        "shipdate":{
+                           "$gt":{
+                              "$date":"1997-03-25T00:00:00.000Z"
+                           }
+                        }
+                     }
+                  ]
+               },
+               "winningPlan":{
+                  "stage":"FETCH",
+                  "inputStage":{
+                     "stage":"IXSCAN",
+                     "keyPattern":{
+                        "quantity":1.0,
+                        "discount":1.0,
+                        "shipdate":1.0,
+                        "_partial_index_18":1.0
+                     },
+                     "indexName":"P_4_6_10_18",
+                     "isMultiKey":false,
+                     "multiKeyPaths":{
+                        "quantity":[
+
+                        ],
+                        "discount":[
+
+                        ],
+                        "shipdate":[
+
+                        ],
+                        "_partial_index_18":[
+
+                        ]
+                     },
+                     "isUnique":false,
+                     "isSparse":false,
+                     "isPartial":true,
+                     "indexVersion":2,
+                     "direction":"forward",
+                     "indexBounds":{
+                        "quantity":[
+                           "[-inf.0, 13.0)"
+                        ],
+                        "discount":[
+                           "(0.005, 0.025)"
+                        ],
+                        "shipdate":[
+                           "(new Date(859248000000), new Date(864604800000))"
+                        ],
+                        "_partial_index_18":[
+                           "[MinKey, MaxKey]"
+                        ]
+                     }
+                  }
+               },
+               "rejectedPlans":[
+                  {
+                     "stage":"FETCH",
+                     "inputStage":{
+                        "stage":"IXSCAN",
+                        "keyPattern":{
+                           "quantity":1.0,
+                           "discount":1.0,
+                           "shipdate":1.0,
+                           "_partial_index_3":1.0
+                        },
+                        "indexName":"P_4_6_10_3",
+                        "isMultiKey":false,
+                        "multiKeyPaths":{
+                           "quantity":[
+
+                           ],
+                           "discount":[
+
+                           ],
+                           "shipdate":[
+
+                           ],
+                           "_partial_index_3":[
+
+                           ]
+                        },
+                        "isUnique":false,
+                        "isSparse":false,
+                        "isPartial":true,
+                        "indexVersion":2,
+                        "direction":"forward",
+                        "indexBounds":{
+                           "quantity":[
+                              "[-inf.0, 13.0)"
+                           ],
+                           "discount":[
+                              "(0.005, 0.025)"
+                           ],
+                           "shipdate":[
+                              "(new Date(859248000000), new Date(864604800000))"
+                           ],
+                           "_partial_index_3":[
+                              "[MinKey, MaxKey]"
+                           ]
+                        }
+                     }
+                  },
+                  {
+                     "stage":"FETCH",
+                     "inputStage":{
+                        "stage":"IXSCAN",
+                        "keyPattern":{
+                           "quantity":1.0,
+                           "discount":1.0,
+                           "shipdate":1.0,
+                           "_partial_index_8":1.0
+                        },
+                        "indexName":"P_4_6_10_8",
+                        "isMultiKey":false,
+                        "multiKeyPaths":{
+                           "quantity":[
+
+                           ],
+                           "discount":[
+
+                           ],
+                           "shipdate":[
+
+                           ],
+                           "_partial_index_8":[
+
+                           ]
+                        },
+                        "isUnique":false,
+                        "isSparse":false,
+                        "isPartial":true,
+                        "indexVersion":2,
+                        "direction":"forward",
+                        "indexBounds":{
+                           "quantity":[
+                              "[-inf.0, 13.0)"
+                           ],
+                           "discount":[
+                              "(0.005, 0.025)"
+                           ],
+                           "shipdate":[
+                              "(new Date(859248000000), new Date(864604800000))"
+                           ],
+                           "_partial_index_8":[
+                              "[MinKey, MaxKey]"
+                           ]
+                        }
+                     }
+                  },
+                  {
+                     "stage":"FETCH",
+                     "inputStage":{
+                        "stage":"IXSCAN",
+                        "keyPattern":{
+                           "quantity":1.0,
+                           "discount":1.0,
+                           "shipdate":1.0,
+                           "_partial_index_13":1.0
+                        },
+                        "indexName":"P_4_6_10_13",
+                        "isMultiKey":false,
+                        "multiKeyPaths":{
+                           "quantity":[
+
+                           ],
+                           "discount":[
+
+                           ],
+                           "shipdate":[
+
+                           ],
+                           "_partial_index_13":[
+
+                           ]
+                        },
+                        "isUnique":false,
+                        "isSparse":false,
+                        "isPartial":true,
+                        "indexVersion":2,
+                        "direction":"forward",
+                        "indexBounds":{
+                           "quantity":[
+                              "[-inf.0, 13.0)"
+                           ],
+                           "discount":[
+                              "(0.005, 0.025)"
+                           ],
+                           "shipdate":[
+                              "(new Date(859248000000), new Date(864604800000))"
+                           ],
+                           "_partial_index_13":[
+                              "[MinKey, MaxKey]"
+                           ]
+                        }
+                     }
+                  },
+                  {
+                     "stage":"FETCH",
+                     "inputStage":{
+                        "stage":"IXSCAN",
+                        "keyPattern":{
+                           "quantity":1.0,
+                           "discount":1.0,
+                           "shipdate":1.0,
+                           "_partial_index_11":1.0
+                        },
+                        "indexName":"P_4_6_10_11",
+                        "isMultiKey":false,
+                        "multiKeyPaths":{
+                           "quantity":[
+
+                           ],
+                           "discount":[
+
+                           ],
+                           "shipdate":[
+
+                           ],
+                           "_partial_index_11":[
+
+                           ]
+                        },
+                        "isUnique":false,
+                        "isSparse":false,
+                        "isPartial":true,
+                        "indexVersion":2,
+                        "direction":"forward",
+                        "indexBounds":{
+                           "quantity":[
+                              "[-inf.0, 13.0)"
+                           ],
+                           "discount":[
+                              "(0.005, 0.025)"
+                           ],
+                           "shipdate":[
+                              "(new Date(859248000000), new Date(864604800000))"
+                           ],
+                           "_partial_index_11":[
+                              "[MinKey, MaxKey]"
+                           ]
+                        }
+                     }
+                  }
+               ]
+            },
+            "executionStats":{
+               "executionSuccess":true,
+               "nReturned":66166,
+               "executionTimeMillis":1693,
+               "totalKeysExamined":66215,
+               "totalDocsExamined":66166,
+               "executionStages":{
+                  "stage":"FETCH",
+                  "nReturned":66166,
+                  "executionTimeMillisEstimate":1680,
+                  "works":66215,
+                  "advanced":66166,
+                  "needTime":48,
+                  "needYield":0,
+                  "saveState":1,
+                  "restoreState":1,
+                  "isEOF":1,
+                  "invalidates":0,
+                  "docsExamined":66166,
+                  "alreadyHasObj":0,
+                  "inputStage":{
+                     "stage":"IXSCAN",
+                     "nReturned":66166,
+                     "executionTimeMillisEstimate":80,
+                     "works":66215,
+                     "advanced":66166,
+                     "needTime":48,
+                     "needYield":0,
+                     "saveState":1,
+                     "restoreState":1,
+                     "isEOF":1,
+                     "invalidates":0,
+                     "keyPattern":{
+                        "quantity":1.0,
+                        "discount":1.0,
+                        "shipdate":1.0,
+                        "_partial_index_18":1.0
+                     },
+                     "indexName":"P_4_6_10_18",
+                     "isMultiKey":false,
+                     "multiKeyPaths":{
+                        "quantity":[
+
+                        ],
+                        "discount":[
+
+                        ],
+                        "shipdate":[
+
+                        ],
+                        "_partial_index_18":[
+
+                        ]
+                     },
+                     "isUnique":false,
+                     "isSparse":false,
+                     "isPartial":true,
+                     "indexVersion":2,
+                     "direction":"forward",
+                     "indexBounds":{
+                        "quantity":[
+                           "[-inf.0, 13.0)"
+                        ],
+                        "discount":[
+                           "(0.005, 0.025)"
+                        ],
+                        "shipdate":[
+                           "(new Date(859248000000), new Date(864604800000))"
+                        ],
+                        "_partial_index_18":[
+                           "[MinKey, MaxKey]"
+                        ]
+                     },
+                     "keysExamined":66215,
+                     "seeks":49,
+                     "dupsTested":0,
+                     "dupsDropped":0,
+                     "seenInvalidated":0
+                  }
+               },
+               "allPlansExecution":[
+                  {
+                     "nReturned":101,
+                     "executionTimeMillisEstimate":0,
+                     "totalKeysExamined":102,
+                     "totalDocsExamined":101,
+                     "executionStages":{
+                        "stage":"FETCH",
+                        "nReturned":101,
+                        "executionTimeMillisEstimate":0,
+                        "works":102,
+                        "advanced":101,
+                        "needTime":1,
+                        "needYield":0,
+                        "saveState":1,
+                        "restoreState":1,
+                        "isEOF":0,
+                        "invalidates":0,
+                        "docsExamined":101,
+                        "alreadyHasObj":0,
+                        "inputStage":{
+                           "stage":"IXSCAN",
+                           "nReturned":101,
+                           "executionTimeMillisEstimate":0,
+                           "works":102,
+                           "advanced":101,
+                           "needTime":1,
+                           "needYield":0,
+                           "saveState":1,
+                           "restoreState":1,
+                           "isEOF":0,
+                           "invalidates":0,
+                           "keyPattern":{
+                              "quantity":1.0,
+                              "discount":1.0,
+                              "shipdate":1.0,
+                              "_partial_index_3":1.0
+                           },
+                           "indexName":"P_4_6_10_3",
+                           "isMultiKey":false,
+                           "multiKeyPaths":{
+                              "quantity":[
+
+                              ],
+                              "discount":[
+
+                              ],
+                              "shipdate":[
+
+                              ],
+                              "_partial_index_3":[
+
+                              ]
+                           },
+                           "isUnique":false,
+                           "isSparse":false,
+                           "isPartial":true,
+                           "indexVersion":2,
+                           "direction":"forward",
+                           "indexBounds":{
+                              "quantity":[
+                                 "[-inf.0, 13.0)"
+                              ],
+                              "discount":[
+                                 "(0.005, 0.025)"
+                              ],
+                              "shipdate":[
+                                 "(new Date(859248000000), new Date(864604800000))"
+                              ],
+                              "_partial_index_3":[
+                                 "[MinKey, MaxKey]"
+                              ]
+                           },
+                           "keysExamined":102,
+                           "seeks":2,
+                           "dupsTested":0,
+                           "dupsDropped":0,
+                           "seenInvalidated":0
+                        }
+                     }
+                  },
+                  {
+                     "nReturned":101,
+                     "executionTimeMillisEstimate":0,
+                     "totalKeysExamined":102,
+                     "totalDocsExamined":101,
+                     "executionStages":{
+                        "stage":"FETCH",
+                        "nReturned":101,
+                        "executionTimeMillisEstimate":0,
+                        "works":102,
+                        "advanced":101,
+                        "needTime":1,
+                        "needYield":0,
+                        "saveState":1,
+                        "restoreState":1,
+                        "isEOF":0,
+                        "invalidates":0,
+                        "docsExamined":101,
+                        "alreadyHasObj":0,
+                        "inputStage":{
+                           "stage":"IXSCAN",
+                           "nReturned":101,
+                           "executionTimeMillisEstimate":0,
+                           "works":102,
+                           "advanced":101,
+                           "needTime":1,
+                           "needYield":0,
+                           "saveState":1,
+                           "restoreState":1,
+                           "isEOF":0,
+                           "invalidates":0,
+                           "keyPattern":{
+                              "quantity":1.0,
+                              "discount":1.0,
+                              "shipdate":1.0,
+                              "_partial_index_8":1.0
+                           },
+                           "indexName":"P_4_6_10_8",
+                           "isMultiKey":false,
+                           "multiKeyPaths":{
+                              "quantity":[
+
+                              ],
+                              "discount":[
+
+                              ],
+                              "shipdate":[
+
+                              ],
+                              "_partial_index_8":[
+
+                              ]
+                           },
+                           "isUnique":false,
+                           "isSparse":false,
+                           "isPartial":true,
+                           "indexVersion":2,
+                           "direction":"forward",
+                           "indexBounds":{
+                              "quantity":[
+                                 "[-inf.0, 13.0)"
+                              ],
+                              "discount":[
+                                 "(0.005, 0.025)"
+                              ],
+                              "shipdate":[
+                                 "(new Date(859248000000), new Date(864604800000))"
+                              ],
+                              "_partial_index_8":[
+                                 "[MinKey, MaxKey]"
+                              ]
+                           },
+                           "keysExamined":102,
+                           "seeks":2,
+                           "dupsTested":0,
+                           "dupsDropped":0,
+                           "seenInvalidated":0
+                        }
+                     }
+                  },
+                  {
+                     "nReturned":101,
+                     "executionTimeMillisEstimate":0,
+                     "totalKeysExamined":102,
+                     "totalDocsExamined":101,
+                     "executionStages":{
+                        "stage":"FETCH",
+                        "nReturned":101,
+                        "executionTimeMillisEstimate":0,
+                        "works":102,
+                        "advanced":101,
+                        "needTime":1,
+                        "needYield":0,
+                        "saveState":1,
+                        "restoreState":1,
+                        "isEOF":0,
+                        "invalidates":0,
+                        "docsExamined":101,
+                        "alreadyHasObj":0,
+                        "inputStage":{
+                           "stage":"IXSCAN",
+                           "nReturned":101,
+                           "executionTimeMillisEstimate":0,
+                           "works":102,
+                           "advanced":101,
+                           "needTime":1,
+                           "needYield":0,
+                           "saveState":1,
+                           "restoreState":1,
+                           "isEOF":0,
+                           "invalidates":0,
+                           "keyPattern":{
+                              "quantity":1.0,
+                              "discount":1.0,
+                              "shipdate":1.0,
+                              "_partial_index_13":1.0
+                           },
+                           "indexName":"P_4_6_10_13",
+                           "isMultiKey":false,
+                           "multiKeyPaths":{
+                              "quantity":[
+
+                              ],
+                              "discount":[
+
+                              ],
+                              "shipdate":[
+
+                              ],
+                              "_partial_index_13":[
+
+                              ]
+                           },
+                           "isUnique":false,
+                           "isSparse":false,
+                           "isPartial":true,
+                           "indexVersion":2,
+                           "direction":"forward",
+                           "indexBounds":{
+                              "quantity":[
+                                 "[-inf.0, 13.0)"
+                              ],
+                              "discount":[
+                                 "(0.005, 0.025)"
+                              ],
+                              "shipdate":[
+                                 "(new Date(859248000000), new Date(864604800000))"
+                              ],
+                              "_partial_index_13":[
+                                 "[MinKey, MaxKey]"
+                              ]
+                           },
+                           "keysExamined":102,
+                           "seeks":2,
+                           "dupsTested":0,
+                           "dupsDropped":0,
+                           "seenInvalidated":0
+                        }
+                     }
+                  },
+                  {
+                     "nReturned":101,
+                     "executionTimeMillisEstimate":0,
+                     "totalKeysExamined":102,
+                     "totalDocsExamined":101,
+                     "executionStages":{
+                        "stage":"FETCH",
+                        "nReturned":101,
+                        "executionTimeMillisEstimate":0,
+                        "works":102,
+                        "advanced":101,
+                        "needTime":1,
+                        "needYield":0,
+                        "saveState":1,
+                        "restoreState":1,
+                        "isEOF":0,
+                        "invalidates":0,
+                        "docsExamined":101,
+                        "alreadyHasObj":0,
+                        "inputStage":{
+                           "stage":"IXSCAN",
+                           "nReturned":101,
+                           "executionTimeMillisEstimate":0,
+                           "works":102,
+                           "advanced":101,
+                           "needTime":1,
+                           "needYield":0,
+                           "saveState":1,
+                           "restoreState":1,
+                           "isEOF":0,
+                           "invalidates":0,
+                           "keyPattern":{
+                              "quantity":1.0,
+                              "discount":1.0,
+                              "shipdate":1.0,
+                              "_partial_index_11":1.0
+                           },
+                           "indexName":"P_4_6_10_11",
+                           "isMultiKey":false,
+                           "multiKeyPaths":{
+                              "quantity":[
+
+                              ],
+                              "discount":[
+
+                              ],
+                              "shipdate":[
+
+                              ],
+                              "_partial_index_11":[
+
+                              ]
+                           },
+                           "isUnique":false,
+                           "isSparse":false,
+                           "isPartial":true,
+                           "indexVersion":2,
+                           "direction":"forward",
+                           "indexBounds":{
+                              "quantity":[
+                                 "[-inf.0, 13.0)"
+                              ],
+                              "discount":[
+                                 "(0.005, 0.025)"
+                              ],
+                              "shipdate":[
+                                 "(new Date(859248000000), new Date(864604800000))"
+                              ],
+                              "_partial_index_11":[
+                                 "[MinKey, MaxKey]"
+                              ]
+                           },
+                           "keysExamined":102,
+                           "seeks":2,
+                           "dupsTested":0,
+                           "dupsDropped":0,
+                           "seenInvalidated":0
+                        }
+                     }
+                  },
+                  {
+                     "nReturned":101,
+                     "executionTimeMillisEstimate":0,
+                     "totalKeysExamined":102,
+                     "totalDocsExamined":101,
+                     "executionStages":{
+                        "stage":"FETCH",
+                        "nReturned":101,
+                        "executionTimeMillisEstimate":0,
+                        "works":102,
+                        "advanced":101,
+                        "needTime":1,
+                        "needYield":0,
+                        "saveState":1,
+                        "restoreState":1,
+                        "isEOF":0,
+                        "invalidates":0,
+                        "docsExamined":101,
+                        "alreadyHasObj":0,
+                        "inputStage":{
+                           "stage":"IXSCAN",
+                           "nReturned":101,
+                           "executionTimeMillisEstimate":0,
+                           "works":102,
+                           "advanced":101,
+                           "needTime":1,
+                           "needYield":0,
+                           "saveState":1,
+                           "restoreState":1,
+                           "isEOF":0,
+                           "invalidates":0,
+                           "keyPattern":{
+                              "quantity":1.0,
+                              "discount":1.0,
+                              "shipdate":1.0,
+                              "_partial_index_18":1.0
+                           },
+                           "indexName":"P_4_6_10_18",
+                           "isMultiKey":false,
+                           "multiKeyPaths":{
+                              "quantity":[
+
+                              ],
+                              "discount":[
+
+                              ],
+                              "shipdate":[
+
+                              ],
+                              "_partial_index_18":[
+
+                              ]
+                           },
+                           "isUnique":false,
+                           "isSparse":false,
+                           "isPartial":true,
+                           "indexVersion":2,
+                           "direction":"forward",
+                           "indexBounds":{
+                              "quantity":[
+                                 "[-inf.0, 13.0)"
+                              ],
+                              "discount":[
+                                 "(0.005, 0.025)"
+                              ],
+                              "shipdate":[
+                                 "(new Date(859248000000), new Date(864604800000))"
+                              ],
+                              "_partial_index_18":[
+                                 "[MinKey, MaxKey]"
+                              ]
+                           },
+                           "keysExamined":102,
+                           "seeks":2,
+                           "dupsTested":0,
+                           "dupsDropped":0,
+                           "seenInvalidated":0
+                        }
+                     }
+                  }
+               ]
+            }
+         }
+      },
+      {
+         "$group":{
+            "_id":{
+               "$const":null
+            },
+            "revenue":{
+               "$sum":{
+                  "$multiply":[
+                     "$extendedprice",
+                     "$discount"
+                  ]
+               }
+            }
+         }
+      },
+      {
+         "$project":{
+            "_id":false,
+            "revenue":true
+         }
+      }
+   ],
+   "ok":1.0
+}

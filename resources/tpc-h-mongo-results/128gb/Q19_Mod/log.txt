@@ -1,0 +1,242 @@
+Jun 11, 2020 2:10:58 PM LoggerHelper addLog
+INFO: Running Q19_Mod
+Jun 11, 2020 2:10:58 PM LoggerHelper addLog
+INFO: Running queries without indexes...
+Jun 11, 2020 2:10:58 PM LoggerHelper addLog
+INFO: __PARAM_BRAND_2__ = Brand#14
+Jun 11, 2020 2:10:58 PM LoggerHelper addLog
+INFO: __PARAM_QUANTITY_1__ = 4
+Jun 11, 2020 2:10:58 PM LoggerHelper addLog
+INFO: __PARAM_QUANTITY_2__ = 7
+Jun 11, 2020 2:10:58 PM LoggerHelper addLog
+INFO: __PARAM_BRAND_1__ = Brand#14
+Jun 11, 2020 2:10:58 PM LoggerHelper addLog
+INFO: Removing indexes...
+Jun 11, 2020 2:10:58 PM LoggerHelper addLog
+INFO: db.stats = { "ns" : "final.deals" , "size" : 1.14638298063E11 , "count" : 59986052 , "avgObjSize" : 1911 , "storageSize" : 5.1725508608E10 , "capped" : false , "wiredTiger" : { "metadata" : { "formatVersion" : 1} , "creationString" : "access_pattern_hint=none,allocation_size=4KB,app_metadata=(formatVersion=1),assert=(commit_timestamp=none,read_timestamp=none),block_allocation=best,block_compressor=snappy,cache_resident=false,checksum=on,colgroups=,collator=,columns=,dictionary=0,encryption=(keyid=,name=),exclusive=false,extractor=,format=btree,huffman_key=,huffman_value=,ignore_in_memory_cache_size=false,immutable=false,internal_item_max=0,internal_key_max=0,internal_key_truncate=true,internal_page_max=4KB,key_format=q,key_gap=10,leaf_item_max=0,leaf_key_max=0,leaf_page_max=32KB,leaf_value_max=64MB,log=(enabled=true),lsm=(auto_throttle=true,bloom=true,bloom_bit_count=16,bloom_config=,bloom_hash_count=8,bloom_oldest=false,chunk_count_limit=0,chunk_max=5GB,chunk_size=10MB,merge_custom=(prefix=,start_generation=0,suffix=),merge_max=15,merge_min=0),memory_page_image_max=0,memory_page_max=10m,os_cache_dirty_max=0,os_cache_max=0,prefix_compression=false,prefix_compression_min=4,source=,split_deepen_min_child=0,split_deepen_per_child=0,split_pct=90,type=file,value_format=u" , "type" : "file" , "uri" : "statistics:table:collection-22--6132717005104692312" , "LSM" : { "bloom filter false positives" : 0 , "bloom filter hits" : 0 , "bloom filter misses" : 0 , "bloom filter pages evicted from cache" : 0 , "bloom filter pages read into cache" : 0 , "bloom filters in the LSM tree" : 0 , "chunks in the LSM tree" : 0 , "highest merge generation in the LSM tree" : 0 , "queries that could have benefited from a Bloom filter that did not exist" : 0 , "sleep for LSM checkpoint throttle" : 0 , "sleep for LSM merge throttle" : 0 , "total size of bloom filters" : 0} , "block-manager" : { "allocations requiring file extension" : 4253834 , "blocks allocated" : 4276496 , "blocks freed" : 40306 , "checkpoint size" : 5.1725017088E10 , "file allocation unit size" : 4096 , "file bytes available for reuse" : 475136 , "file magic number" : 120897 , "file major version number" : 1 , "file size in bytes" : 5.1725508608E10 , "minor version number" : 0} , "btree" : { "btree checkpoint generation" : 1073 , "column-store fixed-size leaf pages" : 0 , "column-store internal pages" : 0 , "column-store variable-size RLE encoded values" : 0 , "column-store variable-size deleted values" : 0 , "column-store variable-size leaf pages" : 0 , "fixed-record size" : 0 , "maximum internal page key size" : 368 , "maximum internal page size" : 4096 , "maximum leaf page key size" : 2867 , "maximum leaf page size" : 32768 , "maximum leaf page value size" : 67108864 , "maximum tree depth" : 5 , "number of key/value pairs" : 0 , "overflow pages" : 0 , "pages rewritten by compaction" : 0 , "row-store internal pages" : 0 , "row-store leaf pages" : 0} , "cache" : { "bytes currently in the cache" : 5.3641199694E10 , "bytes read into cache" : 27386409201916 , "bytes written from cache" : 1.15557459353E11 , "checkpoint blocked page eviction" : 6 , "data source pages selected for eviction unable to be evicted" : 5588 , "eviction walk passes of a file" : 14204496 , "eviction walk target pages histogram - 0-9" : 62185 , "eviction walk target pages histogram - 10-31" : 149943 , "eviction walk target pages histogram - 128 and higher" : 0 , "eviction walk target pages histogram - 32-63" : 199692 , "eviction walk target pages histogram - 64-128" : 13792676 , "eviction walks abandoned" : 70833 , "eviction walks gave up because they restarted their walk twice" : 0 , "eviction walks gave up because they saw too many pages and found no candidates" : 36076 , "eviction walks gave up because they saw too many pages and found too few candidates" : 14447 , "eviction walks reached end of tree" : 58943 , "eviction walks started from root of tree" : 121356 , "eviction walks started from saved location in tree" : 14083140 , "hazard pointer blocked page eviction" : 1167 , "in-memory page passed criteria to be split" : 28546 , "in-memory page splits" : 14216 , "internal pages evicted" : 2762473 , "internal pages split during eviction" : 282 , "leaf pages split during eviction" : 14556 , "modified pages evicted" : 38675 , "overflow pages read into cache" : 0 , "page split during eviction deepened the tree" : 2 , "page written requiring cache overflow records" : 0 , "pages read into cache" : 999729853 , "pages read into cache after truncate" : 1 , "pages read into cache after truncate in prepare state" : 0 , "pages read into cache requiring cache overflow entries" : 0 , "pages requested from the cache" : 2.877719667E9 , "pages seen by eviction walk" : 1.502583671E9 , "pages written from cache" : 4275975 , "pages written requiring in-memory restoration" : 0 , "tracked dirty bytes in the cache" : 0 , "unmodified pages evicted" : 993450117} , "cache_walk" : { "Average difference between current eviction generation when the page was last considered" : 0 , "Average on-disk page image size seen" : 0 , "Average time in cache for pages that have been visited by the eviction server" : 0 , "Average time in cache for pages that have not been visited by the eviction server" : 0 , "Clean pages currently in cache" : 0 , "Current eviction generation" : 0 , "Dirty pages currently in cache" : 0 , "Entries in the root page" : 0 , "Internal pages currently in cache" : 0 , "Leaf pages currently in cache" : 0 , "Maximum difference between current eviction generation when the page was last considered" : 0 , "Maximum page size seen" : 0 , "Minimum on-disk page image size seen" : 0 , "Number of pages never visited by eviction server" : 0 , "On-disk page image sizes smaller than a single allocation unit" : 0 , "Pages created in memory and never written" : 0 , "Pages currently queued for eviction" : 0 , "Pages that could not be queued for eviction" : 0 , "Refs skipped during cache traversal" : 0 , "Size of the root page" : 0 , "Total number of pages currently in cache" : 0} , "compression" : { "compressed pages read" : 996964580 , "compressed pages written" : 4200684 , "page written failed to compress" : 0 , "page written was too small to compress" : 75287 , "raw compression call failed, additional data available" : 0 , "raw compression call failed, no additional data available" : 0 , "raw compression call succeeded" : 0} , "cursor" : { "bulk-loaded cursor-insert calls" : 0 , "create calls" : 8281 , "cursor operation restarted" : 0 , "cursor-insert key and value bytes inserted" : 1.14921360487E11 , "cursor-remove key bytes removed" : 0 , "cursor-update value bytes updated" : 0 , "cursors cached on close" : 0 , "cursors reused from cache" : 0 , "insert calls" : 59986052 , "modify calls" : 0 , "next calls" : 1.1757266388E10 , "prev calls" : 1 , "remove calls" : 0 , "reserve calls" : 0 , "reset calls" : 60118279 , "search calls" : 646533213 , "search near calls" : 10555 , "truncate calls" : 0 , "update calls" : 0} , "reconciliation" : { "dictionary matches" : 0 , "fast-path pages deleted" : 0 , "internal page key bytes discarded using suffix compression" : 8465081 , "internal page multi-block writes" : 1435 , "internal-page overflow keys" : 0 , "leaf page key bytes discarded using prefix compression" : 0 , "leaf page multi-block writes" : 14396 , "leaf-page overflow keys" : 0 , "maximum blocks required for a page" : 1 , "overflow values written" : 0 , "page checksum matches" : 247026 , "page reconciliation calls" : 44402 , "page reconciliation calls for eviction" : 176 , "pages deleted" : 472} , "session" : { "cached cursor count" : 0 , "object compaction" : 0 , "open cursor count" : 61} , "transaction" : { "update conflicts" : 0}} , "nindexes" : 1 , "totalIndexSize" : 608337920 , "indexSizes" : { "_id_" : 608337920} , "ok" : 1.0}
+Jun 11, 2020 2:10:58 PM LoggerHelper addLog
+INFO: Running explain...
+Jun 11, 2020 2:13:44 PM LoggerHelper addLog
+INFO: Explain (w/o indexes) = { "stages" : [ { "$cursor" : { "query" : { "$or" : [ { "$and" : [ { "partsupp.part.brand" : { "$eq" : "Brand#14"}} , { "partsupp.part.container" : { "$in" : [ "SM CASE" , "SM BOX" , "SM PACK" , "SM PKG"]}} , { "quantity" : { "$gt" : 4.0}} , { "quantity" : { "$lt" : 14.0}} , { "shipmode" : { "$in" : [ "AIR" , "AIR REG"]}} , { "shipinstruct" : { "$eq" : "DELIVER IN PERSON"}}]} , { "$and" : [ { "partsupp.part.brand" : { "$eq" : "Brand#14"}} , { "partsupp.part.container" : { "$in" : [ "MED BAG" , "MED BOX" , "MED PKG" , "MED PACK"]}} , { "quantity" : { "$gt" : 7.0}} , { "quantity" : { "$lt" : 17.0}} , { "shipmode" : { "$in" : [ "AIR" , "AIR REG"]}} , { "shipinstruct" : { "$eq" : "DELIVER IN PERSON"}}]}]} , "fields" : { "discount" : 1 , "extendedprice" : 1 , "_id" : 0} , "queryPlanner" : { "plannerVersion" : 1 , "namespace" : "final.deals" , "indexFilterSet" : false , "parsedQuery" : { "$or" : [ { "$and" : [ { "partsupp.part.brand" : { "$eq" : "Brand#14"}} , { "shipinstruct" : { "$eq" : "DELIVER IN PERSON"}} , { "quantity" : { "$lt" : 14.0}} , { "quantity" : { "$gt" : 4.0}} , { "partsupp.part.container" : { "$in" : [ "SM BOX" , "SM CASE" , "SM PACK" , "SM PKG"]}} , { "shipmode" : { "$in" : [ "AIR" , "AIR REG"]}}]} , { "$and" : [ { "partsupp.part.brand" : { "$eq" : "Brand#14"}} , { "shipinstruct" : { "$eq" : "DELIVER IN PERSON"}} , { "quantity" : { "$lt" : 17.0}} , { "quantity" : { "$gt" : 7.0}} , { "partsupp.part.container" : { "$in" : [ "MED BAG" , "MED BOX" , "MED PACK" , "MED PKG"]}} , { "shipmode" : { "$in" : [ "AIR" , "AIR REG"]}}]}]} , "winningPlan" : { "stage" : "SUBPLAN" , "inputStage" : { "stage" : "COLLSCAN" , "filter" : { "$or" : [ { "$and" : [ { "partsupp.part.brand" : { "$eq" : "Brand#14"}} , { "shipinstruct" : { "$eq" : "DELIVER IN PERSON"}} , { "quantity" : { "$lt" : 14.0}} , { "quantity" : { "$gt" : 4.0}} , { "partsupp.part.container" : { "$in" : [ "SM BOX" , "SM CASE" , "SM PACK" , "SM PKG"]}} , { "shipmode" : { "$in" : [ "AIR" , "AIR REG"]}}]} , { "$and" : [ { "partsupp.part.brand" : { "$eq" : "Brand#14"}} , { "shipinstruct" : { "$eq" : "DELIVER IN PERSON"}} , { "quantity" : { "$lt" : 17.0}} , { "quantity" : { "$gt" : 7.0}} , { "partsupp.part.container" : { "$in" : [ "MED BAG" , "MED BOX" , "MED PACK" , "MED PKG"]}} , { "shipmode" : { "$in" : [ "AIR" , "AIR REG"]}}]}]} , "direction" : "forward"}} , "rejectedPlans" : [ ]} , "executionStats" : { "executionSuccess" : true , "nReturned" : 3030 , "executionTimeMillis" : 166453 , "totalKeysExamined" : 0 , "totalDocsExamined" : 59986052 , "executionStages" : { "stage" : "SUBPLAN" , "nReturned" : 3030 , "executionTimeMillisEstimate" : 165876 , "works" : 59986054 , "advanced" : 3030 , "needTime" : 59983023 , "needYield" : 0 , "saveState" : 1 , "restoreState" : 1 , "isEOF" : 1 , "invalidates" : 0 , "inputStage" : { "stage" : "COLLSCAN" , "filter" : { "$or" : [ { "$and" : [ { "partsupp.part.brand" : { "$eq" : "Brand#14"}} , { "shipinstruct" : { "$eq" : "DELIVER IN PERSON"}} , { "quantity" : { "$lt" : 14.0}} , { "quantity" : { "$gt" : 4.0}} , { "partsupp.part.container" : { "$in" : [ "SM BOX" , "SM CASE" , "SM PACK" , "SM PKG"]}} , { "shipmode" : { "$in" : [ "AIR" , "AIR REG"]}}]} , { "$and" : [ { "partsupp.part.brand" : { "$eq" : "Brand#14"}} , { "shipinstruct" : { "$eq" : "DELIVER IN PERSON"}} , { "quantity" : { "$lt" : 17.0}} , { "quantity" : { "$gt" : 7.0}} , { "partsupp.part.container" : { "$in" : [ "MED BAG" , "MED BOX" , "MED PACK" , "MED PKG"]}} , { "shipmode" : { "$in" : [ "AIR" , "AIR REG"]}}]}]} , "nReturned" : 3030 , "executionTimeMillisEstimate" : 164166 , "works" : 59986054 , "advanced" : 3030 , "needTime" : 59983023 , "needYield" : 0 , "saveState" : 1 , "restoreState" : 1 , "isEOF" : 1 , "invalidates" : 0 , "direction" : "forward" , "docsExamined" : 59986052}} , "allPlansExecution" : [ ]}}} , { "$group" : { "_id" : { "$const" :  null } , "revenue" : { "$sum" : { "$multiply" : [ "$extendedprice" , { "$subtract" : [ { "$const" : 1.0} , "$discount"]}]}}}} , { "$project" : { "_id" : false , "revenue" : true}}] , "ok" : 1.0}
+Jun 11, 2020 2:13:44 PM LoggerHelper addLog
+INFO: Running queries...
+Jun 11, 2020 2:16:30 PM LoggerHelper addLog
+INFO: Result (w/o indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 2:16:30 PM LoggerHelper addLog
+INFO: Execution Time (w/o indexes) = 165464
+Jun 11, 2020 2:19:16 PM LoggerHelper addLog
+INFO: Result (w/o indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 2:19:16 PM LoggerHelper addLog
+INFO: Execution Time (w/o indexes) = 165378
+Jun 11, 2020 2:22:02 PM LoggerHelper addLog
+INFO: Result (w/o indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 2:22:02 PM LoggerHelper addLog
+INFO: Execution Time (w/o indexes) = 165847
+Jun 11, 2020 2:24:42 PM LoggerHelper addLog
+INFO: Result (w/o indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 2:24:42 PM LoggerHelper addLog
+INFO: Execution Time (w/o indexes) = 160484
+Jun 11, 2020 2:27:25 PM LoggerHelper addLog
+INFO: Result (w/o indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 2:27:25 PM LoggerHelper addLog
+INFO: Execution Time (w/o indexes) = 162339
+Jun 11, 2020 2:30:10 PM LoggerHelper addLog
+INFO: Result (w/o indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 2:30:10 PM LoggerHelper addLog
+INFO: Execution Time (w/o indexes) = 165650
+Jun 11, 2020 2:33:01 PM LoggerHelper addLog
+INFO: Result (w/o indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 2:33:01 PM LoggerHelper addLog
+INFO: Execution Time (w/o indexes) = 170911
+Jun 11, 2020 2:35:51 PM LoggerHelper addLog
+INFO: Result (w/o indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 2:35:51 PM LoggerHelper addLog
+INFO: Execution Time (w/o indexes) = 169231
+Jun 11, 2020 2:38:36 PM LoggerHelper addLog
+INFO: Result (w/o indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 2:38:36 PM LoggerHelper addLog
+INFO: Execution Time (w/o indexes) = 165118
+Jun 11, 2020 2:41:23 PM LoggerHelper addLog
+INFO: Result (w/o indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 2:41:23 PM LoggerHelper addLog
+INFO: Execution Time (w/o indexes) = 167231
+Jun 11, 2020 2:44:07 PM LoggerHelper addLog
+INFO: Result (w/o indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 2:44:07 PM LoggerHelper addLog
+INFO: Execution Time (w/o indexes) = 163939
+Jun 11, 2020 2:46:53 PM LoggerHelper addLog
+INFO: Result (w/o indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 2:46:53 PM LoggerHelper addLog
+INFO: Execution Time (w/o indexes) = 165301
+Jun 11, 2020 2:49:44 PM LoggerHelper addLog
+INFO: Result (w/o indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 2:49:44 PM LoggerHelper addLog
+INFO: Execution Time (w/o indexes) = 171482
+Jun 11, 2020 2:52:29 PM LoggerHelper addLog
+INFO: Result (w/o indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 2:52:29 PM LoggerHelper addLog
+INFO: Execution Time (w/o indexes) = 165091
+Jun 11, 2020 2:55:17 PM LoggerHelper addLog
+INFO: Result (w/o indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 2:55:17 PM LoggerHelper addLog
+INFO: Execution Time (w/o indexes) = 167136
+Jun 11, 2020 2:57:58 PM LoggerHelper addLog
+INFO: Result (w/o indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 2:57:58 PM LoggerHelper addLog
+INFO: Execution Time (w/o indexes) = 160817
+Jun 11, 2020 3:00:44 PM LoggerHelper addLog
+INFO: Result (w/o indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 3:00:44 PM LoggerHelper addLog
+INFO: Execution Time (w/o indexes) = 165994
+Jun 11, 2020 3:03:33 PM LoggerHelper addLog
+INFO: Result (w/o indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 3:03:33 PM LoggerHelper addLog
+INFO: Execution Time (w/o indexes) = 169216
+Jun 11, 2020 3:06:19 PM LoggerHelper addLog
+INFO: Result (w/o indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 3:06:19 PM LoggerHelper addLog
+INFO: Execution Time (w/o indexes) = 165743
+Jun 11, 2020 3:09:06 PM LoggerHelper addLog
+INFO: Result (w/o indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 3:09:06 PM LoggerHelper addLog
+INFO: Execution Time (w/o indexes) = 166392
+Jun 11, 2020 3:11:54 PM LoggerHelper addLog
+INFO: Result (w/o indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 3:11:54 PM LoggerHelper addLog
+INFO: Execution Time (w/o indexes) = 168216
+Jun 11, 2020 3:14:40 PM LoggerHelper addLog
+INFO: Result (w/o indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 3:14:40 PM LoggerHelper addLog
+INFO: Execution Time (w/o indexes) = 166368
+Jun 11, 2020 3:14:40 PM LoggerHelper addLog
+INFO: Creating indexes...
+Jun 11, 2020 3:16:50 PM LoggerHelper addLog
+INFO: Create Index Time (P_4_13_14_1) = 129033
+Jun 11, 2020 3:18:59 PM LoggerHelper addLog
+INFO: Create Index Time (P_4_13_14_2) = 129221
+Jun 11, 2020 3:21:15 PM LoggerHelper addLog
+INFO: Create Index Time (P_4_13_14_3) = 135998
+Jun 11, 2020 3:23:29 PM LoggerHelper addLog
+INFO: Create Index Time (P_4_13_14_4) = 133878
+Jun 11, 2020 3:25:45 PM LoggerHelper addLog
+INFO: Create Index Time (P_4_13_14_5) = 135733
+Jun 11, 2020 3:27:57 PM LoggerHelper addLog
+INFO: Create Index Time (P_4_13_14_6) = 132529
+Jun 11, 2020 3:30:15 PM LoggerHelper addLog
+INFO: Create Index Time (P_4_13_14_7) = 137159
+Jun 11, 2020 3:32:26 PM LoggerHelper addLog
+INFO: Create Index Time (P_4_13_14_8) = 131614
+Jun 11, 2020 3:34:48 PM LoggerHelper addLog
+INFO: Create Index Time (P_4_13_14_9) = 141147
+Jun 11, 2020 3:37:06 PM LoggerHelper addLog
+INFO: Create Index Time (P_4_13_14_10) = 137780
+Jun 11, 2020 3:39:19 PM LoggerHelper addLog
+INFO: Create Index Time (P_4_13_14_11) = 133288
+Jun 11, 2020 3:41:37 PM LoggerHelper addLog
+INFO: Create Index Time (P_4_13_14_12) = 137195
+Jun 11, 2020 3:43:56 PM LoggerHelper addLog
+INFO: Create Index Time (P_4_13_14_13) = 139404
+Jun 11, 2020 3:46:14 PM LoggerHelper addLog
+INFO: Create Index Time (P_4_13_14_14) = 137509
+Jun 11, 2020 3:48:22 PM LoggerHelper addLog
+INFO: Create Index Time (P_4_13_14_15) = 128453
+Jun 11, 2020 3:50:36 PM LoggerHelper addLog
+INFO: Create Index Time (P_4_13_14_16) = 133744
+Jun 11, 2020 3:55:19 PM LoggerHelper addLog
+INFO: Create Index Time (C_303) = 282814
+Jun 11, 2020 3:55:19 PM LoggerHelper addLog
+INFO: db.stats = { "ns" : "final.deals" , "size" : 1.14638298063E11 , "count" : 59986052 , "avgObjSize" : 1911 , "storageSize" : 5.1725508608E10 , "capped" : false , "wiredTiger" : { "metadata" : { "formatVersion" : 1} , "creationString" : "access_pattern_hint=none,allocation_size=4KB,app_metadata=(formatVersion=1),assert=(commit_timestamp=none,read_timestamp=none),block_allocation=best,block_compressor=snappy,cache_resident=false,checksum=on,colgroups=,collator=,columns=,dictionary=0,encryption=(keyid=,name=),exclusive=false,extractor=,format=btree,huffman_key=,huffman_value=,ignore_in_memory_cache_size=false,immutable=false,internal_item_max=0,internal_key_max=0,internal_key_truncate=true,internal_page_max=4KB,key_format=q,key_gap=10,leaf_item_max=0,leaf_key_max=0,leaf_page_max=32KB,leaf_value_max=64MB,log=(enabled=true),lsm=(auto_throttle=true,bloom=true,bloom_bit_count=16,bloom_config=,bloom_hash_count=8,bloom_oldest=false,chunk_count_limit=0,chunk_max=5GB,chunk_size=10MB,merge_custom=(prefix=,start_generation=0,suffix=),merge_max=15,merge_min=0),memory_page_image_max=0,memory_page_max=10m,os_cache_dirty_max=0,os_cache_max=0,prefix_compression=false,prefix_compression_min=4,source=,split_deepen_min_child=0,split_deepen_per_child=0,split_pct=90,type=file,value_format=u" , "type" : "file" , "uri" : "statistics:table:collection-22--6132717005104692312" , "LSM" : { "bloom filter false positives" : 0 , "bloom filter hits" : 0 , "bloom filter misses" : 0 , "bloom filter pages evicted from cache" : 0 , "bloom filter pages read into cache" : 0 , "bloom filters in the LSM tree" : 0 , "chunks in the LSM tree" : 0 , "highest merge generation in the LSM tree" : 0 , "queries that could have benefited from a Bloom filter that did not exist" : 0 , "sleep for LSM checkpoint throttle" : 0 , "sleep for LSM merge throttle" : 0 , "total size of bloom filters" : 0} , "block-manager" : { "allocations requiring file extension" : 4253834 , "blocks allocated" : 4276496 , "blocks freed" : 40306 , "checkpoint size" : 5.1725017088E10 , "file allocation unit size" : 4096 , "file bytes available for reuse" : 475136 , "file magic number" : 120897 , "file major version number" : 1 , "file size in bytes" : 5.1725508608E10 , "minor version number" : 0} , "btree" : { "btree checkpoint generation" : 1178 , "column-store fixed-size leaf pages" : 0 , "column-store internal pages" : 0 , "column-store variable-size RLE encoded values" : 0 , "column-store variable-size deleted values" : 0 , "column-store variable-size leaf pages" : 0 , "fixed-record size" : 0 , "maximum internal page key size" : 368 , "maximum internal page size" : 4096 , "maximum leaf page key size" : 2867 , "maximum leaf page size" : 32768 , "maximum leaf page value size" : 67108864 , "maximum tree depth" : 5 , "number of key/value pairs" : 0 , "overflow pages" : 0 , "pages rewritten by compaction" : 0 , "row-store internal pages" : 0 , "row-store leaf pages" : 0} , "cache" : { "bytes currently in the cache" : 5.3640508901E10 , "bytes read into cache" : 31089688365953 , "bytes written from cache" : 1.15557459353E11 , "checkpoint blocked page eviction" : 6 , "data source pages selected for eviction unable to be evicted" : 6173 , "eviction walk passes of a file" : 16256253 , "eviction walk target pages histogram - 0-9" : 70128 , "eviction walk target pages histogram - 10-31" : 171786 , "eviction walk target pages histogram - 128 and higher" : 0 , "eviction walk target pages histogram - 32-63" : 228048 , "eviction walk target pages histogram - 64-128" : 15786291 , "eviction walks abandoned" : 80882 , "eviction walks gave up because they restarted their walk twice" : 0 , "eviction walks gave up because they saw too many pages and found no candidates" : 43713 , "eviction walks gave up because they saw too many pages and found too few candidates" : 17073 , "eviction walks reached end of tree" : 69875 , "eviction walks started from root of tree" : 141668 , "eviction walks started from saved location in tree" : 16114585 , "hazard pointer blocked page eviction" : 1364 , "in-memory page passed criteria to be split" : 28546 , "in-memory page splits" : 14216 , "internal pages evicted" : 3302696 , "internal pages split during eviction" : 282 , "leaf pages split during eviction" : 14556 , "modified pages evicted" : 38694 , "overflow pages read into cache" : 0 , "page split during eviction deepened the tree" : 2 , "page written requiring cache overflow records" : 0 , "pages read into cache" : 1.135113087E9 , "pages read into cache after truncate" : 1 , "pages read into cache after truncate in prepare state" : 0 , "pages read into cache requiring cache overflow entries" : 0 , "pages requested from the cache" : 3.047087747E9 , "pages seen by eviction walk" : 1.718626202E9 , "pages written from cache" : 4275975 , "pages written requiring in-memory restoration" : 0 , "tracked dirty bytes in the cache" : 0 , "unmodified pages evicted" : 1.128153195E9} , "cache_walk" : { "Average difference between current eviction generation when the page was last considered" : 0 , "Average on-disk page image size seen" : 0 , "Average time in cache for pages that have been visited by the eviction server" : 0 , "Average time in cache for pages that have not been visited by the eviction server" : 0 , "Clean pages currently in cache" : 0 , "Current eviction generation" : 0 , "Dirty pages currently in cache" : 0 , "Entries in the root page" : 0 , "Internal pages currently in cache" : 0 , "Leaf pages currently in cache" : 0 , "Maximum difference between current eviction generation when the page was last considered" : 0 , "Maximum page size seen" : 0 , "Minimum on-disk page image size seen" : 0 , "Number of pages never visited by eviction server" : 0 , "On-disk page image sizes smaller than a single allocation unit" : 0 , "Pages created in memory and never written" : 0 , "Pages currently queued for eviction" : 0 , "Pages that could not be queued for eviction" : 0 , "Refs skipped during cache traversal" : 0 , "Size of the root page" : 0 , "Total number of pages currently in cache" : 0} , "compression" : { "compressed pages read" : 1.131806672E9 , "compressed pages written" : 4200684 , "page written failed to compress" : 0 , "page written was too small to compress" : 75287 , "raw compression call failed, additional data available" : 0 , "raw compression call failed, no additional data available" : 0 , "raw compression call succeeded" : 0} , "cursor" : { "bulk-loaded cursor-insert calls" : 0 , "create calls" : 8281 , "cursor operation restarted" : 0 , "cursor-insert key and value bytes inserted" : 1.14921360487E11 , "cursor-remove key bytes removed" : 0 , "cursor-update value bytes updated" : 0 , "cursors cached on close" : 0 , "cursors reused from cache" : 0 , "insert calls" : 59986052 , "modify calls" : 0 , "next calls" : 1.4156708508E10 , "prev calls" : 1 , "remove calls" : 0 , "reserve calls" : 0 , "reset calls" : 60118320 , "search calls" : 646533213 , "search near calls" : 10555 , "truncate calls" : 0 , "update calls" : 0} , "reconciliation" : { "dictionary matches" : 0 , "fast-path pages deleted" : 0 , "internal page key bytes discarded using suffix compression" : 8465081 , "internal page multi-block writes" : 1435 , "internal-page overflow keys" : 0 , "leaf page key bytes discarded using prefix compression" : 0 , "leaf page multi-block writes" : 14396 , "leaf-page overflow keys" : 0 , "maximum blocks required for a page" : 1 , "overflow values written" : 0 , "page checksum matches" : 247026 , "page reconciliation calls" : 44402 , "page reconciliation calls for eviction" : 176 , "pages deleted" : 472} , "session" : { "cached cursor count" : 0 , "object compaction" : 0 , "open cursor count" : 61} , "transaction" : { "update conflicts" : 0}} , "nindexes" : 18 , "totalIndexSize" : 939614208 , "indexSizes" : { "_id_" : 608337920 , "P_4_13_14_1" : 2482176 , "P_4_13_14_2" : 4096 , "P_4_13_14_3" : 3469312 , "P_4_13_14_4" : 4096 , "P_4_13_14_5" : 2727936 , "P_4_13_14_6" : 4096 , "P_4_13_14_7" : 2973696 , "P_4_13_14_8" : 4096 , "P_4_13_14_9" : 3964928 , "P_4_13_14_10" : 4096 , "P_4_13_14_11" : 5201920 , "P_4_13_14_12" : 4096 , "P_4_13_14_13" : 2973696 , "P_4_13_14_14" : 4096 , "P_4_13_14_15" : 999424 , "P_4_13_14_16" : 4096 , "C_303" : 306450432} , "ok" : 1.0}
+Jun 11, 2020 3:55:19 PM LoggerHelper addLog
+INFO: Running explain...
+Jun 11, 2020 3:56:05 PM LoggerHelper addLog
+INFO: Explain (w/ indexes) = { "stages" : [ { "$cursor" : { "query" : { "$or" : [ { "$and" : [ { "partsupp.part.brand" : { "$eq" : "Brand#14"}} , { "partsupp.part.container" : { "$in" : [ "SM CASE" , "SM BOX" , "SM PACK" , "SM PKG"]}} , { "quantity" : { "$gt" : 4.0}} , { "quantity" : { "$lt" : 14.0}} , { "shipmode" : { "$in" : [ "AIR" , "AIR REG"]}} , { "shipinstruct" : { "$eq" : "DELIVER IN PERSON"}}]} , { "$and" : [ { "partsupp.part.brand" : { "$eq" : "Brand#14"}} , { "partsupp.part.container" : { "$in" : [ "MED BAG" , "MED BOX" , "MED PKG" , "MED PACK"]}} , { "quantity" : { "$gt" : 7.0}} , { "quantity" : { "$lt" : 17.0}} , { "shipmode" : { "$in" : [ "AIR" , "AIR REG"]}} , { "shipinstruct" : { "$eq" : "DELIVER IN PERSON"}}]}]} , "fields" : { "discount" : 1 , "extendedprice" : 1 , "_id" : 0} , "queryPlanner" : { "plannerVersion" : 1 , "namespace" : "final.deals" , "indexFilterSet" : false , "parsedQuery" : { "$or" : [ { "$and" : [ { "partsupp.part.brand" : { "$eq" : "Brand#14"}} , { "shipinstruct" : { "$eq" : "DELIVER IN PERSON"}} , { "quantity" : { "$lt" : 14.0}} , { "quantity" : { "$gt" : 4.0}} , { "partsupp.part.container" : { "$in" : [ "SM BOX" , "SM CASE" , "SM PACK" , "SM PKG"]}} , { "shipmode" : { "$in" : [ "AIR" , "AIR REG"]}}]} , { "$and" : [ { "partsupp.part.brand" : { "$eq" : "Brand#14"}} , { "shipinstruct" : { "$eq" : "DELIVER IN PERSON"}} , { "quantity" : { "$lt" : 17.0}} , { "quantity" : { "$gt" : 7.0}} , { "partsupp.part.container" : { "$in" : [ "MED BAG" , "MED BOX" , "MED PACK" , "MED PKG"]}} , { "shipmode" : { "$in" : [ "AIR" , "AIR REG"]}}]}]} , "winningPlan" : { "stage" : "SUBPLAN" , "inputStage" : { "stage" : "FETCH" , "filter" : { "$or" : [ { "$and" : [ { "shipinstruct" : { "$eq" : "DELIVER IN PERSON"}} , { "quantity" : { "$lt" : 17.0}} , { "quantity" : { "$gt" : 7.0}} , { "partsupp.part.container" : { "$in" : [ "MED BAG" , "MED BOX" , "MED PACK" , "MED PKG"]}} , { "shipmode" : { "$in" : [ "AIR" , "AIR REG"]}}]} , { "$and" : [ { "shipinstruct" : { "$eq" : "DELIVER IN PERSON"}} , { "quantity" : { "$lt" : 14.0}} , { "quantity" : { "$gt" : 4.0}} , { "partsupp.part.container" : { "$in" : [ "SM BOX" , "SM CASE" , "SM PACK" , "SM PKG"]}} , { "shipmode" : { "$in" : [ "AIR" , "AIR REG"]}}]}]} , "inputStage" : { "stage" : "IXSCAN" , "keyPattern" : { "partsupp.part.brand" : 1.0} , "indexName" : "C_303" , "isMultiKey" : false , "multiKeyPaths" : { "partsupp.part.brand" : [ ]} , "isUnique" : false , "isSparse" : false , "isPartial" : false , "indexVersion" : 2 , "direction" : "forward" , "indexBounds" : { "partsupp.part.brand" : [ "[\"Brand#14\", \"Brand#14\"]"]}}}} , "rejectedPlans" : [ ]} , "executionStats" : { "executionSuccess" : true , "nReturned" : 3030 , "executionTimeMillis" : 45847 , "totalKeysExamined" : 2413215 , "totalDocsExamined" : 2413215 , "executionStages" : { "stage" : "SUBPLAN" , "nReturned" : 3030 , "executionTimeMillisEstimate" : 45807 , "works" : 2413216 , "advanced" : 3030 , "needTime" : 2410185 , "needYield" : 0 , "saveState" : 1 , "restoreState" : 1 , "isEOF" : 1 , "invalidates" : 0 , "inputStage" : { "stage" : "FETCH" , "filter" : { "$or" : [ { "$and" : [ { "shipinstruct" : { "$eq" : "DELIVER IN PERSON"}} , { "quantity" : { "$lt" : 17.0}} , { "quantity" : { "$gt" : 7.0}} , { "partsupp.part.container" : { "$in" : [ "MED BAG" , "MED BOX" , "MED PACK" , "MED PKG"]}} , { "shipmode" : { "$in" : [ "AIR" , "AIR REG"]}}]} , { "$and" : [ { "shipinstruct" : { "$eq" : "DELIVER IN PERSON"}} , { "quantity" : { "$lt" : 14.0}} , { "quantity" : { "$gt" : 4.0}} , { "partsupp.part.container" : { "$in" : [ "SM BOX" , "SM CASE" , "SM PACK" , "SM PKG"]}} , { "shipmode" : { "$in" : [ "AIR" , "AIR REG"]}}]}]} , "nReturned" : 3030 , "executionTimeMillisEstimate" : 45687 , "works" : 2413216 , "advanced" : 3030 , "needTime" : 2410185 , "needYield" : 0 , "saveState" : 1 , "restoreState" : 1 , "isEOF" : 1 , "invalidates" : 0 , "docsExamined" : 2413215 , "alreadyHasObj" : 0 , "inputStage" : { "stage" : "IXSCAN" , "nReturned" : 2413215 , "executionTimeMillisEstimate" : 880 , "works" : 2413216 , "advanced" : 2413215 , "needTime" : 0 , "needYield" : 0 , "saveState" : 1 , "restoreState" : 1 , "isEOF" : 1 , "invalidates" : 0 , "keyPattern" : { "partsupp.part.brand" : 1.0} , "indexName" : "C_303" , "isMultiKey" : false , "multiKeyPaths" : { "partsupp.part.brand" : [ ]} , "isUnique" : false , "isSparse" : false , "isPartial" : false , "indexVersion" : 2 , "direction" : "forward" , "indexBounds" : { "partsupp.part.brand" : [ "[\"Brand#14\", \"Brand#14\"]"]} , "keysExamined" : 2413215 , "seeks" : 1 , "dupsTested" : 0 , "dupsDropped" : 0 , "seenInvalidated" : 0}}} , "allPlansExecution" : [ ]}}} , { "$group" : { "_id" : { "$const" :  null } , "revenue" : { "$sum" : { "$multiply" : [ "$extendedprice" , { "$subtract" : [ { "$const" : 1.0} , "$discount"]}]}}}} , { "$project" : { "_id" : false , "revenue" : true}}] , "ok" : 1.0}
+Jun 11, 2020 3:56:05 PM LoggerHelper addLog
+INFO: Running queries with indexes...
+Jun 11, 2020 3:56:42 PM LoggerHelper addLog
+INFO: Result (w/ indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 3:56:42 PM LoggerHelper addLog
+INFO: Execution Time (w/ indexes) = 36854
+Jun 11, 2020 3:57:16 PM LoggerHelper addLog
+INFO: Result (w/ indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 3:57:16 PM LoggerHelper addLog
+INFO: Execution Time (w/ indexes) = 34312
+Jun 11, 2020 3:57:50 PM LoggerHelper addLog
+INFO: Result (w/ indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 3:57:50 PM LoggerHelper addLog
+INFO: Execution Time (w/ indexes) = 33429
+Jun 11, 2020 3:58:23 PM LoggerHelper addLog
+INFO: Result (w/ indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 3:58:23 PM LoggerHelper addLog
+INFO: Execution Time (w/ indexes) = 32542
+Jun 11, 2020 3:58:49 PM LoggerHelper addLog
+INFO: Result (w/ indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 3:58:49 PM LoggerHelper addLog
+INFO: Execution Time (w/ indexes) = 25731
+Jun 11, 2020 3:59:17 PM LoggerHelper addLog
+INFO: Result (w/ indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 3:59:17 PM LoggerHelper addLog
+INFO: Execution Time (w/ indexes) = 28438
+Jun 11, 2020 3:59:43 PM LoggerHelper addLog
+INFO: Result (w/ indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 3:59:43 PM LoggerHelper addLog
+INFO: Execution Time (w/ indexes) = 26037
+Jun 11, 2020 4:00:12 PM LoggerHelper addLog
+INFO: Result (w/ indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 4:00:12 PM LoggerHelper addLog
+INFO: Execution Time (w/ indexes) = 28667
+Jun 11, 2020 4:00:38 PM LoggerHelper addLog
+INFO: Result (w/ indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 4:00:38 PM LoggerHelper addLog
+INFO: Execution Time (w/ indexes) = 26207
+Jun 11, 2020 4:01:08 PM LoggerHelper addLog
+INFO: Result (w/ indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 4:01:08 PM LoggerHelper addLog
+INFO: Execution Time (w/ indexes) = 29210
+Jun 11, 2020 4:01:35 PM LoggerHelper addLog
+INFO: Result (w/ indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 4:01:35 PM LoggerHelper addLog
+INFO: Execution Time (w/ indexes) = 27359
+Jun 11, 2020 4:02:00 PM LoggerHelper addLog
+INFO: Result (w/ indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 4:02:00 PM LoggerHelper addLog
+INFO: Execution Time (w/ indexes) = 24814
+Jun 11, 2020 4:02:28 PM LoggerHelper addLog
+INFO: Result (w/ indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 4:02:28 PM LoggerHelper addLog
+INFO: Execution Time (w/ indexes) = 27544
+Jun 11, 2020 4:02:57 PM LoggerHelper addLog
+INFO: Result (w/ indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 4:02:57 PM LoggerHelper addLog
+INFO: Execution Time (w/ indexes) = 29004
+Jun 11, 2020 4:03:24 PM LoggerHelper addLog
+INFO: Result (w/ indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 4:03:24 PM LoggerHelper addLog
+INFO: Execution Time (w/ indexes) = 27440
+Jun 11, 2020 4:03:50 PM LoggerHelper addLog
+INFO: Result (w/ indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 4:03:50 PM LoggerHelper addLog
+INFO: Execution Time (w/ indexes) = 25978
+Jun 11, 2020 4:04:17 PM LoggerHelper addLog
+INFO: Result (w/ indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 4:04:17 PM LoggerHelper addLog
+INFO: Execution Time (w/ indexes) = 26506
+Jun 11, 2020 4:04:42 PM LoggerHelper addLog
+INFO: Result (w/ indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 4:04:42 PM LoggerHelper addLog
+INFO: Execution Time (w/ indexes) = 24453
+Jun 11, 2020 4:05:09 PM LoggerHelper addLog
+INFO: Result (w/ indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 4:05:09 PM LoggerHelper addLog
+INFO: Execution Time (w/ indexes) = 27184
+Jun 11, 2020 4:05:34 PM LoggerHelper addLog
+INFO: Result (w/ indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 4:05:34 PM LoggerHelper addLog
+INFO: Execution Time (w/ indexes) = 24786
+Jun 11, 2020 4:05:58 PM LoggerHelper addLog
+INFO: Result (w/ indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 4:05:58 PM LoggerHelper addLog
+INFO: Execution Time (w/ indexes) = 24471
+Jun 11, 2020 4:06:22 PM LoggerHelper addLog
+INFO: Result (w/ indexes) = { "_batch" : [ { "revenue" : 4.57233923358E7}] , "_cursor" : { }}
+Jun 11, 2020 4:06:22 PM LoggerHelper addLog
+INFO: Execution Time (w/ indexes) = 23467

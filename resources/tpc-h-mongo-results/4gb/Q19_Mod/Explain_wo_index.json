@@ -1,0 +1,447 @@
+{
+   "stages":[
+      {
+         "$cursor":{
+            "query":{
+               "$or":[
+                  {
+                     "$and":[
+                        {
+                           "partsupp.part.brand":{
+                              "$eq":"Brand#14"
+                           }
+                        },
+                        {
+                           "partsupp.part.container":{
+                              "$in":[
+                                 "SM CASE",
+                                 "SM BOX",
+                                 "SM PACK",
+                                 "SM PKG"
+                              ]
+                           }
+                        },
+                        {
+                           "quantity":{
+                              "$gt":4.0
+                           }
+                        },
+                        {
+                           "quantity":{
+                              "$lt":14.0
+                           }
+                        },
+                        {
+                           "shipmode":{
+                              "$in":[
+                                 "AIR",
+                                 "AIR REG"
+                              ]
+                           }
+                        },
+                        {
+                           "shipinstruct":{
+                              "$eq":"DELIVER IN PERSON"
+                           }
+                        }
+                     ]
+                  },
+                  {
+                     "$and":[
+                        {
+                           "partsupp.part.brand":{
+                              "$eq":"Brand#14"
+                           }
+                        },
+                        {
+                           "partsupp.part.container":{
+                              "$in":[
+                                 "MED BAG",
+                                 "MED BOX",
+                                 "MED PKG",
+                                 "MED PACK"
+                              ]
+                           }
+                        },
+                        {
+                           "quantity":{
+                              "$gt":7.0
+                           }
+                        },
+                        {
+                           "quantity":{
+                              "$lt":17.0
+                           }
+                        },
+                        {
+                           "shipmode":{
+                              "$in":[
+                                 "AIR",
+                                 "AIR REG"
+                              ]
+                           }
+                        },
+                        {
+                           "shipinstruct":{
+                              "$eq":"DELIVER IN PERSON"
+                           }
+                        }
+                     ]
+                  }
+               ]
+            },
+            "fields":{
+               "discount":1,
+               "extendedprice":1,
+               "_id":0
+            },
+            "queryPlanner":{
+               "plannerVersion":1,
+               "namespace":"final.deals",
+               "indexFilterSet":false,
+               "parsedQuery":{
+                  "$or":[
+                     {
+                        "$and":[
+                           {
+                              "partsupp.part.brand":{
+                                 "$eq":"Brand#14"
+                              }
+                           },
+                           {
+                              "shipinstruct":{
+                                 "$eq":"DELIVER IN PERSON"
+                              }
+                           },
+                           {
+                              "quantity":{
+                                 "$lt":14.0
+                              }
+                           },
+                           {
+                              "quantity":{
+                                 "$gt":4.0
+                              }
+                           },
+                           {
+                              "partsupp.part.container":{
+                                 "$in":[
+                                    "SM BOX",
+                                    "SM CASE",
+                                    "SM PACK",
+                                    "SM PKG"
+                                 ]
+                              }
+                           },
+                           {
+                              "shipmode":{
+                                 "$in":[
+                                    "AIR",
+                                    "AIR REG"
+                                 ]
+                              }
+                           }
+                        ]
+                     },
+                     {
+                        "$and":[
+                           {
+                              "partsupp.part.brand":{
+                                 "$eq":"Brand#14"
+                              }
+                           },
+                           {
+                              "shipinstruct":{
+                                 "$eq":"DELIVER IN PERSON"
+                              }
+                           },
+                           {
+                              "quantity":{
+                                 "$lt":17.0
+                              }
+                           },
+                           {
+                              "quantity":{
+                                 "$gt":7.0
+                              }
+                           },
+                           {
+                              "partsupp.part.container":{
+                                 "$in":[
+                                    "MED BAG",
+                                    "MED BOX",
+                                    "MED PACK",
+                                    "MED PKG"
+                                 ]
+                              }
+                           },
+                           {
+                              "shipmode":{
+                                 "$in":[
+                                    "AIR",
+                                    "AIR REG"
+                                 ]
+                              }
+                           }
+                        ]
+                     }
+                  ]
+               },
+               "winningPlan":{
+                  "stage":"SUBPLAN",
+                  "inputStage":{
+                     "stage":"COLLSCAN",
+                     "filter":{
+                        "$or":[
+                           {
+                              "$and":[
+                                 {
+                                    "partsupp.part.brand":{
+                                       "$eq":"Brand#14"
+                                    }
+                                 },
+                                 {
+                                    "shipinstruct":{
+                                       "$eq":"DELIVER IN PERSON"
+                                    }
+                                 },
+                                 {
+                                    "quantity":{
+                                       "$lt":14.0
+                                    }
+                                 },
+                                 {
+                                    "quantity":{
+                                       "$gt":4.0
+                                    }
+                                 },
+                                 {
+                                    "partsupp.part.container":{
+                                       "$in":[
+                                          "SM BOX",
+                                          "SM CASE",
+                                          "SM PACK",
+                                          "SM PKG"
+                                       ]
+                                    }
+                                 },
+                                 {
+                                    "shipmode":{
+                                       "$in":[
+                                          "AIR",
+                                          "AIR REG"
+                                       ]
+                                    }
+                                 }
+                              ]
+                           },
+                           {
+                              "$and":[
+                                 {
+                                    "partsupp.part.brand":{
+                                       "$eq":"Brand#14"
+                                    }
+                                 },
+                                 {
+                                    "shipinstruct":{
+                                       "$eq":"DELIVER IN PERSON"
+                                    }
+                                 },
+                                 {
+                                    "quantity":{
+                                       "$lt":17.0
+                                    }
+                                 },
+                                 {
+                                    "quantity":{
+                                       "$gt":7.0
+                                    }
+                                 },
+                                 {
+                                    "partsupp.part.container":{
+                                       "$in":[
+                                          "MED BAG",
+                                          "MED BOX",
+                                          "MED PACK",
+                                          "MED PKG"
+                                       ]
+                                    }
+                                 },
+                                 {
+                                    "shipmode":{
+                                       "$in":[
+                                          "AIR",
+                                          "AIR REG"
+                                       ]
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     },
+                     "direction":"forward"
+                  }
+               },
+               "rejectedPlans":[
+
+               ]
+            },
+            "executionStats":{
+               "executionSuccess":true,
+               "nReturned":3030,
+               "executionTimeMillis":412885,
+               "totalKeysExamined":0,
+               "totalDocsExamined":59986052,
+               "executionStages":{
+                  "stage":"SUBPLAN",
+                  "nReturned":3030,
+                  "executionTimeMillisEstimate":412365,
+                  "works":59986054,
+                  "advanced":3030,
+                  "needTime":59983023,
+                  "needYield":0,
+                  "saveState":1,
+                  "restoreState":1,
+                  "isEOF":1,
+                  "invalidates":0,
+                  "inputStage":{
+                     "stage":"COLLSCAN",
+                     "filter":{
+                        "$or":[
+                           {
+                              "$and":[
+                                 {
+                                    "partsupp.part.brand":{
+                                       "$eq":"Brand#14"
+                                    }
+                                 },
+                                 {
+                                    "shipinstruct":{
+                                       "$eq":"DELIVER IN PERSON"
+                                    }
+                                 },
+                                 {
+                                    "quantity":{
+                                       "$lt":14.0
+                                    }
+                                 },
+                                 {
+                                    "quantity":{
+                                       "$gt":4.0
+                                    }
+                                 },
+                                 {
+                                    "partsupp.part.container":{
+                                       "$in":[
+                                          "SM BOX",
+                                          "SM CASE",
+                                          "SM PACK",
+                                          "SM PKG"
+                                       ]
+                                    }
+                                 },
+                                 {
+                                    "shipmode":{
+                                       "$in":[
+                                          "AIR",
+                                          "AIR REG"
+                                       ]
+                                    }
+                                 }
+                              ]
+                           },
+                           {
+                              "$and":[
+                                 {
+                                    "partsupp.part.brand":{
+                                       "$eq":"Brand#14"
+                                    }
+                                 },
+                                 {
+                                    "shipinstruct":{
+                                       "$eq":"DELIVER IN PERSON"
+                                    }
+                                 },
+                                 {
+                                    "quantity":{
+                                       "$lt":17.0
+                                    }
+                                 },
+                                 {
+                                    "quantity":{
+                                       "$gt":7.0
+                                    }
+                                 },
+                                 {
+                                    "partsupp.part.container":{
+                                       "$in":[
+                                          "MED BAG",
+                                          "MED BOX",
+                                          "MED PACK",
+                                          "MED PKG"
+                                       ]
+                                    }
+                                 },
+                                 {
+                                    "shipmode":{
+                                       "$in":[
+                                          "AIR",
+                                          "AIR REG"
+                                       ]
+                                    }
+                                 }
+                              ]
+                           }
+                        ]
+                     },
+                     "nReturned":3030,
+                     "executionTimeMillisEstimate":410605,
+                     "works":59986054,
+                     "advanced":3030,
+                     "needTime":59983023,
+                     "needYield":0,
+                     "saveState":1,
+                     "restoreState":1,
+                     "isEOF":1,
+                     "invalidates":0,
+                     "direction":"forward",
+                     "docsExamined":59986052
+                  }
+               },
+               "allPlansExecution":[
+
+               ]
+            }
+         }
+      },
+      {
+         "$group":{
+            "_id":{
+               "$const":null
+            },
+            "revenue":{
+               "$sum":{
+                  "$multiply":[
+                     "$extendedprice",
+                     {
+                        "$subtract":[
+                           {
+                              "$const":1.0
+                           },
+                           "$discount"
+                        ]
+                     }
+                  ]
+               }
+            }
+         }
+      },
+      {
+         "$project":{
+            "_id":false,
+            "revenue":true
+         }
+      }
+   ],
+   "ok":1.0
+}
